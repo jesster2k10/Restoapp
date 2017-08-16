@@ -12,7 +12,7 @@ const ApplicationStyles = {
     screen: {
         mainContainer: {
             flex: 1,
-            backgroundColor: Colours.transparent
+            backgroundColor: Colours.lightBody
         },
         backgroundImage: {
             position: 'absolute',
@@ -24,7 +24,7 @@ const ApplicationStyles = {
         container: {
             flex: 1,
             paddingTop: Metrics.baseMargin,
-            backgroundColor: Colours.transparent
+            backgroundColor: Colours.lightBody
         },
         section: {
             margin: Metrics.section,
@@ -77,6 +77,11 @@ const ApplicationStyles = {
         borderColor: Colours.ember,
         alignItems: 'center',
         textAlign: 'center'
+    },
+    position: {
+        end: {
+            justifyContent: 'flex-end'
+        }
     }
 };
 

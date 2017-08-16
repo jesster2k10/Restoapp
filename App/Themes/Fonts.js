@@ -2,13 +2,15 @@
  * Created by jesseonolememen on 07/08/2017.
  */
 const type = {
-    base: 'Avenir-Book',
-    bold: 'Avenir-Black',
-    emphasis: 'HelveticaNeue-Italic'
+    base: 'Poppins-Regular',
+    bold: 'Poppins-Bold',
+    medium: 'Poppins-Medium',
+    emphasis: 'HelveticaNeue-Italic',
+    thin: 'Poppins-Light'
 };
 
 const size = {
-    h1: 38,
+    h1: 28,
     h2: 34,
     h3: 30,
     h4: 26,
@@ -16,43 +18,76 @@ const size = {
     h6: 19,
     input: 18,
     regular: 17,
-    medium: 14,
+    medium: 17,
     small: 12,
-    tiny: 8.5
+    tiny: 8.5,
+    normalSmall: 14
 };
 
 const style = {
     h1: {
         fontFamily: type.base,
-        fontSize: size.h1
+        fontSize: size.h1,
+        backgroundColor: 'transparent',
     },
     h2: {
         fontWeight: 'bold',
-        fontSize: size.h2
+        fontSize: size.h2,
+        backgroundColor: 'transparent',
     },
     h3: {
         fontFamily: type.emphasis,
-        fontSize: size.h3
+        fontSize: size.h3,
+        backgroundColor: 'transparent',
     },
     h4: {
         fontFamily: type.base,
-        fontSize: size.h4
+        fontSize: size.h4,
+        backgroundColor: 'transparent',
     },
     h5: {
         fontFamily: type.base,
-        fontSize: size.h5
+        fontSize: size.h5,
+        backgroundColor: 'transparent',
     },
     h6: {
         fontFamily: type.emphasis,
-        fontSize: size.h6
+        fontSize: size.h6,
+        backgroundColor: 'transparent',
     },
     normal: {
         fontFamily: type.base,
-        fontSize: size.regular
+        fontSize: size.regular,
+        backgroundColor: 'transparent',
     },
     description: {
         fontFamily: type.base,
-        fontSize: size.medium
+        fontSize: size.medium,
+        backgroundColor: 'transparent',
+    },
+    medium: {
+        fontFamily: type.medium,
+        fontSize: size.medium,
+        backgroundColor: 'transparent',
+    },
+    small: {
+        fontFamily: type.thin,
+        fontSize: size.small,
+        backgroundColor: 'transparent',
+    },
+    normalSmall: {
+        fontFamily: type.base,
+        fontSize: size.normalSmall,
+        backgroundColor: 'transparent',
+    },
+    navigation: {
+        fontFamily: type.base,
+        fontSize: size.medium,
+    },
+    rowHeader: {
+        fontFamily: type.thin,
+        fontSize: size.normalSmall,
+        backgroundColor: 'transparent',
     }
 };
 

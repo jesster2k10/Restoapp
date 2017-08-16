@@ -8,7 +8,7 @@ import {
     GET_CATEGORY_MEALS,
     GET_CATEGORY_MEALS_SUCCESS,
     GET_CATEGORY_MEALS_FAILED
-} from '../Actions/Types';
+} from '../Config/ActionTypes';
 
 const INITIAL_STATE = {
     categories: {},
@@ -19,8 +19,6 @@ const INITIAL_STATE = {
 };
 
 export default (state = INITIAL_STATE, action) => {
-    console.log(action);
-
     switch (action.type) {
         case GET_CATEGORIES_SUCCESS:
             return {...state, categories: action.payload.results, loading: false};

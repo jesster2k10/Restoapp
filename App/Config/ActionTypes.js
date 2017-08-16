@@ -24,6 +24,9 @@ export const MEAL_GET_OPTIONS = 'meal_get_options';
 export const MEAL_HAS_OPTIONS = 'meal_has_options';
 export const MEAL_GET_TAX = 'meal_get_tax';
 export const MEAL_GET_IMAGES = 'meal_get_images';
+export const GET_ALL_MEALS = 'GET_ALL_MEALS'.toLowerCase();
+export const GET_ALL_MEALS_FAILED = 'GET_ALL_MEALS_FAILED'.toLowerCase();
+export const GET_ALL_MEALS_SUCCESS = 'GET_ALL_MEALS_SUCCESS'.toLowerCase();
 
 /**** CART *****/
 export const ADD_MEAL_TO_CART = 'add_meal_to_cart';

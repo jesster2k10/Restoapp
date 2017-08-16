@@ -34,6 +34,18 @@ const metrics = {
         medium: 40,
         large: 60,
         logo: 200
+    },
+    center: {
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    positioning: {
+        alignStart: {
+            alignItems: 'flex-start'
+        },
+        alignEnd: {
+            alignItems: 'flex-end'
+        }
     }
 }
 
