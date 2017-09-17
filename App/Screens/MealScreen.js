@@ -34,14 +34,14 @@ class MealScreen extends Component {
                          tabStyle={styles.tab}
                          textStyle={styles.tabTitle}
                          activeTextStyle={styles.activeTabTitle}>
-                        <Meal meal={meal} />
+                        <Meal meal={meal} navigation={this.props.navigation} />
                     </Tab>
                     <Tab heading={strings.reviews}
                          activeTabStyle={styles.tab}
                          tabStyle={styles.tab}
                          textStyle={styles.tabTitle}
                          activeTextStyle={styles.activeTabTitle}>
-                        <MealReviews/>
+                        <MealReviews meal={meal} />
                     </Tab>
                 </Tabs>
             </View>

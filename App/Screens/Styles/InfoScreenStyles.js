@@ -1,0 +1,47 @@
+import {
+    StyleSheet
+} from 'react-native';
+import {
+    ApplicationStyles,
+    Fonts,
+    Colours,
+    Metrics
+} from '../../Themes';
+
+export default StyleSheet.create({
+    ...ApplicationStyles.screen,
+    container: {
+        ...ApplicationStyles.screen.container,
+        padding: 0,
+        marginTop: -10
+    },
+    bodyContainer: {
+        flex: 1,
+        padding: 0,
+        margin: 0,
+        backgroundColor: Colours.lightBody,
+        shadowColor: 'black',
+        shadowOpacity: 0.15,
+        shadowOffset: {
+            width: 0,
+            height: -5,
+        }
+    },
+    title: {
+        ...Fonts.style.h6,
+        color: Colours.mainTextColor,
+        fontFamily: Fonts.type.medium,
+        paddingBottom: 5,
+    },
+    body: {
+        ...Fonts.style.normalSmall,
+        fontFamily: Fonts.type.base,
+        fontSize: 12,
+        color: Colours.mainTextColor,
+        marginTop: 5
+    },
+    map: {
+        width: Metrics.fullWidth,
+        height: 200
+    }
+});

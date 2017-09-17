@@ -5,7 +5,8 @@ import {
     Button
 } from 'react-native';
 import {
-    NavigationButton
+    NavigationButton,
+    MealReviewItem
 } from '../Components';
 import MenuList from  '../Components/MenuList';
 import styles from './Styles/MenuScreenStyles';
@@ -13,7 +14,8 @@ import styles from './Styles/MenuScreenStyles';
 class MenuScreen extends Component {
     static navigationOptions = ({ navigation }) => ({
         title: 'Menu',
-        headerLeft: <NavigationButton navigation={navigation} />,
+        drawerLabel: 'Menu',
+        headerLeft: <NavigationButton navigation={navigation} size={25} />,
         headerRight: <NavigationButton navigation={navigation} cart />
     });
 

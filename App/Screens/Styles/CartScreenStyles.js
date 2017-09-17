@@ -8,8 +8,8 @@ export default StyleSheet.create({
     ...ApplicationStyles.screen,
     container: {
         ...ApplicationStyles.screen.container,
-        justifyContent: 'flex-end',
-        paddingTop: 0,
+        justifyContent: 'flex-start',
+        paddingTop: 15,
         paddingBottom: 100
     },
     cartOverlay: {

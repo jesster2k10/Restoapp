@@ -8,6 +8,7 @@ import {
     Button,
     Text
 } from 'native-base';
+import Spinner from 'react-native-spinkit';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import styles from './Styles/IconButtonStyles';
@@ -20,7 +21,18 @@ const renderIcon = (icon, iconColor, fontawesome) => {
     }
 };
 
-const IconButton = ({ onPress, children, backgroundColor, iconBackgroundColor, icon, iconColor, fontawesome }) => {
+const renderBody = (loading, children, iconColor) => {
+    if (loading) {
+        return <Spinner isVisible size={15} type='Arc' color={iconColor} />
+    } else {
+        return <Text style={styles.title}>{ children }</Text>
+    }
+};
+
+
+const IconButton = ({ onPress, loading, children, backgroundColor, iconBackgroundColor, icon, iconColor, fontawesome }) => {
+    let body = loading ? <Spinner isVisible size={15} type='Arc' color='white' /> : <Text style={styles.title}>{ loading ? null : children }</Text>;
+
     return (
         <TouchableOpacity onPress={onPress}>
             <View style={[styles.container, { backgroundColor: backgroundColor || 'blue' }]}>
@@ -28,7 +40,7 @@ const IconButton = ({ onPress, children, backgroundColor, iconBackgroundColor, i
                     { renderIcon(icon, iconColor, fontawesome) }
                 </View>
                 <View style={[styles.button, { backgroundColor: backgroundColor || 'blue' } ]}>
-                    <Text style={styles.title}>{ children }</Text>
+                    { body }
                 </View>
             </View>
         </TouchableOpacity>

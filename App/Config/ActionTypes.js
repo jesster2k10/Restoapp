@@ -11,13 +11,55 @@ export const GET_CATEGORY_MEALS = 'get_category_meals';
 export const GET_CATEGORY_MEALS_SUCCESS = 'get_category_meals_success';
 export const GET_CATEGORY_MEALS_FAILED = 'get_category_meals_failed';
 
+/**** USER *****/
+export const GET_CURRENT_USER = 'GET_CURRENT_USER'.toLowerCase();
+export const GET_CURRENT_USER_FAILED = 'GET_CURRENT_USER_FAILED'.toLowerCase();
+export const GET_CURRENT_USER_SUCCESS = 'GET_CURRENT_USER_SUCCESS'.toLowerCase();
+
+/**** REVIEWS *****/
+export const GET_REVIEWS = 'GET_REVIEWS'.toLowerCase();
+export const GET_REVIEWS_SUCCESS = 'GET_REVIEWS_SUCCESS'.toLowerCase();
+export const GET_REVIEWS_FAILED = 'GET_REVIEWS_FAILED'.toLowerCase();
+
+/**** NEWS *****/
+export const GET_NEWS = 'GET_NEWS'.toLowerCase();
+export const GET_NEWS_FAILED = 'GET_NEWS_FAILED'.toLowerCase();
+export const GET_NEWS_SUCCESS = 'GET_NEWS_SUCCESS'.toLowerCase();
+export const GET_NEWS_CATEGORIES = 'GET_NEWS_CATEGORIES'.toLowerCase();
+export const GET_NEWS_CATEGORIES_FAILED = 'GET_NEWS_CATEGORIES_FAILED'.toLowerCase();
+export const GET_NEWS_CATEGORIES_SUCCESS = 'GET_NEWS_CATEGORIES_SUCCESS'.toLowerCase();
+
+/**** Photos *****/
+export const GET_ALL_PHOTOS = 'GET_ALL_PHOTOS'.toLowerCase();
+export const GET_ALL_PHOTOS_FAILED = 'GET_ALL_PHOTOS_FAILED'.toLowerCase();
+export const GET_ALL_PHOTOS_SUCCESS = 'GET_ALL_PHOTOS_SUCCESS'.toLowerCase();
+export const GET_ALL_GALLERIES = 'GET_ALL_GALLERIES'.toLowerCase();
+export const GET_ALL_GALLERIES_SUCCESS = 'GET_ALL_GALLERIES_SUCCESS '.toLowerCase();
+export const GET_ALL_GALLERIES_FAILED = 'GET_ALL_GALLERIES_FAILED'.toLowerCase();
+
 /**** AUTH *****/
 export const FACEBOOK_SIGN_IN = 'facebook_sign_in';
 export const FACEBOOK_SIGN_IN_SUCCESS = 'facebook_sign_in_success';
 export const FACEBOOK_SIGN_IN_FAILED = 'facebook_sign_in_failed';
+export const LOGIN = 'LOGIN';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'.toLowerCase();
+export const LOGIN_FAILED = 'LOGIN_FAILED'.toLowerCase();
+export const REGISTER = 'REGISTER'.toLowerCase();
+export const REGISTER_SUCCESS = 'REGISTER_SUCCESS'.toLowerCase();
+export const REGISTER_FAILED = 'REGISTER_FAILED'.toLowerCase();
 export const GOOGLE_SIGN_IN = 'google_sign_in';
 export const GOOGLE_SIGN_IN_SUCCESS = 'google_sign_in_success';
 export const GOOGLE_SIGN_IN_FAILED = 'google_sign_in_failed';
+export const IS_USER_LOGGED_IN = 'IS_USER_LOGGED_IN'.toLowerCase();
+export const LOG_OUT = 'LOG_OUT'.toLowerCase();
+export const LOG_OUT_FAILED = 'LOG_OUT_FAILED'.toLowerCase();
+export const LOG_OUT_SUCCESS = 'LOG_OUT_SUCCESS'.toLowerCase();
+export const CHANGE_EMAIL = 'CHANGE_EMAIL'.toLowerCase();
+export const CHANGE_EMAIL_FAILED = 'CHANGE_EMAIL_FAILED'.toLowerCase();
+export const CHANGE_PASSWORD = 'CHANGE_PASSWORD'.toLowerCase();
+export const CHANGE_PASSWORD_FAILED = 'CHANGE_PASSWORD_FAILED'.toLowerCase();
+export const CHANGE_NAME = 'CHANGE_NAME'.toLowerCase();
+export const CHANGE_NAME_FAILED = 'CHANGE_NAME_FAILED'.toLowerCase();
 
 /**** MEAL *****/
 export const MEAL_GET_OPTIONS = 'meal_get_options';
@@ -45,6 +87,46 @@ export const GET_SAVED_CART = 'get_saved_cart';
 export const GET_SAVED_CART_SUCCESS = 'get_saved_cart_success';
 export const GET_SAVED_CART_FAILED = 'get_saved_cart_failed';
 export const RESET_CART = 'reset_cart';
+export const RESET_CART_FAILED = 'RESET_CART_FAILED'.toLowerCase();
+export const RESET_CART_SUCCESS = 'RESET_CART_SUCCESS'.toLowerCase();
+export const CLEAR_RESET_ERRORS = 'CLEAR_RESET_ERRORS'.toLowerCase();
+export const CLEAR_REMOVE_ERRORS = 'CLEAR_REMOVE_ERRORS'.toLowerCase();
+export const CLEAR_ADD_ERRORS = 'CLEAR_ADD_ERRORS'.toLowerCase();
+export const CLEAR_MEAL_ERRORS = 'CLEAR_MEAL_ERRORS'.toLowerCase();
+
+/**** ORDERS ******/
+export const GET_ORDERS = 'GET_ORDERS'.toLowerCase();
+export const GET_ORDERS_SUCCESS = 'GET_ORDERS_SUCCESS'.toLowerCase();
+export const GET_ORDERS_FAILED  = 'GET_ORDERS_FAILED'.toLowerCase();
 
 /**** CHECKOUT *****/
-export const CREATE_ORDER = '';
+export const SET_SELECTED_PAYMENT_TYPE = 'SET_SELECTED_PAYMENT_TYPE'.toLowerCase();
+export const CHECKOUT_CHANGE_PAGE = 'CHECKOUT_CHANGE_PAGE'.toLowerCase();
+export const SET_CARD_NUMBER_TINT_COLOR = 'SET_CARD_NUMBER_TINT_COLOR'.toLowerCase();
+export const SET_CCV_TINT_COLOR = 'SET_CCV_TINT_COLOR'.toLowerCase();
+export const SET_EXPIRY_TINT_COLOR = 'SET_EXPIRY_TINT_COLOR'.toLowerCase();
+export const CONFIRM_PAYMENT = 'CONFIRM_PAYMENT'.toLowerCase();
+export const CONFIRM_SHIPPING = 'CONFIRM_SHIPPING'.toLowerCase();
+
+/***** FORMS ****/
+export const CHANGE_PHONE = 'CHANGE_PHONE'.toLowerCase();
+export const CHANGE_PHONE_FAILED = 'CHANGE_PHONE_FAILED'.toLowerCase();
+export const CHANGE_ZIP = 'CHANGE_ZIP'.toLowerCase();
+export const CHANGE_ZIP_FAILED = 'CHANGE_ZIP_FAILED'.toLowerCase();
+export const CHANGE_ADDRESS = 'CHANGE_ADDRESS'.toLowerCase();
+export const CHANGE_ADDRESS_FAILED = 'CHANGE_ADDRESS_FAILED'.toLowerCase();
+export const CHANGE_CITY = 'CHANGE_CITY'.toLowerCase();
+export const CHANGE_STATE = 'CHANGE_STATE'.toLowerCase();
+export const CHANGE_COUNTRY = 'CHANGE_COUNTRY'.toLowerCase();
+export const CHANGE_COUNTRY_FAILED = 'CHANGE_COUNTRY_FAILED'.toLowerCase();
+
+/***** FAVOURITES *****/
+export const FAVOURITE_MEAL = 'FAVOURITE_MEAL'.toLowerCase();
+export const FAVOURITE_MEAL_FAILED = 'FAVOURITE_MEAL_FAILED'.toLowerCase();
+export const FAVOURITE_MEAL_SUCCESS = 'FAVOURITE_MEAL_SUCCESS'.toLowerCase();
+export const GET_ALL_FAVOURITES = 'GET_ALL_FAVOURITES'.toLowerCase();
+export const GET_ALL_FAVOURITES_FAILED = 'GET_ALL_FAVOURITES_FAILED'.toLowerCase();
+export const GET_ALL_FAVOURITES_SUCCESS = 'GET_ALL_FAVOURITES_SUCCESS'.toLowerCase();
+export const REMOVE_FAVOURITE = 'REMOVE_FAVOURITE'.toLowerCase();
+export const REMOVE_FAVOURITE_FAILED = 'REMOVE_FAVOURITE_FAILED'.toLowerCase();
+export const REMOVE_FAVOURITE_SUCCESS = 'REMOVE_FAVOURITE_SUCCESS'.toLowerCase();

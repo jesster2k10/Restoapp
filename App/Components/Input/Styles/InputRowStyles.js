@@ -29,9 +29,44 @@ export default StyleSheet.create({
         fontSize: 12
     },
     input: {
-        width: Metrics.fullWidth - 30,
         ...Fonts.style.normalSmall,
         fontFamily: Fonts.type.thin,
         color: Colours.mainTextColor,
+        width: Metrics.fullWidth - 40
     },
+    phoneInput: {
+        width: Metrics.fullWidth - 50
+    },
+    errorLabel: {
+        ...Fonts.style.normalSmall,
+        fontFamily: Fonts.type.thin,
+        color: Colours.fire,
+        marginLeft: -4,
+        fontSize: 12
+    },
+    flag: {
+        width: 50/2,
+        height: 30/2,
+        borderWidth: 0
+    },
+    pickerItem: {
+        ...Fonts.style.normalSmall,
+        color: Colours.mainTextColor,
+        fontSize: 14
+    },
+    button: {
+        ...Fonts.style.normalSmall,
+        fontFamily: Fonts.type.medium,
+        color: Colours.mainTextColor,
+        fontSize: 14
+    },
+    viewContainer: {
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        alignItems: 'flex-end',
+        backgroundColor: 'red',
+    },
+    iconContainer: {
+        alignItems: 'flex-end'
+    }
 });

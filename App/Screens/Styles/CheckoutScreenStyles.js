@@ -8,6 +8,8 @@ export default StyleSheet.create({
     ...ApplicationStyles.screen,
     container: {
         ...ApplicationStyles.screen.container,
+        flex: 1,
+        height: Metrics.fullHeight,
         backgroundColor: Colours.lightBody,
         paddingTop: 0,
         paddingLeft: 0,
@@ -44,6 +46,5 @@ export default StyleSheet.create({
     cardInput: {
         ...Fonts.style.normalSmall,
         color: 'white'
-    }
-
+    },
 })

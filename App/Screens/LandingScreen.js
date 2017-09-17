@@ -1,13 +1,22 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import {
+    signInWithFacebook,
+    signInWithGoogle
+} from '../Actions/AuthActions';
 import {
     View,
     StyleSheet,
     Image,
+    LayoutAnimation,
+    ImageBackground
 } from 'react-native';
 import {
     Button,
     Text,
-    Container
+    Container,
+    Toast,
+    Root
 } from 'native-base';
 import {
     Images,
@@ -18,70 +27,99 @@ import {
     IconButton,
     Section
 } from '../Components';
+import strings from '../Config/Localization';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import LinearGradient from 'react-native-linear-gradient';
 import styles from './Styles/LandingScreenStyles';
 
-const LandingScreen = ({ navigation }) => {
-    return (
-        <Container style={styles.container}>
-            <Image style={styles.backgroundImage} source={Images.background}>
-                <LinearGradient
-                    colors={Colours.mainGradient}
-                    style={styles.gradient}
-                    locations={[0.5,0.6]}
-                />
-            </Image>
-            <View style={styles.topContainer}>
-                <Section top={30}>
-                    <Image style={styles.logo} source={Images.logo} />
-                    <Text style={styles.title}>Restoapp</Text>
-                </Section>
-            </View>
-            <View style={styles.mainContainer}>
-                <Section bottom={10}>
-                    <IconButton
-                        icon='google'
-                        backgroundColor={Colours.darkGoogle}
-                        iconBackgroundColor={Colours.lightGoogle}
-                        fontawesome
-                    >
-                        Sign up with Email
-                    </IconButton>
-                </Section>
-                <Section bottom={10}>
-                    <IconButton
-                        icon='facebook'
-                        backgroundColor={Colours.darkFacebook}
-                        iconBackgroundColor={Colours.lightFacebook}
-                        fontawesome
-                    >
-                        Sign up with Google
-                    </IconButton>
-                </Section>
-                <Section>
-                    <IconButton
-                        icon='email'
-                        backgroundColor={Colours.darkBody}
-                        iconBackgroundColor={Colours.lightBody}
-                    >
-                        Sign up with Email
-                    </IconButton>
-                </Section>
-                <Section top={15} bottom={15}>
-                    <Button transparent full>
-                        <Text style={styles.textButton}>Already registered?</Text>
-                    </Button>
-                </Section>
-                <Button bordered block style={styles.turquoiseButton} onPress={() => navigation.navigate('MainScreen')}>
-                    <View style={styles.center}>
-                        <Icon name="restaurant-menu" color={Colours.turquoise} size={16} style={styles.turquoiseButtonIcon}/>
-                        <Text style={styles.turquoiseButtonTitle}>See Menu</Text>
+class LandingScreen extends Component {
+    static navigationOptions = ({ navigation }) => ({
+        header: null
+    });
+
+    componentWillReceiveProps({ success, facebookError, googleError }) {
+        if (success) {
+            this.props.navigation.navigate('MainScreen');
+        } else {
+            if (facebookError || googleError) {
+                Toast.show({
+                    text: facebookError || googleError,
+                    position: 'bottom',
+                    buttonText: 'Dismiss'
+                });
+            }
+        }
+    }
+
+    render() {
+        const { navigation, signInWithFacebook, signInWithGoogle } = this.props;
+
+        return (
+            <Root>
+                <Container style={styles.container}>
+                    <ImageBackground style={styles.backgroundImage} source={Images.background}>
+                        <LinearGradient colors={Colours.mainGradient} style={styles.gradient} locations={[0.5,0.6]}/>
+                    </ImageBackground>
+                    <View style={styles.topContainer}>
+                        <Section top={30} column>
+                            <Image style={styles.logo} source={Images.logo} />
+                            <Text style={styles.title}>Restoapp</Text>
+                        </Section>
                     </View>
-                </Button>
-            </View>
-        </Container>
-    );
+                    <View style={styles.mainContainer}>
+                        <View style={{ paddingBottom: 10 }}>
+                            <IconButton
+                                icon='google'
+                                backgroundColor={Colours.darkGoogle}
+                                iconBackgroundColor={Colours.lightGoogle}
+                                fontawesome
+                                onPress={() => signInWithGoogle()}>
+                                { strings.googleSignup }
+                            </IconButton>
+                        </View>
+                        <View style={{ paddingBottom: 10 }}>
+                            <IconButton
+                                icon='facebook'
+                                backgroundColor={Colours.darkFacebook}
+                                iconBackgroundColor={Colours.lightFacebook}
+                                onPress={() => signInWithFacebook()}
+                                fontawesome>
+                                { strings.facebookSignup }
+                            </IconButton>
+                        </View>
+                        <View>
+                            <IconButton icon='email' backgroundColor={Colours.darkBody} iconBackgroundColor={Colours.lightBody} onPress={() => navigation.navigate('Registration', { register: true })}>
+                                { strings.emailSignup }
+                            </IconButton>
+                        </View>
+                        <View style={{ paddingTop: 15, paddingBottom: 15 }}>
+                            <Button transparent full onPress={() => navigation.navigate('Registration', { register: false })}>
+                                <Text style={styles.textButton}>{ strings.alreadyRegistered }</Text>
+                            </Button>
+                        </View>
+                        <Button bordered block style={styles.turquoiseButton} onPress={() => navigation.navigate('MainScreen')}>
+                            <View style={styles.center}>
+                                <Icon name="restaurant-menu" color={Colours.turquoise} size={16} style={styles.turquoiseButtonIcon}/>
+                                <Text style={styles.turquoiseButtonTitle}>{ strings.seeMenu }</Text>
+                            </View>
+                        </Button>
+                    </View>
+                </Container>
+            </Root>
+        );
+    }
+}
+
+const mapStateToProps = ({ auth }) => ({
+    loading: auth.loading,
+    facebookError: auth.facebook_error,
+    googleError: auth.google_error,
+    success: auth.success
+});
+
+const actions = {
+    signInWithFacebook,
+    signInWithGoogle
 };
 
-export default LandingScreen;
+export default connect(mapStateToProps, actions)(LandingScreen);

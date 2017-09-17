@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getAllMeals }from '../Actions/MealActions';
+import { getAllMeals, getMealsForCategory }from '../Actions/MealActions';
 import { FlatList, View } from 'react-native';
-import { Spinner } from 'native-base';
+import Spinner from 'react-native-spinkit';
 import { MenuItem } from './MenuItem';
 
 class MenuList extends Component {
     componentWillMount() {
-        this.props.getAllMeals();
+        if (this.props.category) {
+            this.props.getMealsForCategory(this.props.category._id, this.props.token);
+        } else {
+            this.props.getAllMeals();
+        }
     }
 
     componentWillReceiveProps({ navigation }) {
@@ -25,14 +29,14 @@ class MenuList extends Component {
 
         if (loading === true) {
             return (
-                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: 'transparent' }}>
-                    <Spinner color='white' />
+                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                    <Spinner color='white' size={17} type="Arc" />
                 </View>
             )
         } else {
             return (
                 <FlatList
-                    data={this.props.meals}
+                    data={this.props.category ? this.props.categoryMeals : this.props.meals}
                     renderItem={this.renderItem.bind(this)}
                     keyExtractor={this.keyExtractor}
                 />
@@ -45,12 +49,14 @@ class MenuList extends Component {
     };
 }
 
-const mapStateToProps = ({ meals }) => {
+const mapStateToProps = ({ meals, auth }) => {
     return {
         meals: meals.meals,
         error: meals.error,
-        loading: meals.loading
+        loading: meals.loading,
+        token: auth.token,
+        categoryMeals: meals.category_meals
     }
 };
 
-export default connect(mapStateToProps, { getAllMeals })(MenuList);
+export default connect(mapStateToProps, { getAllMeals, getMealsForCategory })(MenuList);

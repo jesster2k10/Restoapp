@@ -4,8 +4,46 @@
 import {
     AsyncStorage
 } from 'react-native';
+import RNSecureKeyStore from 'react-native-secure-key-store';
 
 export const CART_KEY = 'cart';
+export const TOKEN_KEY = 'token';
+
+export const isUserLoggedIn = () => {
+    return new Promise((resolve, reject) => {
+        RNSecureKeyStore.get(TOKEN_KEY)
+            .then(token => {
+                if (token != null || token != undefined) {
+                    resolve(token);
+                } else {
+                    reject(new Error('No token was found'));
+                }
+            })
+            .catch(error => {
+                reject(error);
+            })
+    });
+};
+
+export const saveUserToken = (token) => {
+    RNSecureKeyStore.set(TOKEN_KEY, token)
+        .then((res) => {
+            console.log(res);
+        }, (err) => {
+            console.log(err);
+        });
+};
+
+export const removeUserToken = () => {
+    return new Promise((resolve, reject) => {
+        RNSecureKeyStore.remove(TOKEN_KEY)
+            .then(() => {
+                resolve();
+            }, (err) => {
+                reject(err);
+            });
+    })
+};
 
 export const cartExists = (callback) => {
     AsyncStorage.getItem(CART_KEY)
@@ -45,12 +83,14 @@ export const saveCart = (cart, callback) => {
     })
 };
 
-export const clearCart = (callback) => {
-    AsyncStorage.removeItem(CART_KEY)
-        .then(() => {
-            callback(true, null)
-        })
-        .catch(error => {
-            callback(false, error)
-        })
+export const clearCart = () => {
+    return new Promise((resolve, reject) => {
+        AsyncStorage.removeItem(CART_KEY)
+            .then(() => {
+                resolve()
+            })
+            .catch(error => {
+                reject(error)
+            })
+    })
 };

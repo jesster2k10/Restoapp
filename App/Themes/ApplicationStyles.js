@@ -81,6 +81,29 @@ const ApplicationStyles = {
     position: {
         end: {
             justifyContent: 'flex-end'
+        },
+        start: {
+
+        },
+        alignEnd: {
+            alignItems: 'flex-end'
+        },
+        centered: {
+            flex: 1,
+            alignItems: 'center',
+            justifyContent: 'center'
+        }
+    },
+    toast: {
+        body: {
+            backgroundColor: Colours.navigation.background,
+            marginLeft: 20,
+            marginRight: 20
+        },
+        text: {
+            color: Colours.mainTextColor,
+            ...Fonts.style.normalSmall,
+            fontSize: 13,
         }
     }
 };

@@ -47,6 +47,6 @@ const metrics = {
             alignItems: 'flex-end'
         }
     }
-}
+};
 
 export default metrics

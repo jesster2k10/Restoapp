@@ -41,9 +41,13 @@ export const getSavedCart = () => (dispatch)  => {
             dispatch(getCart(cart));
         } else {
             dispatch({ type: Types.GET_SAVED_CART_FAILED });
+            dispatch(createCart());
         }
     })
 };
+
+export const clearRemoveErrors = () => ({ type: Types.CLEAR_REMOVE_ERRORS });
+export const clearAddErrors = () => ({ type: Types.CLEAR_ADD_ERRORS });
 
 export const getCart = (cart) => (dispatch) => {
     dispatch({ type: Types.GET_CART });
@@ -79,6 +83,7 @@ export const addMealToCart = (cart, { _id }, option) => (dispatch) => {
             if (data.results === undefined) {
                 dispatch({ type: Types.ADD_MEAL_TO_CART_FAILED, payload: data.error });
             } else {
+                dispatch(getCart(cart));
                 dispatch({ type: Types.ADD_MEAL_TO_CART_SUCCESS, payload: data });
             }
         })
@@ -86,3 +91,61 @@ export const addMealToCart = (cart, { _id }, option) => (dispatch) => {
             dispatch({ type: Types.ADD_MEAL_TO_CART_FAILED, payload: error });
         });
 };
+
+export const removeMealFromCart = (token, cart, product) => (dispatch) => {
+    dispatch({ type: Types.REMOVE_MEAL_FROM_CART });
+
+    const options = {
+        method: 'DELETE',
+        url: `${Constants.BASE_API_URL}/carts/${cart}/products`,
+        headers: {
+            'x-access-token': token || Constants.ACCESS_TOKEN,
+            'Content-Type': 'application/json'
+        },
+        data: {
+            product: product._id
+        }
+    };
+
+    axios(options)
+        .then(({ data }) => {
+            if (data.success == false || !data.results) {
+                dispatch({ type: Types.REMOVE_MEAL_FROM_CART_FAILED, payload: data.error.message });
+            } else {
+                dispatch({ type: Types.REMOVE_MEAL_FROM_CART_SUCCESS });
+                dispatch(getCart(cart));
+            }
+        })
+        .catch(({ message }) => {
+            dispatch({ type: Types.REMOVE_MEAL_FROM_CART_FAILED, payload: message });
+        });
+};
+
+export const resetCart = (token, cart) => (dispatch) => {
+    dispatch({ type: Types.RESET_CART });
+
+    const options = {
+        method: 'DELETE',
+        url: `${Constants.BASE_API_URL}/carts/${cart}/products/all`,
+        headers: {
+            'x-access-token': token || Constants.ACCESS_TOKEN,
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        json: true,
+    };
+
+    axios(options)
+        .then(({ data }) => {
+            if (data.success == false) {
+                dispatch({ type: Types.RESET_CART_FAILED, payload: data.error });
+            } else {
+                dispatch({ type: Types.RESET_CART_SUCCESS });
+                dispatch(getCart(cart));
+            }
+        })
+        .catch(({ message }) => {
+            dispatch({ type: Types.RESET_CART_FAILED, payload: message });
+        });
+};
+
+export const clearResetErrors = () => ({ type: Types.CLEAR_RESET_ERRORS });

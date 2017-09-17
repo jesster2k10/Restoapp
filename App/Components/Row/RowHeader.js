@@ -15,16 +15,16 @@ import {
 } from '../../Helpers';
 import styles from './Styles/RowHeaderStyles';
 
-const _render = (children, center, capital, style, textStyle) => {
+const _render = (children, center, capital, style, textStyle, spacing) => {
     if (center) {
         return (
             <Center>
-                <Text style={[styles.title, textStyle, { textAlign: center ? 'center' : 'left' }]}>{ capital ? applyLetterSpacing(children.toUpperCase(), 5) : applyLetterSpacing(children, 5) }</Text>
+                <Text style={[styles.title, textStyle, { textAlign: center ? 'center' : 'left' }]}>{ capital ? applyLetterSpacing(children.toUpperCase(), spacing) : applyLetterSpacing(children, spacing) }</Text>
             </Center>
         );
     } else {
         return (
-            <Text style={[styles.title, textStyle]}>{ capital ? applyLetterSpacing(children.toUpperCase(), 5) : applyLetterSpacing(children, 5) }</Text>
+            <Text style={[styles.title, textStyle]}>{ capital ? applyLetterSpacing(children.toUpperCase(), spacing) : applyLetterSpacing(children, spacing) }</Text>
         )
     }
 };

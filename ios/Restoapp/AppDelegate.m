@@ -8,6 +8,8 @@
  */
 
 #import "AppDelegate.h"
+#import "RCTBraintree.h"
+#import "OAuthManager.h"
 
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
@@ -27,6 +29,7 @@
   rootView.backgroundColor = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:1];
   
   [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+  [OAuthManager setupOAuthHandler:application];
 
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
   UIViewController *rootViewController = [UIViewController new];
@@ -34,6 +37,25 @@
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
   return YES;
+}
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+            options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+  return [RCTLinkingManager application:application openURL:url options:options];
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+  if ([[RCTBraintree sharedInstance] application:application openURL:url sourceApplication:sourceApplication annotation:annotation]) {
+    return [[RCTBraintree sharedInstance] application:application openURL:url sourceApplication:sourceApplication annotation:annotation];
+  }
+  
+  if ([OAuthManager handleOpenUrl:application openURL:url sourceApplication:sourceApplication annotation:annotation]) {
+    return [OAuthManager handleOpenUrl:application openURL:url sourceApplication:sourceApplication annotation:annotation];
+  }
+  
+  return [RCTLinkingManager application:application openURL:url
+                      sourceApplication:sourceApplication annotation:annotation];
 }
 
 @end

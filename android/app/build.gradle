@@ -96,11 +96,21 @@ android {
     defaultConfig {
         applicationId "com.restoapp"
         minSdkVersion 16
-        targetSdkVersion 22
+        targetSdkVersion 23
         versionCode 1
         versionName "1.0"
         ndk {
             abiFilters "armeabi-v7a", "x86"
+        }
+    }
+    signingConfigs {
+        release {
+            if (project.hasProperty('MYAPP_RELEASE_STORE_FILE')) {
+                storeFile file(MYAPP_RELEASE_STORE_FILE)
+                storePassword MYAPP_RELEASE_STORE_PASSWORD
+                keyAlias MYAPP_RELEASE_KEY_ALIAS
+                keyPassword MYAPP_RELEASE_KEY_PASSWORD
+            }
         }
     }
     splits {
@@ -115,6 +125,7 @@ android {
         release {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            signingConfig signingConfigs.release
         }
     }
     // applicationVariants are e.g. debug, release
@@ -133,6 +144,24 @@ android {
 }
 
 dependencies {
+    compile(project(':react-native-maps')) {
+        exclude group: 'com.google.android.gms', module: 'play-services-base'
+        exclude group: 'com.google.android.gms', module: 'play-services-maps'
+    }
+
+    compile 'com.google.android.gms:play-services-base:11+'
+    compile 'com.google.android.gms:play-services-maps:11+'
+
+    compile project(':react-native-blur')
+    compile project(':react-native-secure-key-store')
+    compile project(':react-native-spinkit')
+    compile project(':react-native-oauth')
+    compile project(':react-native-device-info')
+    compile project(':react-native-picker')
+    compile project(':tipsi-stripe')
+    compile project(':react-native-braintree-xplat')
+    compile project(':@yfuks/react-native-action-sheet')
+    compile project(':react-native-awesome-card-io')
     compile project(':react-native-svg')
     compile project(':react-native-linear-gradient')
     compile project(':react-native-vector-icons')

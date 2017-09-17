@@ -15,7 +15,7 @@ const size = {
     h3: 30,
     h4: 26,
     h5: 20,
-    h6: 19,
+    h6: 17,
     input: 18,
     regular: 17,
     medium: 17,
@@ -36,7 +36,7 @@ const style = {
         backgroundColor: 'transparent',
     },
     h3: {
-        fontFamily: type.emphasis,
+        fontFamily: type.base,
         fontSize: size.h3,
         backgroundColor: 'transparent',
     },
@@ -51,7 +51,7 @@ const style = {
         backgroundColor: 'transparent',
     },
     h6: {
-        fontFamily: type.emphasis,
+        fontFamily: type.base,
         fontSize: size.h6,
         backgroundColor: 'transparent',
     },

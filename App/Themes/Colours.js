@@ -41,6 +41,7 @@ const colors = {
     alternative: 'rgb(42, 36, 66)',
     accent: '#ff2851',
     darkAccent: '#b42342',
+    yellow: '#FFD401',
     ribbon: {
         title: 'rgb(42, 36, 66)',
         background: '#FFD401'
@@ -53,6 +54,9 @@ const colors = {
         background: '#2a2442',
         title: 'white'
     },
+    statusBar: {
+        background: '#1c0e42'
+    }
 };
 
 export default colors

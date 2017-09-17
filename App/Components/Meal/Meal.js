@@ -6,7 +6,9 @@ import {
     ScrollView,
     ImageBackground,
 } from 'react-native';
-import { getSavedCart, addMealToCart } from '../../Actions/CartActions';
+import { getSavedCart, addMealToCart,  } from '../../Actions/CartActions';
+import { clearMealErrors } from '../../Actions/MealActions';
+import { favouriteMeal } from '../../Actions/FavouriteActions';
 import {
     Text,
     Container,
@@ -14,6 +16,7 @@ import {
     Icon,
 } from 'native-base';
 import ActionSheet from '@yfuks/react-native-action-sheet';
+import { ApplicationStyles } from '../../Themes';
 import {
     Col,
     Row,
@@ -25,40 +28,60 @@ import {
     NotificationBody
 } from '../../Components';
 import { Colours } from '../../Themes';
-import { getPrice } from '../../Helpers';
-import Notification from 'react-native-in-app-notification';
+import { getPrice, isMealInCart } from '../../Helpers';
+import Spinner from 'react-native-spinkit';
 import LinearGradient from 'react-native-linear-gradient';
 import styles from './Styles/MealStyles';
 import strings from '../../Config/Localization';
+import Toast, { DURATION } from 'react-native-easy-toast';
 
 class Meal extends Component {
     componentWillMount() {
         this.props.getSavedCart();
     }
 
-    componentWillReceiveProps({ addedToCart, meal, error }) {
+    componentWillReceiveProps({ addedToCart, meal, error, favouriteSuccess, favouriteError, favouriteLoading, clearMealErrors }) {
         if (addedToCart) {
-            if (this.successNotification) {
-                this.successNotification.show(
-                    strings.formatString(strings.addedToCart, meal.name),
-                    null,
-                    () => navigate('Cart'),
-                );
-            }
+            this.refs.toast.show(strings.formatString(strings.addedToCart, meal.name), DURATION.LENGTH_LONG);
+            clearMealErrors();
         }
 
         if (!addedToCart && error !== null) {
-            if (this.errorNotification) {
-                this.errorNotification.show();
-            }
+            this.refs.toast.show(error, DURATION.LENGTH_LONG);
+            clearMealErrors();
+        }
+
+        if (favouriteSuccess && !favouriteError && !favouriteLoading) {
+            this.refs.toast.show(strings.formatString(strings.favourited, meal.name), DURATION.LENGTH_LONG);
+            clearMealErrors();
+        }
+
+        if (favouriteError && !favouriteSuccess && !favouriteLoading) {
+            this.refs.toast.show(favouriteError, DURATION.LENGTH_LONG);
+            clearMealErrors();
+        }
+    }
+
+    favourite() {
+        const { favouriteMeal, meal, token, userId, isUserLoggedIn, navigation } = this.props;
+
+        if (isUserLoggedIn) {
+            favouriteMeal(token, meal._id, userId);
+        } else {
+
         }
     }
 
     addToCart() {
-        const { cart, meal } = this.props;
+        const { cart_id, meal, cart, navigation } = this.props;
         const { options } = meal;
 
-        if (cart != null) {
+        if (isMealInCart(meal, cart)) {
+            navigation.navigate('Cart');
+            return
+        }
+
+        if (cart_id != null) {
             if (options.length > 0) {
 
                 let _options = [...options.map(option => {
@@ -73,12 +96,12 @@ class Meal extends Component {
                         tintColor: Colours.darkBody
                     }, (idx) => {
                         if (idx != CANCEL_INDEX) {
-                            this.props.addMealToCart(cart, meal, _options[idx]);
+                            this.props.addMealToCart(cart_id, meal, _options[idx]);
                         }
                     }
                 );
             } else {
-                this.props.addMealToCart(cart, meal);
+                this.props.addMealToCart(cart_id, meal);
             }
         }
     }
@@ -109,7 +132,7 @@ class Meal extends Component {
     }
 
     render() {
-        const { meal } = this.props;
+        const { meal, addToCartLoading, favouriteLoading, cart } = this.props;
 
         const {
             description,
@@ -120,72 +143,79 @@ class Meal extends Component {
         } = meal;
 
         return (
-            <ScrollView style={styles.container}>
-                <Container>
-                    <Grid>
-                        <Row style={{ height: 200 }}>
-                            <ImageBackground style={styles.image} source={{ uri: featuredImage.secure_url }}>
-                                <LinearGradient
-                                    colors={Colours.mainGradient}
-                                    style={styles.gradient}
-                                />
-                            </ImageBackground>
-                            <View style={styles.priceContainer}>
-                                { this.renderRibbon }
-                            </View>
-                            <View style={styles.titleContainer}>
-                                <Grid>
-                                    <Col style={styles.end}>
-                                        <Text style={styles.medium}>{ name }</Text>
-                                    </Col>
-                                    <Col style={[styles.end, styles.right]}>
-                                        <Text style={styles.medium}>{ getPrice(meal) }</Text>
-                                    </Col>
-                                </Grid>
-                            </View>
-                        </Row>
-                        <Row style={{ height: 50 }}>
-                            <Col>
-                                <Button style={styles.button} iconLeft full light>
-                                    <Text style={styles.buttonTitle}>{strings.favourite}</Text>
-                                </Button>
-                            </Col>
-                            <Col>
-                                <Button style={styles.button} full light onPress={() => this.addToCart()}>
-                                    <Text style={styles.buttonTitle}>{ options.length == 0 ? strings.addToCart : strings.choseAnOption }</Text>
-                                </Button>
-                            </Col>
-                        </Row>
-                        <Row style={{ flexDirection: 'column' }}>
-                            <View style={styles.padding}>
-                                <Text style={styles.rowHeader}>{strings.description}</Text>
-                                <Text style={styles.description}>{ description }</Text>
-                            </View>
-                            { this.renderOptions() }
-                        </Row>
-                    </Grid>
-                </Container>
+            <View style={styles.container}>
+                <ScrollView style={styles.container}>
+                    <Container>
+                        <Grid>
+                            <Row style={{ height: 200 }}>
+                                <ImageBackground style={styles.image} source={{ uri: featuredImage.secure_url }}>
+                                    <LinearGradient
+                                        colors={Colours.mainGradient}
+                                        style={styles.gradient}
+                                    />
+                                </ImageBackground>
+                                <View style={styles.priceContainer}>
+                                    { this.renderRibbon }
+                                </View>
+                                <View style={styles.titleContainer}>
+                                    <Grid>
+                                        <Col style={styles.end}>
+                                            <Text style={styles.medium}>{ name }</Text>
+                                        </Col>
+                                        <Col style={[styles.end, styles.right]}>
+                                            <Text style={styles.medium}>{ getPrice(meal) }</Text>
+                                        </Col>
+                                    </Grid>
+                                </View>
+                            </Row>
+                            <Row style={{ height: 50 }}>
+                                <Col>
+                                    <Button style={styles.button} iconLeft full light onPress={() => this.favourite()}>
+                                        { favouriteLoading ?  <Spinner color='white' type="Arc" size={17} /> : <Text style={styles.buttonTitle}>{ strings.favourite }</Text> }
+                                    </Button>
+                                </Col>
+                                <Col>
+                                    <Button style={styles.button} full light onPress={() => this.addToCart()}>
+                                        { addToCartLoading ?  <Spinner color='white' type="Arc" size={17} /> : <Text style={styles.buttonTitle}>{ isMealInCart(meal, cart) ? strings.isAddedToCart : options.length == 0 ? strings.addToCart : strings.choseAnOption }</Text> }
+                                    </Button>
+                                </Col>
+                            </Row>
+                            <Row style={{ flexDirection: 'column' }}>
+                                <View style={styles.padding}>
+                                    <Text style={styles.rowHeader}>{strings.description}</Text>
+                                    <Text style={styles.description}>{ description }</Text>
+                                </View>
+                                { this.renderOptions() }
+                            </Row>
+                        </Grid>
+                    </Container>
+                    <Toast
+                        ref="toast"
+                        style={ApplicationStyles.toast.body}
+                        textStyle={ApplicationStyles.toast.text}/>
+                </ScrollView>
+                <Toast
+                    ref="toast"
+                    style={styles.toast}
+                    position='top'
+                    textStyle={styles.toastText}/>
+            </View>
 
-                <Notification
-                    height={40}
-                    notificationBodyComponent={NotificationBody}
-                    ref={(ref) => { this.successNotification = ref; }} />
-
-                <Notification
-                    height={40}
-                    backgroundColour="red"
-                    notificationBodyComponent={ () => <NotificationBody error title={strings.formatString(strings.failedToAddToCart, name)} /> }
-                    ref={(ref) => { this.errorNotification = ref; }} />
-
-            </ScrollView>
         )
     };
 }
-
-const mapStateToProps = ({ cart }) => ({
-    cart: cart.cart_saved_identifier,
+const mapStateToProps = ({ cart, favourites, auth }) => ({
+    cart_id: cart.cart_saved_identifier || cart.cart._id,
+    cart: cart.cart,
     addedToCart: cart.added_to_cart,
-    error: cart.cart_error
+    error: cart.cart_error,
+    addToCartLoading: cart.cart_add_loading,
+    favouriteLoading: favourites.loading,
+    favouriteError: favourites.error,
+    favouriteSuccess: favourites.success,
+    token: auth.token,
+    isUserLoggedIn: auth.userLoggedIn,
+    userId: auth.userId
 });
 
-export default connect(mapStateToProps, { getSavedCart, addMealToCart })( Meal );
+export default connect(mapStateToProps, { getSavedCart, addMealToCart, favouriteMeal, clearMealErrors })( Meal );

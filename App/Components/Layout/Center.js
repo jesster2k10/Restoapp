@@ -9,9 +9,9 @@ import {
     Text
 } from 'react-native';
 
-const Center = ({ children, vert, horz }) => {
+const Center = ({ children, vert = true, horz = true, full }) => {
     return (
-        <View style={{ alignItems: horz ? 'center' : null, justifyContent: vert ? 'center': null }}>
+        <View style={{ alignItems: horz ? 'center' : null, justifyContent: vert ? 'center': null , flex: full ? 1 : null }}>
             { children }
         </View>
     );

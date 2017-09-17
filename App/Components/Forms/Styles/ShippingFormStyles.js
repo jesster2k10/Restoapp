@@ -4,7 +4,14 @@
 import {
     StyleSheet
 } from 'react-native';
+import {
+    Fonts,
+    Colours
+} from '../../../Themes';
 
 export default StyleSheet.create({
-
+    header: {
+        ...Fonts.style.small,
+        color: Colours.mainTextColor
+    }
 });
