@@ -9,10 +9,10 @@ import {
 } from 'native-base';
 import styles from './Styles/TextButtonStyles';
 
-const TextButton = ({ children, onPress, textStyle, buttonStyle, full = true }) => {
+const TextButton = ({ children, onPress, textStyle, buttonStyle, full = true, uppercase = false }) => {
     return (
         <Button transparent onPress={onPress} style={buttonStyle} full={full}>
-            <Text style={[styles.text, textStyle]}>{ children }</Text>
+            <Text style={[styles.text, textStyle]}>{ uppercase ? children.toUpperCase() : children }</Text>
         </Button>
     );
 };

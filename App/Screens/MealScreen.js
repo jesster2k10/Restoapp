@@ -11,7 +11,8 @@ import {
 import {
     Meal,
     MealReviews,
-    NavigationButton
+    NavigationButton,
+    ReviewBar
 } from '../Components';
 import styles from './Styles/MealScreenStyles';
 import strings from '../Config/Localization';
@@ -41,7 +42,10 @@ class MealScreen extends Component {
                          tabStyle={styles.tab}
                          textStyle={styles.tabTitle}
                          activeTextStyle={styles.activeTabTitle}>
-                        <MealReviews meal={meal} />
+                        <View style={{flex: 1,flexDirection:'column', justifyContent: 'flex-end'}}>
+                            <MealReviews meal={meal} />
+                            <ReviewBar />
+                        </View>
                     </Tab>
                 </Tabs>
             </View>

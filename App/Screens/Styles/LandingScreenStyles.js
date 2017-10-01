@@ -2,6 +2,7 @@
  * Created by jesseonolememen on 07/08/2017.
  */
 import { StyleSheet } from 'react-native';
+import {Dimensions} from 'react-native'
 import { Metrics, ApplicationStyles, Colours, Fonts } from '../../Themes/'
 
 export default StyleSheet.create({
@@ -11,7 +12,7 @@ export default StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'flex-end',
         alignItems: 'center',
-        width: Metrics.fullWidth,
+        width: Dimensions.get('window').width,
         backgroundColor: Colours.sand
     },
     topContainer: {

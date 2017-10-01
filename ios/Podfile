@@ -4,9 +4,11 @@ platform :ios, '8.0'
 use_frameworks!
 
 target 'Restoapp' do
+  react_native_path = '../node_modules/react-native'
+  
   pod 'Stripe', '~> 10.1.0'
   pod 'DCTAuth', :git => 'https://github.com/danielctull/DCTAuth.git'
-  
+
   # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
 
   # Pods for Restoapp

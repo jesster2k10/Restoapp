@@ -21,8 +21,9 @@ import Constants from './Config/Constants';
 import stripe from 'tipsi-stripe';
 import BTClient from 'react-native-braintree-xplat';
 import BackboneEvents from 'backbone-events-standalone';
+import codePush from "react-native-code-push";
 
-export default class Restoapp extends Component {
+class Restoapp extends Component {
     constructor(props) {
         super(props);
 
@@ -99,5 +100,14 @@ export default class Restoapp extends Component {
         );
     }
 }
+
+let codePushOptions = {
+    checkFrequency: codePush.CheckFrequency.ON_APP_RESUME,
+    installMode: codePush.InstallMode.ON_NEXT_RESUME
+};
+
+Restoapp = codePush(codePushOptions)(Restoapp);
+
+module.exports = Restoapp;
 
 AppRegistry.registerComponent('Restoapp', () => Restoapp);
