@@ -76,3 +76,21 @@ export const getMealsForCategory = (category, token) => (dispatch) => {
             dispatch({ type: Types.GET_ALL_MEALS_FAILED, payload: message });
         })
 };
+
+export const addReview = ({ title, review, rating, created = new Date(), meal }, user, token) => (dispatch) => {
+    dispatch({ type: Types.ADD_MEAL_REVIEW });
+
+    axios.post(`${Constants.BASE_API_URL}/meal-reviews`, { title, review, rating, created, meal, user, token })
+        .then(({ data }) => {
+            if (data.results) {
+                dispatch({ type: Types.ADD_MEAL_REVIEW_SUCCESS });
+                dispatch(getReviews(token, meal));
+            } else {
+                dispatch({ type: Types.ADD_MEAL_REVIEW_FAILED, payload: data.message });
+            }
+        })
+        .catch(({ message }) => {
+            dispatch({ type: Types.ADD_MEAL_REVIEW_FAILED, payload: message });
+        })
+
+};

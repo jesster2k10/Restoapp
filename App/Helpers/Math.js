@@ -20,6 +20,10 @@ export const getRandomInt = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
+export const range = (start, end) =>{
+    return Array(end - start + 1).fill().map((_, idx) => start + idx)
+};
+
 const {
     width: SCREEN_WIDTH,
 } = Dimensions.get('window');

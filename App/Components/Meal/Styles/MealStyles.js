@@ -83,6 +83,7 @@ export default StyleSheet.create({
         borderBottomColor: Colours.navigation.background,
         borderLeftWidth: 0.5,
         borderBottomWidth: 0.5,
+        borderRadius: 0
     },
     priceContainer: {
         flex: 1,

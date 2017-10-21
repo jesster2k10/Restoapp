@@ -8,3 +8,4 @@ export * from './Validation';
 export * from './Auth';
 export * from './Math';
 export * from './Checkout';
+export * from './Dimensions';

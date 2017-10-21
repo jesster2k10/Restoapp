@@ -106,7 +106,7 @@ const mapStateToProps = ({ cart, auth }) => {
     return {
         cart: cart.cart,
         products: products,
-        id: cart.cart_saved_identifier,
+        id: cart.cart_saved_identifier || cart.cart_identifier || cart.cart._id,
         loading: cart.cart_loading,
         token: auth.token,
         removeLoading: cart.remove_meal_from_cart_loading,

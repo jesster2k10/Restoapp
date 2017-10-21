@@ -32,6 +32,37 @@ import styles from './Styles/ShippingFormStyles';
 const KEY = 'SHIPPING';
 
 class ShippingForm extends Component {
+    componentDidMount() {
+        const {
+            changeEmail,
+            changePhone,
+            changeName,
+            changeCity,
+            changeState,
+            changeAddress,
+            changeCountry,
+            changeZip
+        } = this.props;
+
+        const {
+            user
+        } = this.props;
+
+        if (user && user.name && user.name.first != 'BLANK_NAME') {
+            let name = `${user.name.first} ${user.name.last && user.name.last != 'BLANK_NAME' ? user.name.last : ''}`
+
+            changeName(false, name, 'SHIPPING');
+        }
+
+        if (user && user.email) {
+            changeEmail(false, user.email, 'SHIPPING');
+        }
+
+        if (user && user.phone) {
+            changePhone(false, user.phone, 'SHIPPING')
+        }
+    }
+
     render() {
         const {
             name,
@@ -42,7 +73,8 @@ class ShippingForm extends Component {
             zip,
             postcode,
             errors,
-            country
+            country,
+            user
         } = this.props;
 
         const {
@@ -151,7 +183,7 @@ class ShippingForm extends Component {
     };
 }
 
-const mapStateToProps = ({ shippingForm }) => {
+const mapStateToProps = ({ shippingForm, user }) => {
     const {
         name,
         email,
@@ -171,7 +203,8 @@ const mapStateToProps = ({ shippingForm }) => {
         city,
         zip,
         state,
-        errors
+        errors,
+        user: user.user
     }
 };
 

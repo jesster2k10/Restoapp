@@ -18,6 +18,9 @@ export * from './Forms';
 export * from './Orders';
 export * from './News';
 export * from './Categories';
+export * from './Checkout';
+export * from './Reservations';
+export * from './Favourites';
 
 export { default as Drawer } from './Drawer';
 export { default as Splash } from './Splash';

@@ -4,7 +4,7 @@ const images = {
         front: require('../Assets/Images/card-front.png'),
         back: require('../Assets/Images/card-back.png'),
     },
-    logo: { uri: 'https://www.dimasword.com/codecanyon/demo/your_restaurant_app/assets/images/ic_launcher.png' },
+    logo: require('../Assets/Images/icon.png') ,
     payPal: { uri: 'https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP_logo_h_100x26.png' },
     applePay: require('../Assets/Images/apple-pay.png'),
     cardIcons: {

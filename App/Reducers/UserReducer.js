@@ -6,7 +6,6 @@ const INITIAL_STATE = {
             first: 'EMPTY_NAME',
             last: 'EMPTY_NAME'
         },
-
     },
     loading: false,
     error: null

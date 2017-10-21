@@ -5,7 +5,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import {
-    View,
+    ScrollView,
     StyleSheet,
     TouchableOpacity
 } from 'react-native';
@@ -68,14 +68,14 @@ class Drawer extends Component {
     };
 
     render() {
-        const { props, userLoggedIn, user } = this.props;
+        const { props, userLoggedIn, user, userId, userError } = this.props;
 
         let name = user && user.name.first != "EMPTY_NAME" && user.name.last != "EMPTY_NAME" ? `${user.name.first} ${user.name.last}` : strings.unknown;
         let image = user && user.profileImage ? user.profileImage.secure_url : Constants.BLANK_PROFILE_IMAGE;
 
         return (
             <Root>
-                <View style={styles.container}>
+                <ScrollView style={styles.container}>
                     <Grid>
                         <Row size={4}>
                             <Grid>
@@ -90,7 +90,7 @@ class Drawer extends Component {
                                     </Section>
                                     <Section>
                                         <Button transparent onPress={this._action}>
-                                            <Text style={styles.logoutButtonText}>{ userLoggedIn ? strings.logout : strings.login }</Text>
+                                            <Text style={styles.logoutButtonText}>{ userLoggedIn && userId && !userError ? strings.logout : strings.login }</Text>
                                         </Button>
                                     </Section>
                                 </Row>
@@ -106,7 +106,7 @@ class Drawer extends Component {
                             />
                         </Row>
                     </Grid>
-                </View>
+                </ScrollView>
             </Root>
         )
     }
@@ -119,7 +119,9 @@ const mapStateToProps = ({ auth, user }) => ({
     userLoggedIn: auth.userLoggedIn,
     token: auth.token,
     requestedLogout: auth.requested_logout,
-    user: user.currentUser
+    user: user.currentUser,
+    userId: auth.userId,
+    userError: user.error
 });
 
 const actions = {

@@ -6,9 +6,12 @@ import {
     Metrics,
     Colours,
     Fonts
-} from '../../Themes/'
+} from '../../Themes/';
+import {
+    isiPhoneX
+} from '../../Helpers'
 
-const HEIGHT = 175;
+const HEIGHT = isiPhoneX() ? 220 : 175;
 
 export default StyleSheet.create({
     container: {

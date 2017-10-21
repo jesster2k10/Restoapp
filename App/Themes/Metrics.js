@@ -20,7 +20,7 @@ const metrics = {
     screenHeight: width < height ? height : width,
     navBarHeight: (Platform.OS === 'ios') ? 64 : 54,
     buttonRadius: 4,
-    fullWidth: width,
+    fullWidth: Dimensions.get('window').width,
     fullHeight: height,
     icons: {
         tiny: 15,

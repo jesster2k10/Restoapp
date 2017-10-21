@@ -18,7 +18,9 @@ import NewsReducer from './NewsReducer';
 import CategoryReducer from './CategoryReducer';
 import UserReducer from './UserReducer';
 import PhotosReducer from './PhotosReducer';
+import ReservationsReducer from './ReservationReducer';
 import FavouritesReducer from './FavouritesReducer';
+import PaymentReducer from './PaymentReducer';
 
 export default combineReducers({
     auth: AuthReducer,
@@ -31,6 +33,7 @@ export default combineReducers({
     cart: CartReducer,
     user: UserReducer,
     checkout: CheckoutReducer,
+    reservations: ReservationsReducer,
     loginForm: LoginFormReducer,
     registrationForm: RegistrationFormReducer,
     shippingForm: ShippingFormReducer,
@@ -44,5 +47,6 @@ export default combineReducers({
             }
         }
     }),
-    orders: OrderReducer
+    orders: OrderReducer,
+    payments: PaymentReducer
 });

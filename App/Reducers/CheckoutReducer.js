@@ -30,6 +30,18 @@ export default (state = INITIAL_STATE, { payload, type }) => {
             return { ...state, can_confirm_payment: payload };
         case Types.CONFIRM_SHIPPING:
             return { ...state, can_confirm_shipping: payload };
+        case Types.MAKE_PAYMENT_SUCCESS:
+            return { ...state, can_confirm_payment: true };
+        case Types.MAKE_PAYMENT:
+            return { ...state, can_confirm_payment: false };
+        case Types.MAKE_PAYMENT_FAILED:
+            return { ...state, can_confirm_payment: false };
+        case Types.CHARGE_CUSTOMER:
+            return { ...state, can_confirm_payment: false };
+        case Types.CHARGE_CUSTOMER_SUCCESS:
+            return { ...state, can_confirm_payment: true };
+        case Types.CHARGE_CUSTOMER_FAILED:
+            return { ...state, can_confirm_payment: false };
         default:
             return state;
     }

@@ -5,6 +5,9 @@ import { StyleSheet } from 'react-native';
 import {Dimensions} from 'react-native'
 import { Metrics, ApplicationStyles, Colours, Fonts } from '../../Themes/'
 
+let width = Dimensions.get('window').width;
+let height = Dimensions.get('window').height;
+
 export default StyleSheet.create({
     ...ApplicationStyles.screen,
     container: {
@@ -12,29 +15,38 @@ export default StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'flex-end',
         alignItems: 'center',
-        width: Dimensions.get('window').width,
+        width,
+        height,
         backgroundColor: Colours.sand
     },
     topContainer: {
         flex: 1,
         position: 'absolute',
         padding: Metrics.baseMargin,
-        width: Metrics.fullWidth,
-        height: Metrics.fullHeight,
+        width,
+        height,
         justifyContent: 'flex-start',
         alignItems: 'center',
     },
     mainContainer: {
         flex: 1,
+        justifyContent: 'flex-end',
         position: 'absolute',
         padding: Metrics.baseMargin,
-        width: Metrics.fullWidth,
+        width,
+    },
+    buttonContainer: {
+        paddingBottom: 10
     },
     backgroundImage: {
         position: 'absolute',
-        width: Metrics.fullWidth,
-        height: Metrics.fullHeight,
+        width,
+        height,
         zIndex: 0,
+        left: 0,
+        right: 0,
+        top: 0,
+        bottom: 0
     },
     gradient: {
         position: 'absolute',

@@ -11,6 +11,10 @@ const INITIAL_STATE = {
     userLoggedIn: null,
     logout_error: null,
     logout_success: false,
+    register_error: null,
+    register_success: false,
+    register_loading: null,
+    login_loading: null,
     requested_logout: false,
     userId: '',
     requested_user_login: true
@@ -24,6 +28,12 @@ export default (state = INITIAL_STATE, action) => {
                 return {...state, facebook_error: null, login_success: false, login_error: null, google_error: null, success: false, loading: false, logout_error: null, logout_success: false, requested_logout: false, ...incoming, userLoggedIn: false}
             }
             return state;
+        case Types.REGISTER:
+            return {...state, register_loading: true, register_success: false, register_error: null};
+        case Types.REGISTER_FAILED:
+            return {...state, register_loading: false, register_success: false, register_error: action.payload};
+        case Types.REGISTER_SUCCESS:
+            return {...state, register_loading: false, register_success: true, register_error: null, userLoggedIn: true, token: action.token, userId: action.user._id};
         case Types.LOG_OUT:
             return {...state, loading: true, logout_success: false, logout_error: null, requested_logout: true};
         case Types.LOG_OUT_FAILED:
@@ -31,11 +41,11 @@ export default (state = INITIAL_STATE, action) => {
         case Types.LOG_OUT_SUCCESS:
             return {...state, loading: false, logout_success: true, logout_error: null, requested_logout: true, userLoggedIn: false, userId: '', token: Constants.ACCESS_TOKEN};
         case Types.LOGIN:
-            return {...state, loading: true, login_success: false, login_error: null};
+            return {...state, login_loading: true, login_success: false, login_error: null};
         case Types.LOGIN_FAILED:
-            return {...state, loading: false, login_success: false, login_error: action.payload, };
+            return {...state, login_loading: false, login_success: false, login_error: action.payload, };
         case Types.LOGIN_SUCCESS:
-            return {...state, loading: false, login_success: true, login_error: null, token: action.payload, userLoggedIn: true};
+            return {...state, login_loading: false, login_success: true, login_error: null, token: action.payload, userLoggedIn: true};
         case Types.GOOGLE_SIGN_IN:
             return {...state, loading: true, google_error: null, success: false, requested_logout: false};
         case Types.GOOGLE_SIGN_IN_FAILED:

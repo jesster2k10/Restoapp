@@ -7,6 +7,9 @@ import {
     Colours,
     Metrics
 } from '../../Themes';
+import { Dimensions } from 'react-native';
+
+let width = Dimensions.get('window').width;
 
 export default StyleSheet.create({
     ...ApplicationStyles.screen,
@@ -41,7 +44,7 @@ export default StyleSheet.create({
         marginTop: 5
     },
     map: {
-        width: Metrics.fullWidth,
+        width,
         height: 200
     }
 });

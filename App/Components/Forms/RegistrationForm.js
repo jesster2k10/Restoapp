@@ -32,7 +32,7 @@ const RegistrationForm = ({ email, password, errors, name, changeEmail, changePa
                     placeholder={strings.enterEmail}
                     value={email}
                     error={errors.email}
-                    onChangeText={(val) => changeEmail(true, val)}
+                    onChangeText={(val) => changeEmail(true, val, "REGISTER")}
                     label={strings.email} />
             </Section>
             <Section>
@@ -41,7 +41,7 @@ const RegistrationForm = ({ email, password, errors, name, changeEmail, changePa
                     placeholder={strings.enterPassword}
                     value={password}
                     error={errors.password}
-                    onChangeText={(val) => changePassword(true, val)}
+                    onChangeText={(val) => changePassword(true, val, "REGISTER")}
                     label={strings.password}/>
             </Section>
             <Section>
@@ -49,7 +49,7 @@ const RegistrationForm = ({ email, password, errors, name, changeEmail, changePa
                     placeholder={strings.fullName}
                     value={name}
                     error={errors.name}
-                    onChangeText={(val) => changeName(true, val)}
+                    onChangeText={(val) => changeName(true, val, "REGISTER")}
                     label={strings.enterFullName}/>
             </Section>
         </View>

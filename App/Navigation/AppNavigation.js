@@ -21,6 +21,9 @@ import CategoryScreen from '../Screens/CategoryScreen';
 import PhotosScreen from '../Screens/PhotosScreen';
 import PhotoScreen from '../Screens/PhotoScreen';
 import InfoScreen from '../Screens/InfoScreen';
+import ReservationsScreen from '../Screens/ReservationScreen';
+import ReceiptScreen from '../Screens/ReceiptScreen';
+import FavouritesScreen from '../Screens/FavouritesScreen';
 
 import {
     Drawer
@@ -30,7 +33,8 @@ import AppNavigationStyles from './Styles/AppNavigationStyles';
 
 const CheckoutNavigator = StackNavigator({
     Checkout: { screen: CheckoutScreen },
-    SelectCard: { screen: SelectCardScreen }
+    SelectCard: { screen: SelectCardScreen },
+    Receipt: { screen: ReceiptScreen },
 }, {
     headerMode: 'none',
     initialRouteName: 'Checkout',
@@ -44,6 +48,7 @@ const MenuNavigator = StackNavigator({
     Meal: { screen: MealScreen },
     Cart: { screen: CartScreen },
     Checkout: { screen: CheckoutNavigator },
+    Reservations: { screen: ReservationsScreen },
 }, {
     headerMode: 'screen',
     initialRouteName: 'Menu',
@@ -106,13 +111,34 @@ const InfoNavigator = new StackNavigator({
     }
 });
 
+const ReservationsNavigator = new StackNavigator({
+    Reservations: { screen: ReservationsScreen }
+}, {
+    headerMode: 'screen',
+    initialRouteName: 'Reservations',
+    navigationOptions: {
+        ...AppNavigationStyles,
+    }
+});
+
+const FavouritesNavigator = new StackNavigator({
+    Favourites: { screen: FavouritesScreen }
+}, {
+    headerMode: 'screen',
+    initialRouteName: 'Favourites',
+    navigationOptions: {
+        ...AppNavigationStyles,
+    }
+});
+
 export const MainNavigator = DrawerNavigator({
     Menu: { screen: MenuNavigator },
     Categories: { screen: CategoriesNavigator },
     News: { screen: NewsNavigator },
     Orders: { screen: OrderNavigator },
+    Favourites: { screen: FavouritesNavigator },
     Photos: { screen: PhotosNavigator },
-    Info: { screen: InfoNavigator }
+    Info: { screen: InfoNavigator },
 }, {
     initialRouteName: 'Menu',
     headerMode: 'screen',
@@ -123,7 +149,7 @@ export const Root = StackNavigator({
     LandingScreen: { screen: LandingScreen },
     Registration: { screen: RegistrationScreen },
     Forgot: { screen: ForgotScreen },
-    MainScreen: { screen: MainNavigator }
+    MainScreen: { screen: MainNavigator },
 }, {
     // Default config for all screens
     headerMode: 'none',

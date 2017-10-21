@@ -5,6 +5,7 @@ import {
     StyleSheet,
     ScrollView,
     ImageBackground,
+    Alert
 } from 'react-native';
 import { getSavedCart, addMealToCart,  } from '../../Actions/CartActions';
 import { clearMealErrors } from '../../Actions/MealActions';
@@ -35,6 +36,7 @@ import styles from './Styles/MealStyles';
 import strings from '../../Config/Localization';
 import Toast, { DURATION } from 'react-native-easy-toast';
 
+
 class Meal extends Component {
     componentWillMount() {
         this.props.getSavedCart();
@@ -64,11 +66,20 @@ class Meal extends Component {
 
     favourite() {
         const { favouriteMeal, meal, token, userId, isUserLoggedIn, navigation } = this.props;
+        const { navigate } = navigation;
 
         if (isUserLoggedIn) {
             favouriteMeal(token, meal._id, userId);
         } else {
-
+            Alert.alert(strings.signInRequired, strings.pleaseSignIn, [
+                {
+                    text: strings.ok,
+                    onPress: () => navigate('LandingScreen')
+                },
+                {
+                    text: strings.cancel
+                }
+            ])
         }
     }
 
@@ -76,9 +87,11 @@ class Meal extends Component {
         const { cart_id, meal, cart, navigation } = this.props;
         const { options } = meal;
 
-        if (isMealInCart(meal, cart)) {
-            navigation.navigate('Cart');
-            return
+        if (cart && cart.products) {
+            if (isMealInCart(meal, cart)) {
+                navigation.navigate('Cart');
+                return
+            }
         }
 
         if (cart_id != null) {
@@ -170,13 +183,13 @@ class Meal extends Component {
                             </Row>
                             <Row style={{ height: 50 }}>
                                 <Col>
-                                    <Button style={styles.button} iconLeft full light onPress={() => this.favourite()}>
+                                    <Button style={styles.button} block light onPress={() => this.favourite()}>
                                         { favouriteLoading ?  <Spinner color='white' type="Arc" size={17} /> : <Text style={styles.buttonTitle}>{ strings.favourite }</Text> }
                                     </Button>
                                 </Col>
                                 <Col>
-                                    <Button style={styles.button} full light onPress={() => this.addToCart()}>
-                                        { addToCartLoading ?  <Spinner color='white' type="Arc" size={17} /> : <Text style={styles.buttonTitle}>{ isMealInCart(meal, cart) ? strings.isAddedToCart : options.length == 0 ? strings.addToCart : strings.choseAnOption }</Text> }
+                                    <Button style={styles.button} block light onPress={() => this.addToCart()}>
+                                        { addToCartLoading ?  <Spinner color='white' type="Arc" size={17} /> : <Text style={styles.buttonTitle}>{ cart && cart.products ? isMealInCart(meal, cart) ? strings.isAddedToCart : options.length == 0 ? strings.addToCart : strings.choseAnOption : options.length == 0 ? strings.addToCart : strings.choseAnOption }</Text> }
                                     </Button>
                                 </Col>
                             </Row>
@@ -205,7 +218,7 @@ class Meal extends Component {
     };
 }
 const mapStateToProps = ({ cart, favourites, auth }) => ({
-    cart_id: cart.cart_saved_identifier || cart.cart._id,
+    cart_id: cart.cart_saved_identifier || cart.cart._id != '' ? cart.cart._id : null,
     cart: cart.cart,
     addedToCart: cart.added_to_cart,
     error: cart.cart_error,

@@ -30,3 +30,19 @@ export const getCurrentUser = (token, id) => (dispatch) => {
             dispatch({ type: Types.GET_CURRENT_USER_FAILED, payload: message });
         })
 };
+
+export const addAddress = (token, id, address, name) => (dispatch) => {
+    dispatch({ type: Types.ADD_ADDRESS });
+
+    axios.post(`${Constants.BASE_API_URL}/addresses`, { address, name, token, user: id })
+        .then(({ data }) => {
+            if (data.results) {
+                dispatch({ type: Types.ADD_ADDRESS_SUCCESS });
+            } else {
+                dispatch({ type: Types.ADD_ADDRESS_FAILED, payload: data.message })
+            }
+        })
+        .catch(({ message }) => {
+            dispatch({ type: Types.ADD_ADDRESS_FAILED, payload: message });
+        })
+};

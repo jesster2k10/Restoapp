@@ -37,6 +37,10 @@ import PhoneInput from 'react-native-phone-input';
 import CountryPicker, { getAllCountries } from 'react-native-country-picker-modal';
 import DeviceInfo from 'react-native-device-info';
 
+import { Dimensions } from 'react-native';
+
+let width = Dimensions.get('window').width;
+
 const required = value => value ? undefined : 'Required';
 
 const InputComponent = (props) => {
@@ -85,7 +89,7 @@ const InputComponent = (props) => {
                 :
                 <TextInput
                     ref={input => this.input = input}
-                    style={[styles.input, { width: half ? (Metrics.fullWidth / 2) - 30 : Metrics.fullWidth - 30 }]}
+                    style={[styles.input, { width: half ? (width / 2) - 30 : width - 30 }]}
                     returnKeyType={returnKeyType || "next"}
                     placeholder={placeholder}
                     onSubmitEditing={onSubmitEditing}
@@ -122,7 +126,7 @@ const InputComponent = (props) => {
             <TextInput
                 {...props}
                 ref={input => InputRow.input = input}
-                style={[styles.input, { width: half ? (Metrics.fullWidth / 2) - 30 : Metrics.fullWidth - 30 }]}
+                style={[styles.input, { width: half ? (width / 2) - 30 : width - 30 }]}
                 returnKeyType={returnKeyType || "done"}
                 placeholder={placeholder}
                 onSubmitEditing={onSubmitEditing}

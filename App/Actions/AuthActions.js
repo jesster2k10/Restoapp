@@ -10,7 +10,9 @@ import {
     isUserLoggedIn,
     saveUserToken,
     removeUserToken,
-    clearCart
+    clearCart,
+    getFirstName,
+    getLastName
 } from '../Helpers';
 import {
     getCurrentUser
@@ -140,5 +142,30 @@ export const login = (email, password) => (dispatch) => {
 };
 
 export const register = (email, password, name) => (dispatch) => {
+    dispatch({ type: Types.REGISTER });
 
+    let names = {
+        first: getFirstName(name),
+        last: getLastName(name),
+    };
+
+    if (names.last == '<None>') {
+        delete names.last;
+    }
+
+    axios.post(`${Constants.BASE_API_URL}/users`, { email, password, name: names })
+        .then(({ data }) => {
+            if (data.token) {
+                saveUserToken(data.token);
+                dispatch(getCurrentUser(data.token, data.userId));
+                dispatch({ type: Types.REGISTER_SUCCESS, payload: data.token, userId: data.userId });
+            } else if (data.results) {
+                dispatch(login(email, password));
+            } else {
+                dispatch({ type: Types.REGISTER_FAILED, payload: data.message || data.error });
+            }
+        })
+        .catch(({ message }) => {
+            dispatch({ type: Types.REGISTER_FAILED, payload: message });
+        })
 };

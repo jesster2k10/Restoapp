@@ -32,10 +32,10 @@ const _renderIcon = (icon) => {
     }
 };
 
-const Row = ({ title, body, big, disclosure, first, action, colOneSize, colTwoSize, icon }) => {
+const Row = ({ title, style, body, big, disclosure, first, action, colOneSize, colTwoSize, icon }) => {
     return (
         <TouchableOpacity onPress={action}>
-            <View style={[big ? styles.bigRow : styles.row, { borderTopWidth: first ? 0.5 : 0 }]}>
+            <View style={[big ? styles.bigRow : styles.row, { borderTopWidth: first ? 0.5 : 0 }, style]}>
                 <Grid>
                     <Col size={colOneSize || 5} style={styles.rowAlign}>
                         { _renderIcon(icon) }

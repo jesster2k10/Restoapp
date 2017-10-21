@@ -75,6 +75,23 @@ export const getSubtotalWithoutCount = ({ products }) => {
     }
 };
 
+export const getSubtotalWithoutCountAsInt = ({ products }) => {
+    if (products != undefined) {
+        let reqs = products.length;
+        let cost = 0;
+        products.forEach(({ taxPercentage, totalCost }) => {
+            cost += calculateTax(taxPercentage, totalCost, 1, true);
+            reqs--;
+        });
+
+        if (reqs == 0) {
+            return cost;
+        }
+    } else {
+        return 0
+    }
+};
+
 export const getApplePayLastKey = (products) => {
     let cost = getSubtotalWithoutCount({ products });
 
@@ -84,9 +101,9 @@ export const getApplePayLastKey = (products) => {
     }
 };
 
-export const getProductsForApplePay = ({ products }) => {
-    if (products != undefined) {
-        let _products = products.map(product => {
+export const getProductsForApplePay = (cart) => {
+    if (cart.products) {
+        let _products = cart.products.map(product => {
             return {
                 label: product.name,
                 amount: `${getWithoutSymbolPrice(product)}`,
@@ -95,7 +112,7 @@ export const getProductsForApplePay = ({ products }) => {
             }
         });
 
-        _products.push(getApplePayLastKey(products));
+        _products.push(getApplePayLastKey(cart.products));
 
         return _products;
     } else {

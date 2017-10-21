@@ -29,10 +29,10 @@ const _render = (children, center, capital, style, textStyle, spacing) => {
     }
 };
 
-const RowHeader = ({ children, center, capital, style, textStyle }) => {
+const RowHeader = ({ children, center, capital, style, textStyle, spacing }) => {
     return (
-        <View style={styles.container}>
-            { _render(children, center, capital, style, textStyle) }
+        <View style={[ styles.container, style]}>
+            { _render(children, center, capital, style, textStyle, spacing) }
         </View>
     );
 };

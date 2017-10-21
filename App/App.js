@@ -10,6 +10,7 @@ import logger from 'redux-logger';
 import { saveCart, clearCart } from './Helpers';
 import { getSavedCart } from './Actions/CartActions';
 import { checkForAuth } from './Actions/AuthActions';
+import { getSavedCustomerId } from './Actions/PaymentActions';
 import { getCurrentUser } from './Actions/UserActions';
 import { Provider } from 'react-redux';
 import { AppRegistry, AsyncStorage } from 'react-native';
@@ -26,6 +27,9 @@ import codePush from "react-native-code-push";
 class Restoapp extends Component {
     constructor(props) {
         super(props);
+
+        console.disableYellowBox = true;
+
 
         this.state = {
             rootComponent: <Splash />
@@ -68,7 +72,7 @@ class Restoapp extends Component {
             }
 
             if (this.store.getState().auth.userLoggedIn != null) {
-                if (this.store.getState().auth.userLoggedIn) {
+                if (this.store.getState().auth.userLoggedIn && this.store.getState().auth.userId && !this.store.getState().user.error) {
                     this.setState({ rootComponent: <MainNavigator /> });
                 } else {
                     this.setState({ rootComponent: <Root /> });
@@ -83,6 +87,7 @@ class Restoapp extends Component {
 
     componentWillMount() {
         this.store.dispatch(getSavedCart());
+        this.store.dispatch(getSavedCustomerId());
         this.store.dispatch(checkForAuth());
     }
 

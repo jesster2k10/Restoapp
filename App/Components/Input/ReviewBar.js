@@ -6,8 +6,10 @@ import React, {Component} from 'react';
 import {
     View,
     StyleSheet,
-    TextInput
+    TextInput,
+    TouchableOpacity
 } from 'react-native';
+import Spinner from 'react-native-spinkit';
 import {
     Text,
 } from 'native-base';
@@ -18,10 +20,12 @@ import {
 } from 'react-native-easy-grid';
 import {
     Colours
-} from '../../Themes'
+} from '../../Themes';
+import * as Animatable from 'react-native-animatable';
 import StarRating from 'react-native-star-rating';
 import Icon from 'react-native-vector-icons/Ionicons';
 import styles from './Styles/ReviewBarStyles';
+import Constants from '../../Config/Constants';
 
 class ReviewBar extends Component {
     constructor() {
@@ -29,14 +33,57 @@ class ReviewBar extends Component {
 
         this.state = {
             focused: false,
+            body: null,
+            title: null,
+            rating: null,
+            height: null
+        }
+    }
+
+    componentDidMount() {
+        window.EventBus.on(Constants.EVENTS.ADDED_REVIEW, this.addedReview.bind(this));
+    }
+
+    addedReview() {
+        this.setState({
+            focused: false,
+            body: null,
+            title: null,
+            rating: null,
+            height: null
+        })
+    }
+
+    focus() {
+        this.setState({ focused: true });
+    }
+
+    blur() {
+        this.setState({ focused: !!(this.state.body || this.state.title) });
+    }
+
+    renderButton() {
+        const { loading } = this.props;
+        const { onSubmit, meal } = this.props;
+        const { body, title, rating } = this.state;
+
+        if (loading) {
+            return (
+                <Spinner size={15} type='Arc' color='white' />
+            )
+        } else {
+            return (
+                <TouchableOpacity onPress={() => onSubmit({ title, review: body, rating, created: new Date(), meal })}>
+                    <Icon name="ios-done-all-outline" size={30} color="#fff" />
+                </TouchableOpacity>
+            )
         }
     }
 
     render() {
-        const { focused } = this.state;
+        const { focused, body, title, rating, height } = this.state;
 
-        let rating = focused ? <StarRating
-                disabled={false}
+        let _rating = focused && body ? <StarRating
                 halfStarEnabled
                 iconSet="Ionicons"
                 emptyStar="ios-star-outline"
@@ -46,40 +93,52 @@ class ReviewBar extends Component {
                 starColor={Colours.yellow}
                 starSize={25}
                 maxStars={5}
-                rating={3}
+                rating={rating}
                 space={false}
                 starPadding={5}
+                disabled={false}
+                selectedStar={(rating) => this.setState({ rating })}
                 containerStyle={styles.starContainer}
             /> : null;
 
+         let _title = focused && body ? <TextInput
+                 ref={input => this.input = input}
+                 style={styles.titleInput}
+                 placeholder="Review Title (Optional)"
+                 value={title}
+                 underlineColorAndroid='white'
+                 onChangeText={(text) => this.setState({ title: text })}
+             /> : null;
+
         return (
-            <View style={styles.container}>
+            <Animatable.View style={[styles.container, { height: focused && body ? 105 + height : 50 }]}>
                 <Grid>
-                    <Col size={9}>
-                        <Grid>
-                            <Row>
-                                { rating }
-                            </Row>
-                            <Row>
-                                <TextInput
-                                    ref={input => this.input = input}
-                                    style={styles.input}
-                                    placeholder="Add a review"
-                                    underlineColorAndroid='white'
-                                    onFocus={() => this.setState({ focused: true })}
-                                    onBlur={() => this.setState({ focused: false })}
-                                />
-                            </Row>
-                        </Grid>
+                    <Col size={9} style={styles.col}>
+                        { _rating }
+                        { _title }
+                        <Animatable.View ref="bodyInputView">
+                            <TextInput
+                                ref={input => this.input = input}
+                                style={[styles.input, { height }]}
+                                placeholder="Add a Review"
+                                underlineColorAndroid='white'
+                                value={body}
+                                onChangeText={(text) => this.setState({ body: text })}
+                                onFocus={this.focus.bind(this)}
+                                onBlur={this.blur.bind(this)}
+                                onContentSizeChange={(e) => this.setState({ height: e.nativeEvent.contentSize.height < 100 ? e.nativeEvent.contentSize.height : 100 })}
+                                multiline
+                            />
+                        </Animatable.View>
                     </Col>
-                    <Col size={1} style={{ justifyContent: 'flex-end' }}>
-                        <Icon name="ios-done-all-outline" size={30} color="#fff" />
+                    <Col size={1} style={styles.col2}>
+                        { this.renderButton() }
                     </Col>
                 </Grid>
-            </View>
+            </Animatable.View>
         );
     }
 
-};
+}
 
 export default ReviewBar;

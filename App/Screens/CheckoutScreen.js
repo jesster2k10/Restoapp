@@ -8,7 +8,8 @@ import {
     ScrollView,
     StyleSheet,
     Image,
-    KeyboardAvoidingView
+    KeyboardAvoidingView,
+    Alert
 } from 'react-native';
 import {
     Icon,
@@ -22,13 +23,20 @@ import {
     RowHeader,
     Section,
     ShippingForm,
-    PaymentForm
+    PaymentForm,
+    CheckoutConfirmation
 } from '../Components';
+import {
+    Colours
+} from '../Themes';
+import Mailer from 'react-native-mail';
 import { changePage } from '../Actions/CheckoutActions';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
+import ActionSheet from '@yfuks/react-native-action-sheet';
 import strings from '../Config/Localization';
 import styles from './Styles/CheckoutScreenStyles';
+import Constants from '../Config/Constants';
 
 class CheckoutScreen extends Component {
     static navigationOptions = ({ navigation }) => ({
@@ -37,44 +45,108 @@ class CheckoutScreen extends Component {
         headerRight: <NavigationButton navigation={navigation} action={() => { CheckoutScreen._info() }} size={24} icon="ios-help-buoy-outline" />,
     });
 
+    componentDidMount() {
+        window.EventBus.on(Constants.EVENTS.MAKE_PAYMENT_SUCCESS, this._goToConfirm.bind(this));
+        window.EventBus.on(Constants.EVENTS.INFO_NAV_BUTTON_PRESS, this._showInfoActionSheet);
+    }
+
     static _info() {
-        console.log('Help')
+        window.EventBus.trigger(Constants.EVENTS.INFO_NAV_BUTTON_PRESS);
+    };
+
+    _showInfoActionSheet = () => {
+        const { navigate } = this.props.navigation;
+
+        ActionSheet.showActionSheetWithOptions({
+                title: strings.contactSupport,
+                message: strings.chooseContactMethod,
+                options: [strings.emailSupport, strings.callSupport, strings.cancel],
+                cancelButtonIndex: 2,
+                tintColor: Colours.darkBody
+            }, (idx) => {
+                if (idx == 0) {
+                    this._mailSupport();
+                }
+
+                if (idx == 1) {
+                    console.log('CAll Support');
+                }
+            }
+        );
+    };
+
+    _mailSupport = () => {
+        Mailer.mail({
+            subject: 'Checkout Support',
+            recipients: [Constants.SUPPORT_EMAIL],
+        }, (error, event) => {
+            Alert.alert(
+                error,
+                event,
+                [
+                    { text: strings.ok },
+                    { text: strings.cancel }
+                ],
+                { cancelable: true }
+            )
+        });
     };
 
     _goToPayment = () => {
         const {
-            canConfirmShipping
+            canConfirmShipping,
+            changePage
         } = this.props;
 
         if (canConfirmShipping) {
-            this.props.changePage(1);
             this.tabView.goToPage(1);
         } else {
-            alert('Please make sure all fields are entered correctly.')
+            Alert.alert(
+                strings.invalidFields,
+                strings.checkAgainForInvalidFields,
+                [
+                    {
+                        text: strings.ok
+                    },
+                ],
+                {
+                    cancelable: true
+                }
+            )
         }
     };
 
 
     _goToConfirm = () => {
         const {
-            canConfirmPayment
+            canConfirmPayment,
         } = this.props;
 
+        console.log(this)
+
         if (canConfirmPayment) {
-            this.props.changePage(2);
             this.tabView.goToPage(2);
-        } else {
-            alert('Please make sure all fields are entered correctly.')
         }
     };
 
     render() {
+        const {
+            selectedPage,
+            canConfirmShipping
+        } = this.props;
+
+        let nextPaymentInfo = canConfirmShipping ?
+            <View style={styles.buttonContainer}>
+                <Button full style={styles.button} onPress={() => this._goToPayment()}>
+                    <Text style={styles.buttonTitle}>{ strings.nextPaymentInfo }</Text>
+                </Button>
+            </View> : null;
 
         return (
             <Container>
                 <ScrollableTabView
-                    locked
                     renderTabBar={() => <IconTabBar noChange />}
+                    locked
                     ref={(tabView) => { this.tabView = tabView; }}
                 >
                     <View style={styles.container} tabLabel={`ios-pin-outline,${strings.delivery}`}>
@@ -88,12 +160,7 @@ class CheckoutScreen extends Component {
                                 <ShippingForm/>
                             </View>
                         </KeyboardAwareScrollView>
-
-                        <View style={styles.buttonContainer}>
-                            <Button full style={styles.button} onPress={() => this._goToPayment()}>
-                                <Text style={styles.buttonTitle}>{ strings.nextPaymentInfo }</Text>
-                            </Button>
-                        </View>
+                        { nextPaymentInfo }
                     </View>
                     <View style={styles.container} tabLabel={`ios-card-outline,${strings.payment}`}>
                         <ScrollView style={styles.container}>
@@ -104,13 +171,9 @@ class CheckoutScreen extends Component {
                                 <PaymentForm navigation={this.props.navigation} />
                             </KeyboardAvoidingView>
                         </ScrollView>
-                        <View style={styles.buttonContainer}>
-                            <Button full style={styles.button} onPress={() => this._goToConfirm()}>
-                                <Text style={styles.buttonTitle}>{ strings.confirmPayment }</Text>
-                            </Button>
-                        </View>
                     </View>
                     <View style={styles.container} tabLabel={`ios-done-all-outline,${strings.confirm}`}>
+                        <CheckoutConfirmation navigation={this.props.navigation} />
                     </View>
                 </ScrollableTabView>
             </Container>

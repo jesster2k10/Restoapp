@@ -9,6 +9,9 @@ import {
     Colours,
     Metrics
 } from '../../../Themes';
+import { Dimensions } from 'react-native';
+
+let width = Dimensions.get('window').width;
 
 export default StyleSheet.create({
     container: {
@@ -32,10 +35,10 @@ export default StyleSheet.create({
         ...Fonts.style.normalSmall,
         fontFamily: Fonts.type.thin,
         color: Colours.mainTextColor,
-        width: Metrics.fullWidth - 40
+        width: width - 40
     },
     phoneInput: {
-        width: Metrics.fullWidth - 50
+        width: width - 50
     },
     errorLabel: {
         ...Fonts.style.normalSmall,

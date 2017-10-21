@@ -27,10 +27,14 @@ import {
     IconButton,
     Section
 } from '../Components';
+import {
+    isiPhoneX
+} from '../Helpers';
 import strings from '../Config/Localization';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import LinearGradient from 'react-native-linear-gradient';
 import styles from './Styles/LandingScreenStyles';
+import Constants from '../Config/Constants';
 
 class LandingScreen extends Component {
     static navigationOptions = ({ navigation }) => ({
@@ -61,9 +65,9 @@ class LandingScreen extends Component {
                         <LinearGradient colors={Colours.mainGradient} style={styles.gradient} locations={[0.5,0.6]}/>
                     </ImageBackground>
                     <View style={styles.topContainer}>
-                        <Section top={30} column>
+                        <Section top={isiPhoneX() ? 120 : 30} column>
                             <Image style={styles.logo} source={Images.logo} />
-                            <Text style={styles.title}>Restoapp</Text>
+                            <Text style={styles.title}>{ Constants.COMPANY_NAME }</Text>
                         </Section>
                     </View>
                     <View style={styles.mainContainer}>
@@ -97,7 +101,7 @@ class LandingScreen extends Component {
                                 <Text style={styles.textButton}>{ strings.alreadyRegistered }</Text>
                             </Button>
                         </View>
-                        <Button bordered block style={styles.turquoiseButton} onPress={() => navigation.navigate('MainScreen')}>
+                        <Button bordered block style={[styles.turquoiseButton, { marginBottom: isiPhoneX() ? 35 : null }]} onPress={() => navigation.navigate('MainScreen')}>
                             <View style={styles.center}>
                                 <Icon name="restaurant-menu" color={Colours.turquoise} size={16} style={styles.turquoiseButtonIcon}/>
                                 <Text style={styles.turquoiseButtonTitle}>{ strings.seeMenu }</Text>

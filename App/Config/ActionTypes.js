@@ -15,6 +15,9 @@ export const GET_CATEGORY_MEALS_FAILED = 'get_category_meals_failed';
 export const GET_CURRENT_USER = 'GET_CURRENT_USER'.toLowerCase();
 export const GET_CURRENT_USER_FAILED = 'GET_CURRENT_USER_FAILED'.toLowerCase();
 export const GET_CURRENT_USER_SUCCESS = 'GET_CURRENT_USER_SUCCESS'.toLowerCase();
+export const ADD_ADDRESS = 'ADD_ADDRESS'.toLowerCase();
+export const ADD_ADDRESS_SUCCESS = 'ADD_ADDRESS_SUCCESS'.toLowerCase();
+export const ADD_ADDRESS_FAILED = 'ADD_ADDRESS_FAILED'.toLowerCase();
 
 /**** REVIEWS *****/
 export const GET_REVIEWS = 'GET_REVIEWS'.toLowerCase();
@@ -69,6 +72,9 @@ export const MEAL_GET_IMAGES = 'meal_get_images';
 export const GET_ALL_MEALS = 'GET_ALL_MEALS'.toLowerCase();
 export const GET_ALL_MEALS_FAILED = 'GET_ALL_MEALS_FAILED'.toLowerCase();
 export const GET_ALL_MEALS_SUCCESS = 'GET_ALL_MEALS_SUCCESS'.toLowerCase();
+export const ADD_MEAL_REVIEW_SUCCESS = 'ADD_MEAL_REVIEW_SUCCESS'.toLowerCase();
+export const ADD_MEAL_REVIEW_FAILED = 'ADD_MEAL_REVIEW_FAILED'.toLowerCase();
+export const ADD_MEAL_REVIEW = 'ADD_MEAL_REVIEW'.toLowerCase();
 
 /**** CART *****/
 export const ADD_MEAL_TO_CART = 'add_meal_to_cart';
@@ -108,6 +114,27 @@ export const SET_EXPIRY_TINT_COLOR = 'SET_EXPIRY_TINT_COLOR'.toLowerCase();
 export const CONFIRM_PAYMENT = 'CONFIRM_PAYMENT'.toLowerCase();
 export const CONFIRM_SHIPPING = 'CONFIRM_SHIPPING'.toLowerCase();
 
+/***** PAYMENTS *****/
+export const MAKE_PAYMENT               = 'MAKE_PAYMENT'.toLowerCase();
+export const MAKE_PAYMENT_SUCCESS       = 'MAKE_PAYMENT_SUCCESS'.toLowerCase();
+export const MAKE_PAYMENT_FAILED        = 'MAKE_PAYMENT_FAILED'.toLowerCase();
+
+export const CREATE_CUSTOMER            = 'CREATE_CUSTOMER'.toLowerCase();
+export const CREATE_CUSTOMER_SUCCESS    = 'CREATE_CUSTOMER_SUCCESS'.toLowerCase();
+export const CREATE_CUSTOMER_FAILED     = 'CREATE_CUSTOMER_FAILED'.toLowerCase();
+
+export const CHARGE_CUSTOMER            = 'CHARGE_CUSTOMER'.toLowerCase();
+export const CHARGE_CUSTOMER_SUCCESS    = 'CHARGE_CUSTOMER_SUCCESS'.toLowerCase();
+export const CHARGE_CUSTOMER_FAILED     = 'CHARGE_CUSTOMER_FAILED'.toLowerCase();
+
+export const GET_PAYMENT_CARDS          = 'GET_PAYMENT_CARDS'.toLowerCase();
+export const GET_PAYMENT_CARDS_SUCCESS  = 'GET_PAYMENT_CARDS_SUCCESS'.toLowerCase();
+export const GET_PAYMENT_CARDS_FAILED   = 'GET_PAYMENT_CARDS_FAILED'.toLowerCase();
+
+export const GET_SAVED_CUSTOMER_ID      = 'GET_SAVED_CUSTOMER_ID'.toLowerCase();
+export const GET_SAVED_CUSTOMER_ID_FAILED   = 'GET_SAVED_CUSTOMER_ID_FAILED'.toLowerCase();
+export const GET_SAVED_CUSTOMER_ID_SUCCESS   = 'GET_SAVED_CUSTOMER_ID_SUCCESS'.toLowerCase();
+
 /***** FORMS ****/
 export const CHANGE_PHONE = 'CHANGE_PHONE'.toLowerCase();
 export const CHANGE_PHONE_FAILED = 'CHANGE_PHONE_FAILED'.toLowerCase();
@@ -130,3 +157,6 @@ export const GET_ALL_FAVOURITES_SUCCESS = 'GET_ALL_FAVOURITES_SUCCESS'.toLowerCa
 export const REMOVE_FAVOURITE = 'REMOVE_FAVOURITE'.toLowerCase();
 export const REMOVE_FAVOURITE_FAILED = 'REMOVE_FAVOURITE_FAILED'.toLowerCase();
 export const REMOVE_FAVOURITE_SUCCESS = 'REMOVE_FAVOURITE_SUCCESS'.toLowerCase();
+
+/****** RESERVATIONS ****/
+export const GET_TABLES_SUCCESS = 'GET_TABLES_SUCCESS'.toLocaleLowerCase();

@@ -58,11 +58,11 @@ export const changeEmail = (validate, email, key = 'LOGIN') => {
             }
 
             if (!validateEmail(email)) {
-                return { type: Types.CHANGE_EMAIL_FAILED, key, error: strings.invalidEmail, email }
+                return { type: Types.CHANGE_EMAIL_FAILED, key, error: strings.invalidEmail, email: email.toLowerCase() }
             }
         }
     } else {
-        return { type: Types.CHANGE_EMAIL, key, email };
+        return { type: Types.CHANGE_EMAIL, key, email: email.toLowerCase() };
     }
 };
 

@@ -2,7 +2,7 @@ import * as Types from '../Config/ActionTypes';
 import { REHYDRATE } from 'redux-persist/constants'
 
 const INITIAL_STATE = {
-    cart: {},
+    cart: { _id: '' },
     cart_identifier: null,
     cart_error: null,
     cart_loading: false,

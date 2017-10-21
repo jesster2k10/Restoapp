@@ -25,6 +25,8 @@ export const createCart = () => (dispatch) => {
                 dispatch({ type: Types.CREATE_CART_FAILED, payload: data.message });
             } else {
                 dispatch({ type: Types.CREATE_CART_SUCCESS, payload: data.results })
+                dispatch(getCart(data.results._id));
+                helpers.saveCart(data.results._id, null);
             }
         })
         .catch(error => {
@@ -35,7 +37,7 @@ export const createCart = () => (dispatch) => {
 export const getSavedCart = () => (dispatch)  => {
     dispatch({ type: Types.GET_SAVED_CART });
 
-    helpers.getCart(cart => {
+    helpers.getCart((cart, error) => {
         if (cart) {
             dispatch({ type: Types.GET_SAVED_CART_SUCCESS, payload: cart });
             dispatch(getCart(cart));

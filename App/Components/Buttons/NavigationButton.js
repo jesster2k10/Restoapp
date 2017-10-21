@@ -74,10 +74,10 @@ const getSize = (back, size, cart) => {
     if (size) return size;
 };
 
-const NavigationButton = ({back, navigation, cart, productCount, action, icon, route, size }) => {
+const NavigationButton = ({back, navigation, cart, productCount, action, icon, route, size, style }) => {
     return (
         <TouchableOpacity onPress={() => handleAction(navigation, back, cart, action, route)}>
-            <View style={styles.container}>
+            <View style={[styles.container, style]}>
                 { renderBadge(cart, productCount) }
                 <Icon style={styles.icon} size={getSize(back, size, cart)} name={getIcon(back, cart, icon)} color='white' />
             </View>

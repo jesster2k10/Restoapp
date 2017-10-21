@@ -13,7 +13,7 @@ import {
 export default StyleSheet.create({
     row: {
         height: 30,
-        borderColor: 'lightgray',
+        borderColor: 'rgba(0,0,0,0.1)',
     },
     bigRow: {
         flex: 1,

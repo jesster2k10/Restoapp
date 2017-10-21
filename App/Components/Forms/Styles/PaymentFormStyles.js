@@ -38,7 +38,7 @@ const button = {
     borderBottomWidth: 0,
     borderTopWidth: 0,
     marginTop: 0,
-    marginBottom: 15,
+    marginBottom: 0,
     borderColor: 'rgba(0,0,0,0.1)',
     backgroundColor: Colours.lighterBody,
 };
@@ -74,7 +74,7 @@ export const cardFormStyles = {
     scanCardButton: button,
     scanCardButtonText: buttonText,
     errorTextContainer: {
-        height: 50,
+        height: 20,
         backgroundColor: Colours.lightBody,
         justifyContent: 'center',
         alignItems: 'center',
@@ -109,6 +109,11 @@ export const cardFormStyles = {
 export const styles = StyleSheet.create({
     container: {
         flex: 1
+    },
+    centeredContainer: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     paymentIcon: {
         flex: 1,
@@ -154,5 +159,11 @@ export const styles = StyleSheet.create({
     column: {
         flexDirection: 'column',
         flex: 1
+    },
+    loader: {
+        ...Fonts.style.normalSmall,
+        fontFamily: Fonts.type.medium,
+        color: Colours.mainTextColor,
+        paddingTop: 10
     }
 });

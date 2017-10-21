@@ -10,5 +10,14 @@ export default StyleSheet.create({
         ...ApplicationStyles.screen.container,
         paddingTop: 0,
         marginTop: 0
+    },
+    addButtonStyle: {
+        paddingLeft: 0,
+        paddingRight: 0
+    },
+    col: {
+        justifyContent: 'flex-end',
+        alignItems: 'flex-start',
+        paddingBottom: 7
     }
 });

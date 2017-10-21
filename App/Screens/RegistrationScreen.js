@@ -41,22 +41,30 @@ import AppNavigationStyles from '../Navigation/Styles/AppNavigationStyles';
 class RegistrationScreen extends Component {
     componentWillMount() {
         this.hasLoggedIn = false;
+        this.hasRegistered = false;
     }
 
     componentWillReceiveProps(props) {
         const { loginError, loginSuccess, loading } = props;
+        const { registerError, registerSuccess, registerLoading } = props;
         const { navigation } = props;
         const { navigate } = navigation;
         const { register } = navigation.state.params;
 
-        if (!register) {
-            if (!loginSuccess && loginError != null) {
-                this.hasLoggedIn = false;
-                this.refs.toast.show(loginError, DURATION.LENGTH_LONG);
-            } else if (!this.hasLoggedIn && loginSuccess && loginError == null && !loading) {
-                this.hasLoggedIn = true;
-                navigate('MainScreen');
-            }
+        if (!loginSuccess && loginError != null) {
+            this.hasLoggedIn = false;
+            this.refs.toast.show(loginError, DURATION.LENGTH_LONG);
+        } else if (!this.hasLoggedIn && loginSuccess && loginError == null && !loading) {
+            this.hasLoggedIn = true;
+            navigate('MainScreen');
+        }
+
+        if (!registerSuccess && registerError && !registerLoading) {
+            this.hasRegistered = false;
+            this.refs.toast.show(registerError, DURATION.LENGTH_LONG);
+        } else if (!this.hasRegistered && registerSuccess && !registerLoading && !registerError) {
+            this.hasRegistered = true;
+            navigate('MainScreen');
         }
     }
 
@@ -86,15 +94,26 @@ class RegistrationScreen extends Component {
     };
 
     _submit = () => {
-        const { navigation, register, login, loginEmail, loginPassword } = this.props;
+        const {
+            navigation,
+            register,
+            login,
+            loginEmail,
+            registrationEmail,
+            registrationName,
+            registrationPassword,
+            loginPassword
+        } = this.props;
 
         if (!navigation.state.params.register) {
             login(loginEmail, loginPassword)
+        } else {
+            register(registrationEmail, registrationPassword, registrationName);
         }
     };
 
     render() {
-        const { navigation, loading } = this.props;
+        const { navigation, loading, registerLoading } = this.props;
         const { register } = navigation.state.params;
         const { navigate } = navigation;
 
@@ -123,7 +142,7 @@ class RegistrationScreen extends Component {
                             <TextButton onPress={() => navigate('Registration', { register: !register })}>{ register ? strings.alreadyRegistered : strings.notRegistered }</TextButton>
                         </View>
                     </KeyboardAwareScrollView>
-                    <SubmitButton loading={loading} onPress={() => this._submit()} title={ register ? strings.register : strings.login } />
+                    <SubmitButton loading={loading && !register ? true : !!(registerLoading && register)} onPress={() => this._submit()} title={ register ? strings.register : strings.login } />
                 </View>
                 <Toast
                     ref="toast"
@@ -142,7 +161,10 @@ const mapStateToProps = ({ registrationForm, loginForm, auth }) => ({
     loginPassword: loginForm.password,
     loginError: auth.login_error,
     loginSuccess: auth.login_success,
-    loading: auth.loading
+    registerLoading: auth.register_loading,
+    registerError: auth.register_error,
+    registerSuccess: auth.register_success,
+    loading: auth.login_loading
 });
 
 const actions = {
