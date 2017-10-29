@@ -22,7 +22,7 @@ import { connect } from 'react-redux';
 class FavouritesScreen extends Component {
     static navigationOptions = ({ navigation }) => ({
         title: strings.favourites,
-        headerLeft: <NavigationButton navigation={navigation} />
+        headerLeft: <NavigationButton navigation={navigation} size={25} />
     });
 
     componentWillReceiveProps(props) {

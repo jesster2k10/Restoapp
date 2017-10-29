@@ -21,6 +21,7 @@ export * from './Categories';
 export * from './Checkout';
 export * from './Reservations';
 export * from './Favourites';
+export * from './Address';
 
 export { default as Drawer } from './Drawer';
 export { default as Splash } from './Splash';

@@ -52,7 +52,7 @@ export const getFavouritesForUser = (token, user) => (dispatch) => {
 
     axios(options)
         .then(({ data }) => {
-            if (data.success === false || !data.results) {
+            if (data.success === false) {
                 dispatch({ type: Types.GET_ALL_FAVOURITES_FAILED, payload: data.message });
             } else {
                 dispatch({ type: Types.GET_ALL_FAVOURITES_SUCCESS, payload: data.results });

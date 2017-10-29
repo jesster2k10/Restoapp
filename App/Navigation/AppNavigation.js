@@ -11,6 +11,7 @@ import MealScreen from '../Screens/MealScreen';
 import CartScreen from '../Screens/CartScreen';
 import CheckoutScreen from '../Screens/CheckoutScreen';
 import SelectCardScreen from '../Screens/SelectCardScreen';
+import SelectAddressScreen from '../Screens/SelectAddressScreen';
 import OrdersScreen from '../Screens/OrdersScreen';
 import CategoriesScreen from '../Screens/CategoriesScreen';
 import RegistrationScreen from '../Screens/RegistrationScreen';
@@ -33,11 +34,12 @@ import AppNavigationStyles from './Styles/AppNavigationStyles';
 
 const CheckoutNavigator = StackNavigator({
     Checkout: { screen: CheckoutScreen },
+    SelectAddress: { screen: SelectAddressScreen },
     SelectCard: { screen: SelectCardScreen },
     Receipt: { screen: ReceiptScreen },
 }, {
     headerMode: 'none',
-    initialRouteName: 'Checkout',
+    initialRouteName: 'SelectAddress',
     navigationOptions: {
         ...AppNavigationStyles,
     }
@@ -51,7 +53,7 @@ const MenuNavigator = StackNavigator({
     Reservations: { screen: ReservationsScreen },
 }, {
     headerMode: 'screen',
-    initialRouteName: 'Menu',
+    initialRouteName: 'Checkout',
     navigationOptions: {
         ...AppNavigationStyles,
     }

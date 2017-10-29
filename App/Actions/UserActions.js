@@ -46,3 +46,29 @@ export const addAddress = (token, id, address, name) => (dispatch) => {
             dispatch({ type: Types.ADD_ADDRESS_FAILED, payload: message });
         })
 };
+
+export const getAddresses = (token, id) => (dispatch) => {
+    dispatch({ type: Types.GET_ADDRESSES });
+
+    const options = {
+        method: 'GET',
+        url: `${Constants.BASE_API_URL}/addresses/user/${id}`,
+        headers: {
+            'x-access-token': token,
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        json: true
+    };
+
+    axios(options)
+        .then(({ data }) => {
+            if (data.success || data.results) {
+                dispatch({ type: Types.GET_ADDRESSES_SUCCESS, payload: data.results });
+            } else {
+                dispatch({ type: Types.GET_ADDRESSES_FAILED, payload: data.error });
+            }
+        })
+        .catch(({ message }) => {
+            dispatch({ type: Types.GET_ADDRESSES_FAILED, payload: message });
+        })
+};

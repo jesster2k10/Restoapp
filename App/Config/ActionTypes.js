@@ -18,6 +18,11 @@ export const GET_CURRENT_USER_SUCCESS = 'GET_CURRENT_USER_SUCCESS'.toLowerCase()
 export const ADD_ADDRESS = 'ADD_ADDRESS'.toLowerCase();
 export const ADD_ADDRESS_SUCCESS = 'ADD_ADDRESS_SUCCESS'.toLowerCase();
 export const ADD_ADDRESS_FAILED = 'ADD_ADDRESS_FAILED'.toLowerCase();
+export const GET_ADDRESSES = 'GET_ADDRESSES'.toLowerCase();
+export const GET_ADDRESSES_SUCCESS = 'GET_ADDRESSES_SUCCESS'.toLowerCase();
+export const GET_ADDRESSES_FAILED = 'GET_ADDRESSES_FAILED'.toLowerCase();
+export const SELECT_ADDRESS = 'SELECT_ADDRESS'.toLowerCase();
+export const RESET_SELECT_ADDRESS_DONE = 'RESET_SELECT_ADDRESS_DONE'.toLowerCase();
 
 /**** REVIEWS *****/
 export const GET_REVIEWS = 'GET_REVIEWS'.toLowerCase();

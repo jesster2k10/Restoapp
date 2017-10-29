@@ -1,3 +1,4 @@
+
 /**
  * Created by jesseonolememen on 24/08/2017.
  */
@@ -11,6 +12,37 @@ import {
     validateAddress,
     validateCountry
 } from '../Helpers/Validation';
+
+export const selectAddress = (validate, address, key = 'SHIPPING') => (dispatch) => {
+    if (address.phone) {
+        dispatch(changePhone(validate, address.phone, key));
+    }
+
+    if (address.name) {
+        let fullName = `${address.name.first} ${address.name.last ? address.name.last : ''}`;
+        dispatch(changeName(validate, fullName, key));
+    }
+
+    if (address.address.street1) {
+        dispatch(changeAddress(validate, address.street1, key));
+    }
+
+    if (address.address.suburb) {
+        dispatch(changeCity(address.subrub, key));
+    }
+
+    if (address.address.postcode) {
+        dispatch(changeZip(address.postcode, key));
+    }
+
+    if (address.address.state) {
+        dispatch(changeState(address.state, key));
+    }
+
+    if (address.address.country) {
+        dispatch(changeCountry(validate, address.country, key));
+    }
+};
 
 export const changePassword = (validate, password, key = 'LOGIN') => {
     if (validate) {
@@ -123,3 +155,6 @@ export const changeCountry = (validate, country, key = 'SHIPPING') => {
         return { type: Types.CHANGE_COUNTRY, country, key }
     }
 };
+
+export const selectPreviousAddress = (address) => ({ type: Types.SELECT_ADDRESS, payload: address });
+export const resetSelectAddressDone = (address) => ({ type: Types.RESET_SELECT_ADDRESS_DONE });

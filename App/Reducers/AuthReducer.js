@@ -45,7 +45,7 @@ export default (state = INITIAL_STATE, action) => {
         case Types.LOGIN_FAILED:
             return {...state, login_loading: false, login_success: false, login_error: action.payload, };
         case Types.LOGIN_SUCCESS:
-            return {...state, login_loading: false, login_success: true, login_error: null, token: action.payload, userLoggedIn: true};
+            return {...state, login_loading: false, login_success: true, login_error: null, token: action.payload, userLoggedIn: true, userId: action.userId};
         case Types.GOOGLE_SIGN_IN:
             return {...state, loading: true, google_error: null, success: false, requested_logout: false};
         case Types.GOOGLE_SIGN_IN_FAILED:

@@ -11,7 +11,9 @@ const INITIAL_STATE = {
     ccv_tint_color: defaultTint,
     can_confirm_payment: false,
     can_confirm_shipping: false,
-    billing_address: {}
+    billing_address: {},
+    selected_address: {},
+    select_address_done: false,
 };
 
 export default (state = INITIAL_STATE, { payload, type }) => {
@@ -42,6 +44,10 @@ export default (state = INITIAL_STATE, { payload, type }) => {
             return { ...state, can_confirm_payment: true };
         case Types.CHARGE_CUSTOMER_FAILED:
             return { ...state, can_confirm_payment: false };
+        case Types.RESET_SELECT_ADDRESS_DONE:
+            return {...state, select_address_done: false};
+        case Types.SELECT_ADDRESS:
+            return {...state, selected_address: payload, select_address_done: true};
         default:
             return state;
     }

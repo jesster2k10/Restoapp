@@ -121,7 +121,10 @@ let strings = new LocalizedStrings({
         emailSupport: 'Email Support',
         callSupport: 'Call Support',
         signInRequired: 'Sign In Required',
-        pleaseSignIn: 'Please Sign In to Continue'
+        pleaseSignIn: 'Please Sign In to Continue',
+        useSavedAddress: 'Use a saved address',
+        selectAddress: 'Select an Address',
+        noSavedAddresses: 'You have no saved addresses',
     },
     "en-US": {
         enterState: 'Choose your state',

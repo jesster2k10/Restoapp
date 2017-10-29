@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import {
     View,
     StyleSheet,
+    Animatable
 } from 'react-native';
 import {
     Text
@@ -14,7 +15,8 @@ import {
 import {
     InputRow,
     Section,
-    RowHeader
+    RowHeader,
+    Row
 } from '../../Components';
 import {
     changeEmail,
@@ -27,11 +29,82 @@ import {
     changeZip
 } from '../../Actions/FormActions';
 import strings from '../../Config/Localization';
-import styles from './Styles/ShippingFormStyles';
+import styles, { countryPickerStyles } from './Styles/ShippingFormStyles';
+import CountryPicker from 'react-native-country-picker-modal';
+import countries from '../../Config/countries.json';
 
 const KEY = 'SHIPPING';
 
 class ShippingForm extends Component {
+    componentDidMount() {
+        this.hasChanged = false;
+        this.hasChangedEmail = false;
+    }
+
+    state = {
+        cca2: countries.countries.first
+    };
+
+    onPickerSelect(value) {
+        const {
+            changeCountry
+        } = this.props;
+
+        this.setState({
+            cca2: value.cca2
+        })
+    }
+
+    componentWillReceiveProps({ selectedAddress, user }) {
+        const {
+            changeCity,
+            changeState,
+            changeAddress,
+            changeCountry,
+            changeZip
+        } = this.props;
+        
+        if (selectedAddress && !this.hasChanged) {
+            const {
+                name
+            } = selectedAddress;
+
+            const {
+                street1,
+                suburb,
+                state,
+                postcode,
+                country,
+            } = selectedAddress.address;
+
+            if (street1) {
+                changeAddress(false, street1, KEY);
+            }
+
+            if (suburb) {
+                changeCity(suburb, KEY);
+            }
+
+            if (country) {
+                changeCountry(country, KEY);
+            }
+
+            if (state) {
+                changeState(state, KEY);
+            }
+
+            if (postcode) {
+                changeZip(postcode, KEY);
+            }
+
+            if (name) {
+                changeName(false, `${name.first} ${name.last || ''}`)
+            }
+
+            this.hasChanged = true;
+        }
+    }
+
     componentDidMount() {
         const {
             changeEmail,
@@ -92,6 +165,18 @@ class ShippingForm extends Component {
             <View style={styles.container}>
                 <Section top={5} bottom={20}>
                     <RowHeader capital center textStyle={styles.header} spacing={4}>All Fields are required</RowHeader>
+                </Section>
+                <Section bottom={25}>
+                    <View style={styles.rowContainer}>
+                        <Row
+                            title={strings.useSavedAddress}
+                            body={strings.selectAddress}
+                            style={styles.row}
+                            disclosure
+                            first
+                            action={() => this.props.navigation.navigate('SelectAddress')}
+                        />
+                    </View>
                 </Section>
                 <Section>
                     <InputRow
@@ -165,25 +250,14 @@ class ShippingForm extends Component {
                         { strings.state }
                     </InputRow>
                 </Section>
-                <Section>
-                    <InputRow
-                        error={errors.country}
-                        value={country}
-                        returnKeyType="done"
-                        keyboardType='numbers-and-punctuation'
-                        autoCapitalize="words"
-                        placeholder={ strings.enterCountry }
-                        onChangeText={(val) => changeCountry(true, val, KEY)}>
-                        { strings.country }
-                    </InputRow>
-                </Section>
+
             </View>
         )
 
     };
 }
 
-const mapStateToProps = ({ shippingForm, user }) => {
+const mapStateToProps = ({ shippingForm, user, checkout }) => {
     const {
         name,
         email,
@@ -204,7 +278,8 @@ const mapStateToProps = ({ shippingForm, user }) => {
         zip,
         state,
         errors,
-        user: user.user
+        user: user.currentUser,
+        selectedAddress: checkout.selected_address
     }
 };
 

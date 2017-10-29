@@ -73,7 +73,7 @@ class ReviewBar extends Component {
             )
         } else {
             return (
-                <TouchableOpacity onPress={() => onSubmit({ title, review: body, rating, created: new Date(), meal })}>
+                <TouchableOpacity onPress={() => onSubmit({ title, review: body, rating: rating || 0, created: new Date(), meal })}>
                     <Icon name="ios-done-all-outline" size={30} color="#fff" />
                 </TouchableOpacity>
             )

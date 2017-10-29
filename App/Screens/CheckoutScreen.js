@@ -157,7 +157,7 @@ class CheckoutScreen extends Component {
                                         { strings.shippingAddress }
                                     </RowHeader>
                                 </Section>
-                                <ShippingForm/>
+                                <ShippingForm navigation={this.props.navigation} />
                             </View>
                         </KeyboardAwareScrollView>
                         { nextPaymentInfo }
