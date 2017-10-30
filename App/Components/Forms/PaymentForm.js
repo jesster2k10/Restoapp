@@ -25,6 +25,7 @@ import {
     createCustomer,
     chargeCustomer,
     getPaymentCards,
+    makeBraintreePayment,
 } from '../../Actions';
 import {
     Text,
@@ -137,11 +138,13 @@ class PaymentForm extends Component {
             paymentType,
             products,
             currency,
+            token,
+            subtotal
         } = this.props;
 
 
         switch (paymentType) {
-            case APPLE_PAY:
+            case APPLE_PAY: 
                 let options = {
                     requiredBillingAddressFields: 'all',
                     requiredShippingAddressFields: 'all',
@@ -162,10 +165,9 @@ class PaymentForm extends Component {
 
             case PAYPAL:
                 BTClient.showPayPalViewController().then(function(nonce) {
-                    console.log(nonce)
+                    makeBraintreePayment(nonce, token, subtotal)
                 }).catch(function(err) {
-                        //error handling
-                    console.log(err)
+                    this.refs.toast.show(err.message, DURATION.LENGTH_LONG);
                 });
                 break;
         }

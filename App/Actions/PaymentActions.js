@@ -32,6 +32,23 @@ export const getSavedCustomerId = () => (dispatch) => {
         .catch(error => dispatch({ type: Types.GET_SAVED_CUSTOMER_ID_FAILED }));
 };
 
+export const makeBraintreePayment = (nonce, token, amount) => (dispatch) => {
+    dispatch({ type: Types.MAKE_BRAINTREE_PAYMENT });
+
+    axios.post(`${Constants.BASE_API_URL}/payments/braintree`, { nonce, token, amount })
+        .then(({ data }) => {
+            if (data.success === false) {
+                dispatch({ type: Types.MAKE_BRAINTREE_PAYMENT_FAILED, payload: data.error })
+            } else {
+                dispatch({ type: Types.MAKE_BRAINTREE_PAYMENT_SUCCESS, payload: data.result })
+            }
+        })
+        .catch(({ message }) => {
+            dispatch({ type: Types.MAKE_BRAINTREE_PAYMENT_FAILED, payload: message })
+        })
+
+};
+
 export const makePayment = (stripeToken, authToken, amount, currency) => (dispatch) => {
     dispatch({ type: Types.MAKE_PAYMENT });
 

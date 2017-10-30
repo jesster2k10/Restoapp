@@ -61,6 +61,8 @@
 		959C005D1F4C323700C22ACC /* libOAuthManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 959C000C1F4C297400C22ACC /* libOAuthManager.a */; };
 		95A555551F80EBFA00ACD359 /* libCodePush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 95A555231F80EBE700ACD359 /* libCodePush.a */; };
 		95A555571F80EC0A00ACD359 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 95A555561F80EC0A00ACD359 /* libz.tbd */; };
+		95E6CC961FA5DFB5005CC73A /* libRNGeocoder.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 95E6CC951FA5DFA3005CC73A /* libRNGeocoder.a */; };
+		95E6CC971FA5DFBA005CC73A /* libRNMail.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 95E6CC811FA5DF4D005CC73A /* libRNMail.a */; };
 		98BDC87C449F40408FF2B719 /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B3BDC8CBECA54189AC00E99A /* Poppins-Medium.ttf */; };
 		9A74AB8A8AF8415B86E8C29E /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B717AB63015446909E835FDA /* EvilIcons.ttf */; };
 		9BC55A2DE9C74A1AB9CB501C /* Roboto_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 56FD9CA399C441548BB0BB43 /* Roboto_medium.ttf */; };
@@ -490,6 +492,27 @@
 			remoteGlobalIDString = 11FA5C511C4A1296003AC2EE;
 			remoteInfo = AirMaps;
 		};
+		95E6CC801FA5DF4D005CC73A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 95E6CC4F1FA5DF40005CC73A /* RNMail.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 46FEDE7F1AFF192F00D3261C;
+			remoteInfo = RNMail;
+		};
+		95E6CC821FA5DF4D005CC73A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 95E6CC4F1FA5DF40005CC73A /* RNMail.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 46FEDE8A1AFF192F00D3261C;
+			remoteInfo = RNMailTests;
+		};
+		95E6CC941FA5DFA3005CC73A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 95E6CC901FA5DF8B005CC73A /* RNGeocoder.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BF8FCF941BFFB184000FCD37;
+			remoteInfo = RNGeocoder;
+		};
 		95FA4A6B1F7F710100952787 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4C28E90F388748A5B3DA01FF /* BVLinearGradient.xcodeproj */;
@@ -572,6 +595,8 @@
 		956133541F45087500716DB9 /* ApplePayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ApplePayManager.m; path = Restoapp/ApplePayManager.m; sourceTree = "<group>"; };
 		95A555161F80EBE600ACD359 /* CodePush.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CodePush.xcodeproj; path = "/Users/jesseonolememen/Documents/React/Restoapp/node_modules/react-native/Libraries/ART/../../../react-native-code-push/ios/CodePush.xcodeproj"; sourceTree = "<absolute>"; };
 		95A555561F80EC0A00ACD359 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		95E6CC4F1FA5DF40005CC73A /* RNMail.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNMail.xcodeproj; path = "../node_modules/react-native-mail/RNMail.xcodeproj"; sourceTree = "<group>"; };
+		95E6CC901FA5DF8B005CC73A /* RNGeocoder.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNGeocoder.xcodeproj; path = "../node_modules/react-native-geocoder/ios/RNGeocoder.xcodeproj"; sourceTree = "<group>"; };
 		9835F95A93CA43CEA88FADF1 /* RCTBEEPickerManager.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTBEEPickerManager.xcodeproj; path = "../node_modules/react-native-picker/ios/RCTBEEPickerManager.xcodeproj"; sourceTree = "<group>"; };
 		A61A4D9BF5C50CFE6C8DF403 /* Pods-Restoapp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Restoapp.release.xcconfig"; path = "Pods/Target Support Files/Pods-Restoapp/Pods-Restoapp.release.xcconfig"; sourceTree = "<group>"; };
 		A7F78215A653424F83196B12 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
@@ -616,6 +641,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95E6CC971FA5DFBA005CC73A /* libRNMail.a in Frameworks */,
+				95E6CC961FA5DFB5005CC73A /* libRNGeocoder.a in Frameworks */,
 				95A555571F80EC0A00ACD359 /* libz.tbd in Frameworks */,
 				956133031F44D90900716DB9 /* libTPSStripe.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
@@ -844,6 +871,8 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				95E6CC901FA5DF8B005CC73A /* RNGeocoder.xcodeproj */,
+				95E6CC4F1FA5DF40005CC73A /* RNMail.xcodeproj */,
 				95A555161F80EBE600ACD359 /* CodePush.xcodeproj */,
 				953662701F4A3111003B8F98 /* ART.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
@@ -1090,6 +1119,23 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		95E6CC501FA5DF40005CC73A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				95E6CC811FA5DF4D005CC73A /* libRNMail.a */,
+				95E6CC831FA5DF4D005CC73A /* RNMailTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		95E6CC911FA5DF8B005CC73A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				95E6CC951FA5DFA3005CC73A /* libRNGeocoder.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		95FA4A651F7F710100952787 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
@@ -1224,7 +1270,7 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = 964QFWYN42;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.ApplePay = {
 								enabled = 1;
@@ -1346,6 +1392,14 @@
 				{
 					ProductGroup = 953661751F4A1F09003B8F98 /* Products */;
 					ProjectRef = D6C9F8A97EE0495D82012D1A /* RNDeviceInfo.xcodeproj */;
+				},
+				{
+					ProductGroup = 95E6CC911FA5DF8B005CC73A /* Products */;
+					ProjectRef = 95E6CC901FA5DF8B005CC73A /* RNGeocoder.xcodeproj */;
+				},
+				{
+					ProductGroup = 95E6CC501FA5DF40005CC73A /* Products */;
+					ProjectRef = 95E6CC4F1FA5DF40005CC73A /* RNMail.xcodeproj */;
 				},
 				{
 					ProductGroup = 95B2A38F1F4CD3DC0061B2FC /* Products */;
@@ -1772,6 +1826,27 @@
 			remoteRef = 95D5C3C61F580E51007606F9 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		95E6CC811FA5DF4D005CC73A /* libRNMail.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNMail.a;
+			remoteRef = 95E6CC801FA5DF4D005CC73A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		95E6CC831FA5DF4D005CC73A /* RNMailTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = RNMailTests.xctest;
+			remoteRef = 95E6CC821FA5DF4D005CC73A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		95E6CC951FA5DFA3005CC73A /* libRNGeocoder.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNGeocoder.a;
+			remoteRef = 95E6CC941FA5DFA3005CC73A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		95FA4A6C1F7F710100952787 /* libBVLinearGradient.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -2176,6 +2251,7 @@
 				CODEPUSH_KEY = "";
 				CODE_SIGN_ENTITLEMENTS = Restoapp/Restoapp.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 964QFWYN42;
@@ -2217,10 +2293,10 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.flatboxstudio.restoapp;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.flatboxstudio.restoapp-ios";
 				PRODUCT_NAME = Restoapp;
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "091ab916-7551-4b4f-a797-842bce1e62f7";
+				PROVISIONING_PROFILE_SPECIFIER = "Restoapp Development";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -2232,7 +2308,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODEPUSH_KEY = "FSbIZY1-fmvCBQsWXw2QDXlOCVAn04ed951d-ee28-4845-a0e0-04b03f5c2773";
 				CODE_SIGN_ENTITLEMENTS = Restoapp/Restoapp.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 964QFWYN42;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -2276,9 +2353,10 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.flatboxstudio.restoapp;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.flatboxstudio.restoapp-ios";
 				PRODUCT_NAME = Restoapp;
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "cfea60fc-34ce-4f0c-8c14-23090295cbd4";
+				PROVISIONING_PROFILE_SPECIFIER = "Restoapp AdHoc";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

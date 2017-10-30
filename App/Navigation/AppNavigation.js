@@ -39,7 +39,7 @@ const CheckoutNavigator = StackNavigator({
     Receipt: { screen: ReceiptScreen },
 }, {
     headerMode: 'none',
-    initialRouteName: 'SelectAddress',
+    initialRouteName: 'Checkout',
     navigationOptions: {
         ...AppNavigationStyles,
     }
@@ -53,7 +53,7 @@ const MenuNavigator = StackNavigator({
     Reservations: { screen: ReservationsScreen },
 }, {
     headerMode: 'screen',
-    initialRouteName: 'Checkout',
+    initialRouteName: 'Menu',
     navigationOptions: {
         ...AppNavigationStyles,
     }

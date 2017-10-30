@@ -10,7 +10,11 @@ const INITIAL_STATE = {
     make_payment_success: false,
     make_payment_error: false,
     make_payment_loading: false,
+    make_braintree_payment_success: false,
+    make_braintree_payment_error: false,
+    make_braintree_payment_loading: false,
     charge: null,
+    braintree_result: null,
     customer: null,
     payment_cards: [],
     get_payment_cards_error: null,
@@ -43,6 +47,12 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, customer: null };
         case Types.GET_SAVED_CUSTOMER_ID_SUCCESS:
             return { ...state, customer: action.payload };
+        case Types.MAKE_BRAINTREE_PAYMENT:
+            return { ...state, make_payment_error: null, make_payment_success: false, make_payment_loading: true, braintree_result: null };
+        case Types.MAKE_BRAINTREE_PAYMENT_FAILED:
+            return { ...state, make_payment_error: action.payload, make_payment_success: false, make_payment_loading: false, braintree_result: null };
+        case Types.MAKE_BRAINTREE_PAYMENT_SUCCESS:
+            return { ...state, make_payment_error: null, make_payment_success: true, make_payment_loading: false, braintree_result: action.payload };
         default:
             return state;
     }

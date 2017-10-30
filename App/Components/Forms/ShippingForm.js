@@ -64,7 +64,7 @@ class ShippingForm extends Component {
             changeZip
         } = this.props;
         
-        if (selectedAddress && !this.hasChanged) {
+        if (selectedAddress && selectedAddress.address && selectedAddress.name && !this.hasChanged) {
             const {
                 name
             } = selectedAddress;
@@ -147,7 +147,10 @@ class ShippingForm extends Component {
             postcode,
             errors,
             country,
-            user
+            user,
+            token,
+            userId,
+            userLoggedIn
         } = this.props;
 
         const {
@@ -166,18 +169,20 @@ class ShippingForm extends Component {
                 <Section top={5} bottom={20}>
                     <RowHeader capital center textStyle={styles.header} spacing={4}>All Fields are required</RowHeader>
                 </Section>
-                <Section bottom={25}>
-                    <View style={styles.rowContainer}>
-                        <Row
-                            title={strings.useSavedAddress}
-                            body={strings.selectAddress}
-                            style={styles.row}
-                            disclosure
-                            first
-                            action={() => this.props.navigation.navigate('SelectAddress')}
-                        />
-                    </View>
-                </Section>
+                { user && userId && token && userLoggedIn ? (
+                        <Section bottom={25}>
+                            <View style={styles.rowContainer}>
+                                <Row
+                                    title={strings.useSavedAddress}
+                                    body={strings.selectAddress}
+                                    style={styles.row}
+                                    disclosure
+                                    first
+                                    action={() => this.props.navigation.navigate('SelectAddress')}
+                                />
+                            </View>
+                        </Section>
+                    ) : null }
                 <Section>
                     <InputRow
                         placeholder={ strings.enterFullName }
@@ -257,7 +262,7 @@ class ShippingForm extends Component {
     };
 }
 
-const mapStateToProps = ({ shippingForm, user, checkout }) => {
+const mapStateToProps = ({ shippingForm, user, checkout, auth }) => {
     const {
         name,
         email,
@@ -279,6 +284,9 @@ const mapStateToProps = ({ shippingForm, user, checkout }) => {
         state,
         errors,
         user: user.currentUser,
+        userLoggedIn: auth.userLoggedIn,
+        token: auth.token,
+        userId: auth.userId,
         selectedAddress: checkout.selected_address
     }
 };
