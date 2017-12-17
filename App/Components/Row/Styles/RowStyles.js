@@ -19,7 +19,6 @@ export default StyleSheet.create({
         flex: 1,
         backgroundColor: Colours.lighterBody,
         alignItems: 'flex-start',
-        padding: 15,
         borderLeftWidth: 0,
         borderRightWidth: 0.5,
         borderBottomWidth: 0.5,

@@ -9,8 +9,10 @@ import {
     StyleSheet,
     Image,
     KeyboardAvoidingView,
-    Alert
+    Alert,
+    Linking,
 } from 'react-native';
+import { NavigationActions } from 'react-navigation';
 import {
     Icon,
     Text,
@@ -27,27 +29,66 @@ import {
     CheckoutConfirmation
 } from '../Components';
 import {
-    Colours
+    Colours,
+    ApplicationStyles
 } from '../Themes';
 import Mailer from 'react-native-mail';
 import { changePage } from '../Actions/CheckoutActions';
+import { geoCodeAddress } from '../Actions/FormActions';
+import { resetCart } from '../Actions/CartActions';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import ActionSheet from '@yfuks/react-native-action-sheet';
 import strings from '../Config/Localization';
 import styles from './Styles/CheckoutScreenStyles';
 import Constants from '../Config/Constants';
+import Toast, { DURATION } from 'react-native-easy-toast';
 
 class CheckoutScreen extends Component {
     static navigationOptions = ({ navigation }) => ({
         title: strings.checkout,
-        headerLeft: <NavigationButton navigation={navigation} back />,
+        headerLeft: <NavigationButton navigation={navigation} size={24} icon="ios-close-outline" action={() => navigation.dispatch(NavigationActions.back())} />,
         headerRight: <NavigationButton navigation={navigation} action={() => { CheckoutScreen._info() }} size={24} icon="ios-help-buoy-outline" />,
     });
 
     componentDidMount() {
         window.EventBus.on(Constants.EVENTS.MAKE_PAYMENT_SUCCESS, this._goToConfirm.bind(this));
         window.EventBus.on(Constants.EVENTS.INFO_NAV_BUTTON_PRESS, this._showInfoActionSheet);
+        this.hasntAreadyChangedToConfirm = false;
+    }
+
+    componentWillReceiveProps({
+        geoCodeSuccess,
+        geoCodeLocation,
+        geoCodeError,
+        geoCodeLoading,
+        selectedPage,
+        paymentSuccess,
+        paymentError,
+        paymentLoading,
+        createOrderLoading,
+        createOrderError,
+        createOrderSuccess,
+    }) {
+        if (geoCodeSuccess && geoCodeLocation && !geoCodeError && !geoCodeLoading && selectedPage === 0) {
+            const {
+                changePage
+            } = this.props;
+
+            changePage(1);
+        } else {
+            if (geoCodeError && !geoCodeSuccess && !geoCodeLocation && !geoCodeLoading && selectedPage == 0) {
+                this.refs.toast.show(geoCodeError, DURATION.LENGTH_LONG);
+            }
+
+            if (paymentError && !paymentSuccess && !paymentLoading && selectedPage == 1) {
+                this.refs.toast.show(paymentError, DURATION.LENGTH_LONG);
+            }
+
+            if (createOrderError && !createOrderSuccess && !createOrderLoading && selectedPage == 2) {
+                this.refs.toast.show(createOrderError, DURATION.LENGTH_LONG);
+            }
+        }
     }
 
     static _info() {
@@ -55,8 +96,6 @@ class CheckoutScreen extends Component {
     };
 
     _showInfoActionSheet = () => {
-        const { navigate } = this.props.navigation;
-
         ActionSheet.showActionSheetWithOptions({
                 title: strings.contactSupport,
                 message: strings.chooseContactMethod,
@@ -69,7 +108,7 @@ class CheckoutScreen extends Component {
                 }
 
                 if (idx == 1) {
-                    console.log('CAll Support');
+                    Linking.openURL(`tel:${Constants.PHONE}`);
                 }
             }
         );
@@ -95,11 +134,26 @@ class CheckoutScreen extends Component {
     _goToPayment = () => {
         const {
             canConfirmShipping,
-            changePage
+            changePage,
         } = this.props;
 
         if (canConfirmShipping) {
-            this.tabView.goToPage(1);
+            const {
+                geoCodeLocation,
+                geoCodeError,
+                geoCodeLoading,
+                geoCodeSuccess,
+                geoCodeAddress,
+                address,
+                city,
+                postcode,
+            } = this.props;
+
+            if (geoCodeLocation && !geoCodeError && !geoCodeLoading && geoCodeSuccess) {
+                changePage(1)
+            } else {
+                geoCodeAddress(address, postcode, city);
+            }
         } else {
             Alert.alert(
                 strings.invalidFields,
@@ -116,41 +170,65 @@ class CheckoutScreen extends Component {
         }
     };
 
+    _goBack = () => {
+        this.props.navigation.dispatch(
+            {
+                type: 'Navigation/NAVIGATE',
+                routeName: 'MenuNavigator',
+                action: {
+                    type: 'Navigation/NAVIGATE',
+                    routeName: 'Menu',
+                }
+            }
+        );
+        this.props.resetCart();
+    };
+
+    _nextPaymentInfo = () => {
+        const {
+            canConfirmShipping,
+        } = this.props;
+
+        if (canConfirmShipping) {
+            return (
+                <View style={styles.buttonContainer}>
+                    <Button full style={styles.button} onPress={() => this._goToPayment()}>
+                        <Text style={styles.buttonTitle}>{ strings.nextPaymentInfo }</Text>
+                    </Button>
+                </View>
+            )
+        }
+    };
+
 
     _goToConfirm = () => {
         const {
             canConfirmPayment,
+            changePage,
         } = this.props;
 
-        console.log(this)
-
-        if (canConfirmPayment) {
-            this.tabView.goToPage(2);
+        if (canConfirmPayment && !this.hasntAreadyChangedToConfirm) {
+            changePage(2);
+            this.hasntAreadyChangedToConfirm = true;
         }
     };
 
     render() {
         const {
+            canConfirmShipping,
             selectedPage,
-            canConfirmShipping
         } = this.props;
-
-        let nextPaymentInfo = canConfirmShipping ?
-            <View style={styles.buttonContainer}>
-                <Button full style={styles.button} onPress={() => this._goToPayment()}>
-                    <Text style={styles.buttonTitle}>{ strings.nextPaymentInfo }</Text>
-                </Button>
-            </View> : null;
 
         return (
             <Container>
                 <ScrollableTabView
                     renderTabBar={() => <IconTabBar noChange />}
                     locked
+                    page={selectedPage}
                     ref={(tabView) => { this.tabView = tabView; }}
                 >
                     <View style={styles.container} tabLabel={`ios-pin-outline,${strings.delivery}`}>
-                        <KeyboardAwareScrollView extraScrollHeight={150} style={styles.container}>
+                        <KeyboardAwareScrollView extraHeight={200} style={styles.container}>
                             <View style={styles.container}>
                                 <Section top={20} left={20} right={20}>
                                     <RowHeader capital center>
@@ -160,7 +238,7 @@ class CheckoutScreen extends Component {
                                 <ShippingForm navigation={this.props.navigation} />
                             </View>
                         </KeyboardAwareScrollView>
-                        { nextPaymentInfo }
+                        { this._nextPaymentInfo() }
                     </View>
                     <View style={styles.container} tabLabel={`ios-card-outline,${strings.payment}`}>
                         <ScrollView style={styles.container}>
@@ -174,17 +252,39 @@ class CheckoutScreen extends Component {
                     </View>
                     <View style={styles.container} tabLabel={`ios-done-all-outline,${strings.confirm}`}>
                         <CheckoutConfirmation navigation={this.props.navigation} />
+                        <View style={styles.buttonContainer}>
+                            <Button full style={styles.button} onPress={() => this._goBack()}>
+                                <Text style={styles.buttonTitle}>{ strings.finish }</Text>
+                            </Button>
+                        </View>
                     </View>
                 </ScrollableTabView>
+                <Toast
+                    style={ApplicationStyles.toast.body}
+                    textStyle={ApplicationStyles.toast.text}
+                    ref="toast" />
             </Container>
         )
     };
 }
 
-const mapStateToProps = ({ checkout, shippingForm }) => ({
+const mapStateToProps = ({ checkout, shippingForm, orders, payments, }) => ({
     selectedPage: checkout.page,
     canConfirmPayment: checkout.can_confirm_payment,
-    canConfirmShipping: shippingForm.valid
+    canConfirmShipping: shippingForm.valid,
+    geoCodeLocation: shippingForm.geo_code_location,
+    geoCodeSuccess: shippingForm.geo_code_success,
+    geoCodeLoading: shippingForm.geo_code_loading,
+    geoCodeError: shippingForm.geo_code_error,
+    paymentSuccess: payments.make_payment_success,
+    paymentError: payments.make_payment_error,
+    paymentLoading: payments.make_payment_loading,
+    createOrderLoading: orders.create_order_loading,
+    createOrderError: orders.create_order_error,
+    createOrderSuccess: orders.create_order_success,
+    address: shippingForm.address,
+    city: shippingForm.city,
+    postcode: shippingForm.zip,
 });
 
-export default connect(mapStateToProps, { changePage })(CheckoutScreen);
+export default connect(mapStateToProps, { changePage, geoCodeAddress, resetCart })(CheckoutScreen);

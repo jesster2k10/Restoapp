@@ -30,10 +30,30 @@ export default StyleSheet.create({
     },
     row: {
         height: 60,
-        padding: 20,
         backgroundColor: Colours.lighterBody
+    },
+    title: {
+        alignItems: 'flex-end',
+        justifyContent: 'center',
+        height: 25,
+    },
+    body: {
+        alignItems: 'flex-end',
+        justifyContent: 'center',
+        height: 25,
     },
     countryPicker: {
         height: 60
+    },
+    centeredContainer: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    loader: {
+        ...Fonts.style.normalSmall,
+        fontFamily: Fonts.type.medium,
+        color: Colours.mainTextColor,
+        paddingTop: 10
     }
 });

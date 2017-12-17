@@ -31,7 +31,7 @@ export const calculateTax = (taxPercentage, cost, count, returnTotalCost) => {
     return returnTotalCost ? Number(tax) + cost : tax;
 };
 
-export const getPrice = ({ totalCost, taxPercentage, currency, count }) => {
+export const getPrice = ({ totalCost, taxPercentage, currency, count = 1 }) => {
   return `${getCurrencySymbol(currency)}${calculateTax(taxPercentage, totalCost, count, true).toFixed(2)}`;
 };
 

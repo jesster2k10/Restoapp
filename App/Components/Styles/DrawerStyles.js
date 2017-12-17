@@ -17,7 +17,6 @@ export default StyleSheet.create({
     },
     drawerContainer: {
         flex: 1,
-        height: 40,
     },
     drawerItem: {
         color: Colours.mainTextColor,

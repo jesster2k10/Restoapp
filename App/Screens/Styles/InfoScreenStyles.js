@@ -46,5 +46,35 @@ export default StyleSheet.create({
     map: {
         width,
         height: 200
-    }
+    },
+    addressFirst: {
+        paddingLeft: 15,
+        paddingRight: 15,
+        paddingTop: 15,
+        ...Fonts.style.normalSmall,
+        fontFamily: Fonts.type.base,
+        fontSize: 13,
+        color: Colours.mainTextColor,
+        marginTop: 5
+    },
+    address: {
+        padding: 5,
+        paddingLeft: 15,
+        paddingRight: 15,
+        ...Fonts.style.normalSmall,
+        fontFamily: Fonts.type.base,
+        fontSize: 13,
+        color: Colours.mainTextColor,
+        marginTop: 5
+    },
+    addressLast: {
+        paddingLeft: 15,
+        paddingRight: 15,
+        paddingTop: 5,
+        ...Fonts.style.normalSmall,
+        fontFamily: Fonts.type.base,
+        fontSize: 13,
+        color: Colours.mainTextColor,
+        marginTop: 5
+    },
 });

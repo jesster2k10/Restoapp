@@ -10,11 +10,11 @@ export default StyleSheet.create({
         ...ApplicationStyles.screen.container,
         justifyContent: 'flex-start',
         paddingTop: 15,
-        paddingBottom: 100
+        paddingBottom: 150
     },
     cartOverlay: {
         backgroundColor: Colours.navigation.background,
-        height: 100,
+        height: 170,
         position: 'absolute',
         right: 0,
         bottom: 0,
@@ -41,6 +41,16 @@ export default StyleSheet.create({
             height: 0
         },
     },
+    inactiveButton: {
+        backgroundColor: 'gray',
+        borderRadius: 2,
+        shadowColor: 'black',
+        shadowOpacity: 0.2,
+        shadowOffset: {
+            width: 0,
+            height: 0
+        },
+    },
     buttonTitle: {
         fontFamily: Fonts.type.medium,
         fontSize: 15,
@@ -54,6 +64,17 @@ export default StyleSheet.create({
     priceContainer: {
         flex: 1,
         marginTop: 10,
+        marginBottom: 5,
+    },
+    orderNoteContainer: {
+        flex: 1,
+        flexDirection: 'column',
         marginBottom: 5
+    },
+    orderNoteTextField: {
+        marginTop: 10,
+        fontFamily: Fonts.type.base,
+        fontSize: 13,
+        color: Colours.mainTextColor,
     }
 });

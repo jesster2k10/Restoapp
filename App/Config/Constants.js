@@ -23,7 +23,16 @@ export default {
         ADDED_REVIEW: 'ADDED_REVIEW',
         ADD_NAV_BUTTON_PRESS: 'ADD_NAV_BUTTON_PRESS',
         MAKE_PAYMENT_SUCCESS: 'MAKE_PAYMENT_SUCCESS',
-        INFO_NAV_BUTTON_PRESS: 'INFO_NAV_BUTTON_PRESS'
+        INFO_NAV_BUTTON_PRESS: 'INFO_NAV_BUTTON_PRESS',
+        DONE_SELECTING_MEAL_EXTRAS: 'DONE_SELECTING_MEAL_EXTRAS'
     },
-    URL_SCHEME: 'org.reactjs.native.example.Restoapp.payments'
+    URL_SCHEME: 'com.flatboxstudio.restoapp-ios.payments',
+    PHONE: '+353833333333',
+    GEO_CODER_API_KEY: 'AIzaSyDzI5cA4F3OCk2PUf2QN788gpK3OaP8FVU',
+    COUNTRY: {
+        NAME: 'Ireland',
+        CODE: 'IE',
+        CURRENCY: ''
+    },
+    MIN_ORDER_AMOUNT: 10,
 };

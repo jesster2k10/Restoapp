@@ -2,28 +2,40 @@ import * as Types from '../../Config/ActionTypes';
 import { omit } from 'lodash';
 
 const INITIAL_STATE = {
-    errors: {},
+    errors: {
+
+    },
     name: '',
     email: '',
     phone: '',
     address: '',
     city: '',
-    postcode: '',
-    country: '',
+    state: '',
     zip: '',
-    valid: false
+    valid: false,
+    method: 'DELIVERY',
+    geo_code_error: null,
+    geo_code_loading: false,
+    geo_code_success: false,
+    geo_code_location: null,
 };
 
 const isFormValid = (state) => {
-    return Object.keys(state.errors).length == 0
-        && state.name
-        && state.email
-        && state.phone
-        && state.address
-        && state.city
-        && state.postcode
-        && state.country
-        && state.zip
+    if (state.method === 'DELIVERY') {
+        return Object.keys(state.errors).length == 0
+            && state.name
+            && state.email
+            && state.phone
+            && state.address
+            && state.city
+            && state.state
+            && state.zip
+    } else {
+        return Object.keys(state.errors).length == 0
+            && state.name
+            && state.email
+            && state.phone
+    }
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -60,7 +72,7 @@ export default (state = INITIAL_STATE, action) => {
                 return {...state, city: action.city, valid: isFormValid(state)};
 
             case Types.CHANGE_STATE:
-                return {...state, postcode: action.state, valid: isFormValid(state)};
+                return {...state, state: action.state, valid: isFormValid(state)};
 
             case Types.CHANGE_COUNTRY:
                 return {...state, country: action.country, valid: isFormValid(state)};
@@ -72,6 +84,16 @@ export default (state = INITIAL_STATE, action) => {
                 return state;
         }
     } else {
+        switch (action.type) {
+            case Types.SELECT_DELIVERY_TYPE:
+                return {...state, method: action.payload}
+            case Types.GEO_CODE_ADDRESS:
+                return {...state, geo_code_success: false, geo_code_loading: true, geo_code_error: null, geo_code_location: null};
+            case Types.GEO_CODE_ADDRESS_FAILED:
+                return {...state, geo_code_success: false, geo_code_loading: false, geo_code_error: action.payload, geo_code_location: null};
+            case Types.GEO_CODE_ADDRESS_SUCCESS:
+                return {...state, geo_code_success: true, geo_code_loading: false, geo_code_error: null, geo_code_location: action.payload};
+        }
         return state;
     }
 };

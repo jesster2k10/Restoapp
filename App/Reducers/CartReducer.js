@@ -1,4 +1,9 @@
 import * as Types from '../Config/ActionTypes';
+import Constants from '../Config/Constants';
+import {
+    getSubtotalWithoutCountAsInt,
+    getCurrency
+} from '../Helpers';
 import { REHYDRATE } from 'redux-persist/constants'
 
 const INITIAL_STATE = {
@@ -13,7 +18,21 @@ const INITIAL_STATE = {
     remove_meal_from_cart_loading: false,
     cart_reset_error: null,
     cart_reset_loading: false,
-    cart_reset_success: false
+    cart_reset_success: false,
+    validCart: false,
+    currency: '€'
+};
+
+const isCartValid = (cart) => {
+    if (cart) {
+        return getSubtotalWithoutCountAsInt(cart) > Constants.MIN_ORDER_AMOUNT - 1;
+    } else {
+        return false
+    }
+};
+
+const getCartCurrency = (cart) => {
+    return getCurrency(cart, true);
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -33,7 +52,7 @@ export default (state = INITIAL_STATE, action) => {
             return {...state, art_loading: false, cart_error: action.payload };
 
         case Types.GET_CART_SUCCESS:
-            return {...state, cart: action.payload, cart_loading: false, cart_error: null };
+            return {...state, cart: action.payload, cart_loading: false, cart_error: null, validCart: isCartValid(action.payload) };
 
         case Types.GET_SAVED_CART:
             return {...state, cart_saved_identifier: null };
@@ -48,7 +67,7 @@ export default (state = INITIAL_STATE, action) => {
             return {...state, cart_add_loading: true, cart_error: null, added_to_cart: false };
 
         case Types.ADD_MEAL_TO_CART_SUCCESS:
-            return {...state, cart_add_loading: false, cart_error: null, added_to_cart: true };
+            return {...state, cart_add_loading: false, cart_error: null, added_to_cart: true, validCart: isCartValid(action.payload), currency: getCartCurrency(cart) };
 
         case Types.ADD_MEAL_TO_CART_FAILED:
             return {...state, cart_add_loading: false, cart_error: action.payload.message, added_to_cart: false };
@@ -75,7 +94,7 @@ export default (state = INITIAL_STATE, action) => {
             return {...state, remove_meal_from_cart_success: false, remove_meal_from_cart_error: null, remove_meal_from_cart_loading: true};
 
         case Types.REMOVE_MEAL_FROM_CART_SUCCESS:
-            return {...state, remove_meal_from_cart_success: true, remove_meal_from_cart_error: null, remove_meal_from_cart_loading: false};
+            return {...state, remove_meal_from_cart_success: true, remove_meal_from_cart_error: null, remove_meal_from_cart_loading: false, validCart: isCartValid(state.cart) };
 
         case Types.REMOVE_MEAL_FROM_CART_FAILED:
             return {...state, remove_meal_from_cart_success: false, remove_meal_from_cart_error: action.payload, remove_meal_from_cart_loading: false};

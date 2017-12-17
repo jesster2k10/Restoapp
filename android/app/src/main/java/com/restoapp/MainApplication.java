@@ -6,6 +6,7 @@ import com.facebook.react.ReactApplication;
 import com.airbnb.android.react.maps.MapsPackage;
 import com.cmcewen.blurview.BlurViewPackage;
 import com.paypal.android.sdk.BuildConfig;
+import com.actionsheet.ActionSheetPackage;
 import com.reactlibrary.securekeystore.RNSecureKeyStorePackage;
 import com.react.rnspinkit.RNSpinkitPackage;
 import io.fullstack.oauth.OAuthManagerPackage;
@@ -13,7 +14,6 @@ import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.beefe.picker.PickerViewPackage;
 import com.gettipsi.stripe.StripeReactPackage;
 import com.pw.droplet.braintree.BraintreePackage;
-import com.actionsheet.ActionSheetPackage;
 import com.cardio.RNCardIOPackage;
 import com.horcrux.svg.SvgPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
@@ -32,7 +32,7 @@ public class MainApplication extends Application implements ReactApplication {
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
     @Override
     public boolean getUseDeveloperSupport() {
-      return BuildConfig.DEBUG;
+      return true;
     }
 
     @Override
@@ -48,12 +48,12 @@ public class MainApplication extends Application implements ReactApplication {
             new PickerViewPackage(),
             new StripeReactPackage(),
             new BraintreePackage(),
-            new ActionSheetPackage(),
             new RNCardIOPackage(),
             new SvgPackage(),
             new LinearGradientPackage(),
             new VectorIconsPackage(),
-            new ReactNativeLocalizationPackage()
+            new ReactNativeLocalizationPackage(),
+            new ActionSheetPackage()
       );
     }
   };

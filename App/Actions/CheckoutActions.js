@@ -38,3 +38,9 @@ export const confirmShipping = (payload) => ({
     type: Types.CONFIRM_SHIPPING,
     payload
 });
+
+
+export const selectDeliveryType = (payload) => ({
+    type: Types.SELECT_DELIVERY_TYPE,
+    payload,
+});

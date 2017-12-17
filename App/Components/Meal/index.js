@@ -5,3 +5,4 @@ export * from './MealReviews';
 export { default as Meal } from './Meal';
 export { default as MealReviewItem } from './MealReviewItem';
 export { default as MealReviewList } from './MealReviewList';
+export { default as MealExtraItem } from './MealExtraItem';

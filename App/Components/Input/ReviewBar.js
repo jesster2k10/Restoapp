@@ -7,7 +7,8 @@ import {
     View,
     StyleSheet,
     TextInput,
-    TouchableOpacity
+    TouchableOpacity,
+    Platform,
 } from 'react-native';
 import Spinner from 'react-native-spinkit';
 import {
@@ -106,12 +107,12 @@ class ReviewBar extends Component {
                  style={styles.titleInput}
                  placeholder="Review Title (Optional)"
                  value={title}
-                 underlineColorAndroid='white'
+                 underlineColorAndroid='rgba(0,0,0,0.25)'
                  onChangeText={(text) => this.setState({ title: text })}
              /> : null;
 
         return (
-            <Animatable.View style={[styles.container, { height: focused && body ? 105 + height : 50 }]}>
+            <Animatable.View style={[styles.container, { height: focused && body ? Platform.os === 'ios' ? 105 : 125 + height : Platform.os === 'ios' ? 50 : 70 }]}>
                 <Grid>
                     <Col size={9} style={styles.col}>
                         { _rating }
@@ -121,7 +122,7 @@ class ReviewBar extends Component {
                                 ref={input => this.input = input}
                                 style={[styles.input, { height }]}
                                 placeholder="Add a Review"
-                                underlineColorAndroid='white'
+                                underlineColorAndroid='rgba(0,0,0,0.25)'
                                 value={body}
                                 onChangeText={(text) => this.setState({ body: text })}
                                 onFocus={this.focus.bind(this)}

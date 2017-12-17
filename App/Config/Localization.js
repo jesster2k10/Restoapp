@@ -2,6 +2,7 @@
  * Created by jesseonolememen on 07/08/2017.
  */
 import LocalizedStrings from 'react-native-localization';
+import Constants from '../Config/Constants';
 
 let strings = new LocalizedStrings({
     en: {
@@ -25,7 +26,9 @@ let strings = new LocalizedStrings({
         cart: 'Cart',
         isAddedToCart: 'Added to cart',
         removedFromCart: 'Removed meal from cart',
-        subtotal: 'Subtotal (excl. Delivery)',
+        subtotal: 'Subtotal',
+        orderNote: 'Order Note',
+        addOrderNote: 'Add an Order Note',
         delivery: 'Delivery',
         payment: 'Payment',
         checkout: 'Checkout',
@@ -125,6 +128,29 @@ let strings = new LocalizedStrings({
         useSavedAddress: 'Use a saved address',
         selectAddress: 'Select an Address',
         noSavedAddresses: 'You have no saved addresses',
+        chooseDeliveryType: 'Choose Delivery Type',
+        deliveryOrCollection: 'Delivery or Collection',
+        selectDeliveryType: 'Select Delivery Type',
+        collection: 'Collection',
+        haveThisOrderDelivered: 'Have this order delivered to you.',
+        collectThisOrder: 'Collect this order from our store.',
+        orderOnTheWay: 'Your Order is On The Way',
+        orderBeingPrepared: 'Your Order is Being Prepared',
+        mealReadyIn: 'Your meal(s) should arrive within the next:',
+        validatingAddress: 'Validating Address',
+        collectMealIn: 'Your meal(s) should be ready for collection within the next:',
+        finish: 'Finish',
+        makingPayment: 'Processing Payment',
+        creatingOrder: 'Creating Order',
+        minutes: 'minute(s)',
+        galleries: 'Galleries',
+        openingTimes: 'Opening Hours',
+        mondayToFriday: 'Monday to Friday',
+        cash: 'Cash',
+        payWithCash: 'Pay With Cash',
+        doneAddingExtras: 'Done adding Extras',
+        payWithCashMessage: 'You will have to pay in person when the meal is delivered/collected',
+        minOrderAlertText: `You must spend at least {0}${Constants.MIN_ORDER_AMOUNT}`
     },
     "en-US": {
         enterState: 'Choose your state',

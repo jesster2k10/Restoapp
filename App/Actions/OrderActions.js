@@ -2,8 +2,20 @@
  * Created by jesseonolememen on 21/08/2017.
  */
 import * as Types from '../Config/ActionTypes';
+import Api from '../Networking/API';
 import Constants from '../Config/Constants';
+import { addAddress } from './UserActions';
+import { resetCart } from './CartActions';
 import axios from 'axios';
+
+const api = new Api();
+
+const actions = {
+    order: () => ({ type: Types.ORDER }),
+        failure: (service, error) => ({ type: Types.ORDER_FAILED, service, error }),
+        success: (service, response) => ({ type: Types.ORDER_SUCCESS, service, response }),
+        request: (service, order, token) => ({ type: Types.ORDER_REQUEST, service, order, token }),
+};
 
 export const getOrders = (token, userId) => (dispatch) => {
     dispatch({ type: Types.GET_ORDERS });
@@ -47,3 +59,18 @@ export const getOrders = (token, userId) => (dispatch) => {
             dispatch({type: Types.GET_ORDERS_FAILED, payload: message })
         })
 };
+
+export const createOrder = (order, token) => async dispatch => {
+    dispatch(actions.request('service', order, token));
+
+    try {
+        const result = await api.createOrder(order, token);
+        dispatch(actions.success('create', result));
+        dispatch(addAddress(order.deliveryAddress));
+        dispatch(resetCart());
+    } catch (error) {
+        dispatch(actions.failure('create', error));
+    }
+};
+
+export default actions;

@@ -50,33 +50,37 @@ const CartItem = ({ deleteAction, meal,onQuantityIncreased, onQuantityDecreased,
         <TouchableOpacity onPress={() => navigate('Meal', { meal })}>
             <View style={styles.container}>
                 <Grid>
-                    <Col size={4.5}>
-                        <Image source={{ uri: featuredImage.secure_url }} style={styles.image} />
-                    </Col>
-                    <Col size={8}>
-                        <View style={styles.bodyContainer}>
+                    { featuredImage ?
+                        (
+                            <Col size={4.5}>
+                                <Image source={{ uri: featuredImage.secure_url }} style={styles.image} />
+                            </Col>
+                        ) : null
+                    }
+                    <Col size={featuredImage ? 8 : 10}>
+                        <View style={[styles.bodyContainer, { padding: featuredImage ? 0 : 0 }]}>
                             <Grid>
                                 <Row style={styles.row}>
                                     <Grid>
                                         <Col size={9}>
                                             <Text style={styles.title}>{ name }</Text>
                                         </Col>
-                                        <Col size={1}>
+                                        <Col size={1} style={{ alignItems: 'flex-end', justifyContent: 'flex-start' }}>
                                             <TouchableOpacity onPress={deleteAction}>
                                                 <Icon name='ios-close-outline' style={styles.icon} />
                                             </TouchableOpacity>
                                         </Col>
                                     </Grid>
-                                    <Text style={styles.desc}>{ truncate(description, 65, '...') }</Text>
+                                    { description ? <Text style={styles.desc}>{ truncate(description, 65, '...') }</Text> : null }
                                 </Row>
                                 <Row>
-                                    <Section top={10} full end style={{ justifyContent: 'center' }}>
+                                    <Section top={featuredImage ? 10 : 0} full end style={{ justifyContent: 'center' }}>
                                         <Grid>
-                                            <Col size={6} style={{ alignItems: 'flex-start', flexDirection: 'row' }}>
+                                            <Col size={featuredImage ? 7 : 8} style={{ alignItems: 'flex-start', flexDirection: 'row' }}>
                                                 <Text style={styles.price}>{ getPrice(meal) }</Text>
                                                 { _renderCount(meal) }
                                             </Col>
-                                            <Col size={4}>
+                                            <Col size={featuredImage ? 3 : 2}>
                                                 <SimpleStepper
                                                     iconColor={Colours.mainTextColor}
                                                     backgroundColor={Colours.accent}

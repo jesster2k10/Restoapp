@@ -77,7 +77,7 @@ export const getCart = (cart) => (dispatch) => {
         });
 };
 
-export const addMealToCart = (cart, { _id }, option) => (dispatch) => {
+export const addMealToCart = (cart, { _id }, option, extra = false) => (dispatch) => {
     dispatch({ type: Types.ADD_MEAL_TO_CART });
 
     axios.patch(`${Constants.BASE_API_URL}/carts/${cart}/products`, { product: _id, option: option })
@@ -87,6 +87,10 @@ export const addMealToCart = (cart, { _id }, option) => (dispatch) => {
             } else {
                 dispatch(getCart(cart));
                 dispatch({ type: Types.ADD_MEAL_TO_CART_SUCCESS, payload: data });
+
+                if (extra) {
+                    dispatch({ type: Types.SET_SELECTED_EXTRA, extra });
+                }
             }
         })
         .catch(error => {
@@ -127,7 +131,7 @@ export const resetCart = (token, cart) => (dispatch) => {
     dispatch({ type: Types.RESET_CART });
 
     const options = {
-        method: 'DELETE',
+        method: 'GET',
         url: `${Constants.BASE_API_URL}/carts/${cart}/products/all`,
         headers: {
             'x-access-token': token || Constants.ACCESS_TOKEN,
@@ -151,3 +155,4 @@ export const resetCart = (token, cart) => (dispatch) => {
 };
 
 export const clearResetErrors = () => ({ type: Types.CLEAR_RESET_ERRORS });
+export const changeOrderNote = (payload) => ({ type: Types.CHANGE_ORDER_NOTE, payload });

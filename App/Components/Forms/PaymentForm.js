@@ -16,7 +16,9 @@ import {
     getCurrency,
     getSubtotalWithoutCount,
     getProductsForApplePay,
-    getSubtotalWithoutCountAsInt
+    getSubtotalWithoutCountAsInt,
+    getFirstName,
+    getLastName,
 } from '../../Helpers';
 import {
     selectPaymentType,
@@ -25,6 +27,8 @@ import {
     createCustomer,
     chargeCustomer,
     getPaymentCards,
+    makeCashPayment,
+    changePage,
     makeBraintreePayment,
 } from '../../Actions';
 import {
@@ -37,6 +41,7 @@ import {
     RowHeader,
     Row as _Row
 } from '../../Components';
+import UserReducer from '../../Reducers/UserReducer';
 import {
     Grid,
     Col,
@@ -63,7 +68,8 @@ const {
     APPLE_PAY,
     PAYPAL,
     CREDIT_CARD,
-    ANDROID_PAY
+    ANDROID_PAY,
+    CASH,
 } = Constants.PAYMENT_TYPES;
 
 class PaymentForm extends Component {
@@ -71,8 +77,9 @@ class PaymentForm extends Component {
         super(props);
 
         this.state = {
-            deviceSpecificPaymentButton: null
-        }
+            deviceSpecificPaymentButton: null,
+            loading: false
+        };
 
         this.hasSentPaymentNotification = false;
     }
@@ -81,18 +88,27 @@ class PaymentForm extends Component {
         this.props.confirmPayment(false);
     }
 
-    componentWillReceiveProps({ makePaymentsSuccess, makePaymentsError, makePaymentsLoading }) {
+    componentWillReceiveProps({ changePage, makePaymentsSuccess, makePaymentsError, makePaymentsLoading, createOrderSuccess, createOrderError, createOrderLoading, createOrder, order, placedOrder }) {
         if (!this.hasSentPaymentNotification && makePaymentsSuccess && !makePaymentsError && !makePaymentsLoading) {
-            console.log("Payment Success");
-            this.hasSentPaymentNotification = true;
-            window.EventBus.trigger(Constants.EVENTS.MAKE_PAYMENT_SUCCESS);
+
         } else if (!makePaymentsSuccess && !makePaymentsLoading && makePaymentsError) {
             this.refs.toast.show(makePaymentsError, DURATION.LENGTH_LONG);
+        } else if (!createOrderSuccess && !createOrderLoading && createOrderError) {
+            this.refs.toast.show(createOrderError, DURATION.LENGTH_LONG);
+        }
+
+        if (!this.hasSentPaymentNotification && createOrderSuccess && !createOrderLoading && !createOrderError && placedOrder) {
+            this.hasSentPaymentNotification = true;
+            console.log('crate order success');
+            changePage(2);
+            window.EventBus.trigger(Constants.EVENTS.MAKE_PAYMENT_SUCCESS);
+        } else {
+            this.refs.toast.show(createOrderError, DURATION.LENGTH_LONG);
         }
     }
 
     async _addCardHandler(cardNumber, cardExpiry, cardCvc) {
-        const { token, subtotal, currency, makePayment, customer, isUserLoggedIn } = this.props;
+        const { token, subtotal, currency, makePayment, customer, isUserLoggedIn, order } = this.props;
 
         let params = {
             number: cardNumber,
@@ -105,13 +121,12 @@ class PaymentForm extends Component {
             let tokenId = await stripe.createTokenWithCard(params);
 
             if (token && isUserLoggedIn && customer) {
-                chargeCustomer(tokenId.tokenId, customer, Math.round(subtotal*1000), currency)
+                chargeCustomer(tokenId.tokenId, customer, Math.round(subtotal*1000), currency, order)
             } else {
-                makePayment(tokenId.tokenId, token, Math.round(subtotal*1000), currency);
+                makePayment(tokenId.tokenId, token, Math.round(subtotal*1000), currency, order);
             }
 
         } catch (error) {
-            console.log(error.message)
             this.refs.toast.show(error.message, DURATION.LENGTH_LONG);
         }
 
@@ -128,6 +143,8 @@ class PaymentForm extends Component {
                 return strings.card;
             case ANDROID_PAY:
                 return strings.androidPay;
+            case CASH:
+                return strings.cash;
             default:
                 return "";
         }
@@ -139,7 +156,10 @@ class PaymentForm extends Component {
             products,
             currency,
             token,
-            subtotal
+            subtotal,
+            order,
+            makeBraintreePayment,
+            makeCashPayment,
         } = this.props;
 
 
@@ -154,22 +174,30 @@ class PaymentForm extends Component {
 
                 try {
                     let token = await stripe.paymentRequestWithApplePay(products, options);
-                    console.log('Completed pay request', token);
                     stripe.completeApplePayRequest();
                 } catch (e) {
-                    console.log('caught error', e);
                     stripe.cancelApplePayRequest();
                 }
 
                 break;
 
             case PAYPAL:
-                BTClient.showPayPalViewController().then(function(nonce) {
-                    makeBraintreePayment(nonce, token, subtotal)
-                }).catch(function(err) {
-                    this.refs.toast.show(err.message, DURATION.LENGTH_LONG);
-                });
+                this.setState({ loading: true });
+
+                try {
+                    let nonce = await BTClient.showPayPalViewController();
+                    makeBraintreePayment(nonce, token, subtotal, order);
+                } catch (error) {
+                    this.refs.toast.show(error.message, DURATION.LENGTH_LONG);
+                } finally {
+                    this.setState({ loading: false });
+                }
+
                 break;
+
+            case CASH:
+                makeCashPayment(order, token || Constants.ACCESS_TOKEN);
+                return;
         }
     };
 
@@ -179,23 +207,26 @@ class PaymentForm extends Component {
             makePaymentsLoading,
             customer,
             token,
-            paymentCards
+            paymentCards,
+            createOrderLoading,
         } = this.props;
 
-        if (paymentType == CREDIT_CARD) {
-            if (makePaymentsLoading) {
-                return (
-                    <View style={styles.centeredContainer}>
-                        <Spinner
-                            isVisible
-                            size={17}
-                            type='Arc'
-                            color='white'/>
-                        <Text style={styles.loader}>Processing Payment</Text>
-                    </View>
-                )
-            }
+        if (makePaymentsLoading || createOrderLoading || this.state.loading) {
+            let text = createOrderLoading ? strings.creatingOrder : strings.makingPayment;
 
+            return (
+                <View style={styles.centeredContainer}>
+                    <Spinner
+                        isVisible
+                        size={17}
+                        type='Arc'
+                        color='white'/>
+                    <Text style={styles.loader}>{ text }</Text>
+                </View>
+            )
+        }
+
+        if (paymentType == CREDIT_CARD) {
             let selectOtherCard = customer && token && paymentCards ?
                 <Section bottom={25}>
                     <Animatable.View  style={styles.container} ref="form">
@@ -214,6 +245,14 @@ class PaymentForm extends Component {
                         />
                 </Animatable.View>
             )
+        }
+
+        if (paymentType == CASH) {
+            return (
+                <Animatable.View style={styles.container}>
+                    <_Row title={strings.payWithCash} colOneSize={0.3} colTwoSize={0.7} body={strings.payWithCashMessage} big disclosure first action={this._pay.bind(this)} />
+                </Animatable.View>
+            );
         }
 
         if (paymentType == PAYPAL) {
@@ -300,7 +339,12 @@ class PaymentForm extends Component {
                     <Grid>
                         <Section left={10} right={10} bottom={15}>
                             <Row size={1}>
-                                { this.state.deviceSpecificPaymentButton }
+                                { /* this.state.deviceSpecificPaymentButton */ }
+                                <Col>
+                                    <Button block style={paymentType === CASH ? styles.selectedButton : styles.paymentButton} onPress={() => selectPaymentType(CASH)}>
+                                        <Icon name='ios-cash' style={paymentType === CASH ? styles.selectedIcon : styles.icon} />
+                                    </Button>
+                                </Col>
                                 <Col>
                                     <Button block style={paymentType === PAYPAL ? styles.selectedButton : styles.paymentButton} onPress={() => selectPaymentType(PAYPAL)}>
                                         <Image resizeMode="contain" style={paymentType === PAYPAL ? styles.selectedPaymentIcon : styles.paymentIcon} source={Images.payPal} />
@@ -333,7 +377,34 @@ class PaymentForm extends Component {
     };
 }
 
-const mapStateToProps = ({ checkout, cart, auth, payments }) => {
+const mapStateToProps = ({ checkout, cart, auth, payments, user, shippingForm, orders }) => {
+    const name = {
+        first: getFirstName(shippingForm.name),
+        last: getLastName(shippingForm.name),
+    };
+
+    const address = {
+        street1: shippingForm.address,
+        suburb: shippingForm.city,
+        state: shippingForm.state,
+        postcode: shippingForm.zip,
+        country: Constants.COUNTRY.NAME,
+    };
+    const order = {
+        ordererName: name,
+        billingName: name,
+        billingAddress: address,
+        deliveryAddress: address,
+        total: Math.round(getSubtotalWithoutCountAsInt(cart.cart), 2),
+        orderDate: Date.now(),
+        orderNote: checkout.order_note,
+        products: cart.cart.products.map(({ _id }) => _id),
+        user: user.currentUser._id || null,
+        type: checkout.delivery_method,
+        paymentType: payments.type,
+        currency: getCurrency(cart.cart, false),
+    };
+
     return {
         paymentType: checkout.payment_type,
         products: getProductsForApplePay(cart.cart),
@@ -349,8 +420,13 @@ const mapStateToProps = ({ checkout, cart, auth, payments }) => {
         makePaymentsSuccess: payments.make_payment_success,
         makePaymentsError: payments.make_payment_error,
         makePaymentsLoading: payments.make_payment_loading,
+        createOrderSuccess: orders.create_order_success,
+        createOrderError: orders.create_order_error,
+        createOrderLoading: orders.create_order_loading,
         isUserLoggedIn: auth.userLoggedIn,
-        paymentCards: payments.payment_cards
+        paymentCards: payments.payment_cards,
+        placedOrder: orders.placedOrder,
+        order,
     }
 };
 
@@ -359,7 +435,10 @@ const actions = {
     confirmPayment,
     makePayment,
     createCustomer,
-    chargeCustomer
+    chargeCustomer,
+    makeBraintreePayment,
+    makeCashPayment,
+    changePage,
 };
 
 export default connect(mapStateToProps, actions)(PaymentForm);

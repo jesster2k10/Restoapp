@@ -11,7 +11,8 @@ import {
 } from 'react-native';
 import {
     Text,
-    Button
+    Button,
+    Icon,
 } from 'native-base';
 import {
     Grid,
@@ -32,6 +33,8 @@ import dateformat from 'dateformat';
 
 const getColor = (status) => {
     switch (status) {
+        case 'Pending':
+            return Colours.mainTextColor;
         case 'Completed':
             return Colours.ribbon.background;
         case 'Delivered':
@@ -57,8 +60,15 @@ const OrderItem = ({ order, navigation }) => {
     const {
         status,
         orderDate,
-        transaction
+        transaction,
+        paymentType,
     } = order;
+
+    let type = paymentType;
+
+    if (!paymentType) {
+        type = 'CARD';
+    }
 
     let products = order.products || [];
     let mappedProducts = products.map((item, i) => {
@@ -80,14 +90,22 @@ const OrderItem = ({ order, navigation }) => {
             <View style={styles.container}>
                 <View style={styles.topContainer}>
                     <Grid>
-                        <Col>
-                            <Text style={styles.date}>{ dateformat(new Date(orderDate), "dd mmmm yyyy") }</Text>
-                        </Col>
-                        <Col>
-                            <View style={styles.alignEnd}>
-                                <Text style={[styles.price, { color: getColor(status) }]}>{ status }</Text>
-                            </View>
-                        </Col>
+                        <Row>
+                            <Col>
+                                <Text style={styles.date}>{ dateformat(new Date(orderDate), "dd mmmm yyyy") }</Text>
+                            </Col>
+                            <Col>
+                                <View style={styles.alignEnd}>
+                                    <Text style={[styles.price, { color: getColor(status) }]}>{ status }</Text>
+                                </View>
+                            </Col>
+                        </Row>
+                        { order.orderNote ? (
+                            <Row>
+                                <Text style={styles.items}>{ order.orderNote }</Text>
+                            </Row>
+                        ): null
+                        }
                     </Grid>
                 </View>
                 { renderOrderNote(order) }
@@ -100,7 +118,12 @@ const OrderItem = ({ order, navigation }) => {
                     </View>
                     <View style={styles.paymentButtonContainer}>
                         <Button style={styles.paymentButton}>
-                            <Image resizeMode="contain" style={styles.paymentIcon} source={Images.applePay} />
+                            { type === 'PAYPAL' ? (
+                                <Image resizeMode="contain" style={styles.paymentIcon} source={Images.payPal} />
+                            ) : (
+                                <Icon name={type === 'CASH' ? 'ios-cash' : 'ios-card'} style={styles.icon} />
+                            )
+                            }
                         </Button>
                     </View>
                 </View>

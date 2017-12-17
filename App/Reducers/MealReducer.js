@@ -8,10 +8,13 @@ const INITIAL_STATE = {
     add_review_loading: false,
     add_review_success: false,
     add_review_error: null,
+    selected_extra: null,
 };
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
+        case Types.SET_SELECTED_EXTRA:
+            return {...state, selected_extra: action.extra};
         case Types.GET_REVIEWS:
             return {...state, loading: true, error: null};
         case Types.GET_REVIEWS_FAILED:

@@ -25,7 +25,7 @@ class PhotoScreen extends Component {
 
         return (
             <View style={styles.container}>
-                <Image resizeMode='contain' style={styles.image} source={{ uri: photo.image.secure_url }} />
+                <Image resizeMode='contain' style={styles.image} source={{ uri: photo.secure_url }} />
             </View>
         )
     };

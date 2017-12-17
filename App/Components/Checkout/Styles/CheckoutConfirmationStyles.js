@@ -10,6 +10,7 @@ import {
     Metrics,
     ApplicationStyles
 } from '../../../Themes';
+import { responsiveHeight } from 'react-native-responsive-dimensions';
 
 export default StyleSheet.create({
     container: {
@@ -19,7 +20,7 @@ export default StyleSheet.create({
     },
     map: {
         width: Metrics.fullWidth,
-        height: 100
+        height: responsiveHeight(30),
     },
     heading: {
         color: Colours.mainTextColor,
@@ -33,7 +34,10 @@ export default StyleSheet.create({
     body: {
         color: Colours.mainTextColor,
         fontSize: 13,
-        fontFamily: Fonts.type.base
+        fontFamily: Fonts.type.base,
+        marginLeft: 25,
+        marginRight: 25,
+        textAlign: 'center',
     },
     arrivalTime: {
         color: Colours.mainTextColor,
@@ -48,7 +52,6 @@ export default StyleSheet.create({
     row: {
         backgroundColor: Colours.lighterBody,
         height: 60,
-        padding: 20,
         marginBottom: 10
     }
 });

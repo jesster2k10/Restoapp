@@ -77,8 +77,17 @@ class InfoScreen extends Component {
                                     coordinate={new MapView.AnimatedRegion({ latitude: 37.78825, longitude: -122.4324})}
                                     title="location" />
                             </MapView>
+                            <Text style={styles.addressFirst}>123 Some Street</Text>
+                            <Text style={styles.address}>Some City</Text>
+                            <Text style={styles.address}>Some State</Text>
+                            <Text style={styles.address}>Some Zip</Text>
+                            <Text style={styles.addressLast}>Some Country</Text>
                         </Section>
-                        <Section left={15} right={15} bottom={5} column full>
+                        <Section left={15} top={15} bottom={5} column full>
+                            <Text style={styles.title}>{ strings.openingTimes }</Text>
+                        </Section>
+                        <Row icon="ios-clock" big first title={strings.mondayToFriday} body="9.00 AM - 9:00 PM" />
+                        <Section left={15} right={15} bottom={5} top={15} column full>
                             <Text style={styles.title}>{ strings.links }</Text>
                         </Section>
                         <Row icon="ios-globe" action={() => this._openURL('https://flatboxstudio.com')} big disclosure first title={strings.website} body="flatboxstudio" />

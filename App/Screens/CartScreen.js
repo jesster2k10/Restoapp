@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import {
     View,
     StyleSheet,
-    Alert
+    Alert,
+    TextInput,
 } from 'react-native';
 import {
     Text,
@@ -12,18 +13,19 @@ import {
 import {
     NavigationButton,
     CartList,
-    Section
 } from '../Components';
 import {
     Grid,
     Col,
+    Row,
 } from 'react-native-easy-grid';
 import {
     getSubtotal
 } from '../Helpers';
 import {
     resetCart,
-    clearResetErrors
+    clearResetErrors,
+    changeOrderNote,
 } from '../Actions/CartActions';
 import {
     ApplicationStyles
@@ -73,13 +75,28 @@ class CartScreen extends Component {
         )
     };
 
+    _showBadCartError = () => {
+        Alert.alert(
+            strings.failedToCheckout,
+            strings.formatString(strings.minOrderAlertText, this.props.currency),
+            [
+                {
+                    text: strings.cancel
+                },
+            ],
+            {
+                cancelable: false
+            }
+        )
+    };
+
     _checkout = () => {
         const { navigate } = this.props.navigation;
         navigate('Checkout');
     };
 
     _renderCartOverlay = () => {
-        const { cart } = this.props;
+        const { cart, validCart, orderNote, changeOrderNote } = this.props;
 
         if (cart)
             if (cart.products && cart.products.length > 0) {
@@ -87,15 +104,31 @@ class CartScreen extends Component {
                     <View style={styles.cartOverlay}>
                         <View style={styles.priceContainer}>
                             <Grid>
-                                <Col size={7}>
-                                    <Text style={styles.subtotalTitle}>{ strings.subtotal }</Text>
-                                </Col>
-                                <Col size={4} style={{ alignItems: 'flex-end' }}>
-                                    <Text style={styles.subtotalTitle}>{ getSubtotal(cart) }</Text>
-                                </Col>
+                                <Row size={3}>
+                                    <Col size={7}>
+                                        <Text style={styles.subtotalTitle}>{ strings.subtotal }</Text>
+                                    </Col>
+                                    <Col size={4} style={{ alignItems: 'flex-end' }}>
+                                        <Text style={styles.subtotalTitle}>{ getSubtotal(cart) }</Text>
+                                    </Col>
+                                </Row>
+                                <Row size={7}>
+                                    <View style={styles.orderNoteContainer}>
+                                        <Text style={styles.subtotalTitle}>{ strings.orderNote }</Text>
+                                        <TextInput
+                                            style={styles.orderNoteTextField}
+                                            placeholder={strings.addOrderNote}
+                                            placeholderTextColor='white'
+                                            underlineColorAndroid='rgba(0,0,0,0.25)'
+                                            maxLength={500}
+                                            value={orderNote}
+                                            onChangeText={text => changeOrderNote(text)}
+                                        />
+                                    </View>
+                                </Row>
                             </Grid>
                         </View>
-                        <Button block style={styles.button} onPress={this._checkout}>
+                        <Button block style={validCart ? styles.button : styles.inactiveButton} onPress={validCart ? this._checkout : this._showBadCartError}>
                             <Text style={styles.buttonTitle}>{ strings.checkout }</Text>
                         </Button>
                         <Toast
@@ -110,6 +143,8 @@ class CartScreen extends Component {
     render() {
         const { navigation } = this.props;
 
+        console.log(this.props);
+
         return (
             <View style={styles.container}>
                 { this._renderCartOverlay() }
@@ -119,12 +154,15 @@ class CartScreen extends Component {
     };
 }
 
-const mapStateToProps = ({ cart, auth }) => ({
+const mapStateToProps = ({ cart, auth, checkout, }) => ({
     cart: cart.cart,
+    currency: cart.currency,
+    validCart: cart.validCart,
     token: auth.token,
     resetError: cart.cart_reset_error,
     resetLoading: cart.cart_reset_loading,
-    resetSuccess: cart.cart_reset_success
+    resetSuccess: cart.cart_reset_success,
+    orderNote: checkout.order_note,
 });
 
-export default connect(mapStateToProps, { resetCart, clearResetErrors })(CartScreen);
+export default connect(mapStateToProps, { resetCart, clearResetErrors, changeOrderNote })(CartScreen);

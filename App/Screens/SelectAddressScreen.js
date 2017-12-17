@@ -63,7 +63,7 @@ class SelectAddressScreen extends Component {
             this.setState({ message: error });
         }
 
-        if (addresses) {
+        if (addresses && addresses.length > 0) {
             return (
                 <ScrollView style={styles.container}>
                     {addresses.map(address => {

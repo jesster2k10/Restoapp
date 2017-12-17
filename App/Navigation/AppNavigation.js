@@ -8,6 +8,7 @@ import { View } from 'react-native'
 import LandingScreen from '../Screens/LandingScreen';
 import MenuScreen from '../Screens/MenuScreen';
 import MealScreen from '../Screens/MealScreen';
+import MealExtrasScreen from '../Screens/MealExtrasScreen';
 import CartScreen from '../Screens/CartScreen';
 import CheckoutScreen from '../Screens/CheckoutScreen';
 import SelectCardScreen from '../Screens/SelectCardScreen';
@@ -20,11 +21,13 @@ import NewsScreen from '../Screens/NewsScreen';
 import NewsItemScreen from '../Screens/NewsItemScreen';
 import CategoryScreen from '../Screens/CategoryScreen';
 import PhotosScreen from '../Screens/PhotosScreen';
+import GalleryScreen from '../Screens/GalleryScreen';
 import PhotoScreen from '../Screens/PhotoScreen';
 import InfoScreen from '../Screens/InfoScreen';
 import ReservationsScreen from '../Screens/ReservationScreen';
 import ReceiptScreen from '../Screens/ReceiptScreen';
 import FavouritesScreen from '../Screens/FavouritesScreen';
+import SelectDeliveryScreen from '../Screens/SelectDeliveryScreen';
 
 import {
     Drawer
@@ -36,6 +39,7 @@ const CheckoutNavigator = StackNavigator({
     Checkout: { screen: CheckoutScreen },
     SelectAddress: { screen: SelectAddressScreen },
     SelectCard: { screen: SelectCardScreen },
+    SelectDelivery: { screen: SelectDeliveryScreen },
     Receipt: { screen: ReceiptScreen },
 }, {
     headerMode: 'none',
@@ -49,6 +53,7 @@ const MenuNavigator = StackNavigator({
     Menu: { screen: MenuScreen },
     Meal: { screen: MealScreen },
     Cart: { screen: CartScreen },
+    MealExtras: { screen: MealExtrasScreen },
     Checkout: { screen: CheckoutNavigator },
     Reservations: { screen: ReservationsScreen },
 }, {
@@ -93,10 +98,10 @@ const NewsNavigator = new StackNavigator({
 
 const PhotosNavigator = new StackNavigator({
     Photos: { screen: PhotosScreen },
-    Photo: { screen: PhotoScreen }
+    Photo: { screen: PhotoScreen },
+    Gallery: { screen: GalleryScreen },
 }, {
     headerMode: 'screen',
-    mode: 'modal',
     initialRouteName: 'Photos',
     navigationOptions: {
         ...AppNavigationStyles,

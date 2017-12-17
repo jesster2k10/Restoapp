@@ -49,6 +49,12 @@ class Meal extends Component {
         }
 
         if (!addedToCart && error !== null) {
+            let error = error;
+
+            if (typeof error === Error) {
+                error = error.message;
+            }
+
             this.refs.toast.show(error, DURATION.LENGTH_LONG);
             clearMealErrors();
         }
@@ -96,7 +102,6 @@ class Meal extends Component {
 
         if (cart_id != null) {
             if (options.length > 0) {
-
                 let _options = [...options.map(option => {
                     return option.name;
                 }), strings.cancel];
@@ -109,10 +114,18 @@ class Meal extends Component {
                         tintColor: Colours.darkBody
                     }, (idx) => {
                         if (idx != CANCEL_INDEX) {
-                            this.props.addMealToCart(cart_id, meal, _options[idx]);
+                            if (meal.extras && meal.extras.length > 0) {                                this.props.addMealToCart(cart_id, meal, _options[idx]);
+                                this.props.addMealToCart(cart_id, meal, _options[idx]);
+                                this.props.navigation.navigate('MealExtras', { meal });
+                            } else {
+                                this.props.addMealToCart(cart_id, meal, _options[idx]);
+                            }
                         }
                     }
                 );
+            } else if (meal.extras && meal.extras.length > 0 && options.length == 0) {
+                this.props.addMealToCart(cart_id, meal);
+                this.props.navigation.navigate('MealExtras', { meal });
             } else {
                 this.props.addMealToCart(cart_id, meal);
             }

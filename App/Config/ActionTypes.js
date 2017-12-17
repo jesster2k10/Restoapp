@@ -80,6 +80,7 @@ export const GET_ALL_MEALS_SUCCESS = 'GET_ALL_MEALS_SUCCESS'.toLowerCase();
 export const ADD_MEAL_REVIEW_SUCCESS = 'ADD_MEAL_REVIEW_SUCCESS'.toLowerCase();
 export const ADD_MEAL_REVIEW_FAILED = 'ADD_MEAL_REVIEW_FAILED'.toLowerCase();
 export const ADD_MEAL_REVIEW = 'ADD_MEAL_REVIEW'.toLowerCase();
+export const SET_SELECTED_EXTRA = 'SET_SELECTED_EXTRA'.toLowerCase();
 
 /**** CART *****/
 export const ADD_MEAL_TO_CART = 'add_meal_to_cart';
@@ -118,6 +119,7 @@ export const SET_CCV_TINT_COLOR = 'SET_CCV_TINT_COLOR'.toLowerCase();
 export const SET_EXPIRY_TINT_COLOR = 'SET_EXPIRY_TINT_COLOR'.toLowerCase();
 export const CONFIRM_PAYMENT = 'CONFIRM_PAYMENT'.toLowerCase();
 export const CONFIRM_SHIPPING = 'CONFIRM_SHIPPING'.toLowerCase();
+export const SELECT_DELIVERY_TYPE = 'SELECT_DELIVERY_TYPE'.toLowerCase();
 
 /***** PAYMENTS *****/
 export const MAKE_PAYMENT               = 'MAKE_PAYMENT'.toLowerCase();
@@ -147,6 +149,7 @@ export const MAKE_BRAINTREE_PAYMENT_SUCCESS   = 'MAKE_BRAINTREE_PAYMENT_SUCCESS'
 /***** FORMS ****/
 export const CHANGE_PHONE = 'CHANGE_PHONE'.toLowerCase();
 export const CHANGE_PHONE_FAILED = 'CHANGE_PHONE_FAILED'.toLowerCase();
+export const CHANGE_ORDER_NOTE = 'CHANGE_ORDER_NOTE'.toLowerCase();
 export const CHANGE_ZIP = 'CHANGE_ZIP'.toLowerCase();
 export const CHANGE_ZIP_FAILED = 'CHANGE_ZIP_FAILED'.toLowerCase();
 export const CHANGE_ADDRESS = 'CHANGE_ADDRESS'.toLowerCase();
@@ -155,6 +158,9 @@ export const CHANGE_CITY = 'CHANGE_CITY'.toLowerCase();
 export const CHANGE_STATE = 'CHANGE_STATE'.toLowerCase();
 export const CHANGE_COUNTRY = 'CHANGE_COUNTRY'.toLowerCase();
 export const CHANGE_COUNTRY_FAILED = 'CHANGE_COUNTRY_FAILED'.toLowerCase();
+export const GEO_CODE_ADDRESS = 'GEO_CODE_ADDRESS'.toLowerCase();
+export const GEO_CODE_ADDRESS_FAILED = 'GEO_CODE_ADDRESS_FAILED'.toLowerCase();
+export const GEO_CODE_ADDRESS_SUCCESS = 'GEO_CODE_ADDRESS_SUCCESS'.toLowerCase();
 
 /***** FAVOURITES *****/
 export const FAVOURITE_MEAL = 'FAVOURITE_MEAL'.toLowerCase();
@@ -169,3 +175,17 @@ export const REMOVE_FAVOURITE_SUCCESS = 'REMOVE_FAVOURITE_SUCCESS'.toLowerCase()
 
 /****** RESERVATIONS ****/
 export const GET_TABLES_SUCCESS = 'GET_TABLES_SUCCESS'.toLocaleLowerCase();
+
+/// Payment Actions
+export const PAYMENT_REQUEST = 'PAYMENT_REQUEST'.toLowerCase();
+export const PAYMENT_SUCCESS = 'PAYMENT_SUCCESS'.toLowerCase();
+export const PAYMENT_FAILURE = 'PAYMENT_FAILURE'.toLowerCase();
+export const GET_BRAINTREE_CLIENT_TOKEN = 'GET_BRAINTREE_CLIENT_TOKEN'.toLowerCase();
+export const GET_BRAINTREE_CLIENT_TOKEN_SUCCESS = 'GET_BRAINTREE_CLIENT_TOKEN_SUCCESS'.toLowerCase();
+export const GET_BRAINTREE_CLIENT_TOKEN_FAILED = 'GET_BRAINTREE_CLIENT_TOKEN_FAILED'.toLowerCase()
+
+/*** ORDER ACTIONS ***/
+export const ORDER = 'ORDER'.toLowerCase();
+export const ORDER_REQUEST = 'ORDER_REQUEST'.toLowerCase();
+export const ORDER_FAILED = 'ORDER_FAILED'.toLowerCase();
+export const ORDER_SUCCESS = 'ORDER_SUCCESS'.toLowerCase();

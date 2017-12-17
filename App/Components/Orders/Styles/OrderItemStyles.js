@@ -1,5 +1,6 @@
 import {
-    StyleSheet
+    StyleSheet,
+    Dimensions,
 } from 'react-native';
 import {
     ApplicationStyles,
@@ -23,7 +24,8 @@ export default StyleSheet.create({
             width: 0,
             height: 2
         },
-        marginBottom: 15
+        marginBottom: 15,
+        width: Dimensions.get('window').width,
     },
     date: {
         ...Fonts.style.normalSmall,
@@ -53,7 +55,7 @@ export default StyleSheet.create({
         flexDirection: 'row',
     },
     detailContainer: {
-        flexDirection: 'row'
+        flexDirection: 'row',
     },
     col: {
         flexDirection: 'row',
@@ -81,8 +83,6 @@ export default StyleSheet.create({
             width: 0,
             height: 0
         },
-        marginLeft: 5,
-        marginRight: 5,
         width: 50,
         height: 30
     },
@@ -91,7 +91,7 @@ export default StyleSheet.create({
     },
     paymentButtonContainer: {
         flex: 0.2,
-        alignItems: 'flex-start'
+        alignItems: 'flex-end'
     },
     totalContainer: {
         flex: 0.8
@@ -101,5 +101,8 @@ export default StyleSheet.create({
         ...Fonts.style.normalSmall,
         fontFamily: Fonts.type.thin,
         fontSize: 12
+    },
+    icon: {
+        color: 'black'
     }
 });

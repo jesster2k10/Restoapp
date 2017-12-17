@@ -4,6 +4,7 @@
  */
 import * as Types from '../Config/ActionTypes';
 import strings from '../Config/Localization';
+import Constants from '../Config/Constants';
 import {
     validateEmail,
     validatePassword,
@@ -12,6 +13,35 @@ import {
     validateAddress,
     validateCountry
 } from '../Helpers/Validation';
+import Geocoder from '../Networking/Geocoder';
+
+const geocoder = new Geocoder(Constants.GEO_CODER_API_KEY);
+
+export const geoCodeAddress = (streetName, postalCode, locality) => async (dispatch) => {
+    dispatch({ type: Types.GEO_CODE_ADDRESS });
+
+    try {
+        const result = await geocoder.geocodeAddress(`${streetName}+${locality}+${postalCode}+${Constants.COUNTRY.NAME}`);
+
+        if (typeof result === Array) {
+            if (result.length > 0) {
+                dispatch({ type: Types.GEO_CODE_ADDRESS_SUCCESS, payload: result[0] });
+            } else {
+                dispatch({ type: Types.GEO_CODE_ADDRESS_FAILED, payload: 'No Results Found' });
+            }
+        }
+
+        if (result) {
+            dispatch({ type: Types.GEO_CODE_ADDRESS_SUCCESS, payload: result });
+        } else {
+            dispatch({ type: Types.GEO_CODE_ADDRESS_FAILED, payload: 'No Results Found' });
+        }
+    }
+
+    catch (e) {
+        dispatch({ type: Types.GEO_CODE_ADDRESS_FAILED, payload: e.message });
+    }
+};
 
 export const selectAddress = (validate, address, key = 'SHIPPING') => (dispatch) => {
     if (address.phone) {
@@ -76,7 +106,7 @@ export const changeName = (validate, name, key = 'LOGIN') => {
             }
         }
     } else {
-        return { type: Types.CHANGE_NAME_FAILED, name, key };
+        return { type: Types.CHANGE_NAME, name, key };
     }
 };
 

@@ -3,7 +3,8 @@ import {
     KeyboardAvoidingView,
     View,
     StyleSheet,
-    Alert
+    Alert,
+    Platform,
 } from 'react-native';
 import { connect } from 'react-redux';
 import {
@@ -78,7 +79,7 @@ class MealScreen extends Component {
 
         return (
             <Root>
-                <KeyboardAvoidingView style={styles.container}>
+                <KeyboardAvoidingView behavior={"padding"} keyboardVerticalOffset={Platform.os === 'ios' ? 50 : -350} style={styles.container}>
                     <View style={styles.container}>
                         <Tabs initialPage={0} tabBarUnderlineStyle={styles.tabBarUnderline}>
                             <Tab heading={strings.details}

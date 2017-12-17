@@ -14,10 +14,14 @@ const INITIAL_STATE = {
     billing_address: {},
     selected_address: {},
     select_address_done: false,
+    delivery_method: 'DELIVERY',
+    order_note: '',
 };
 
 export default (state = INITIAL_STATE, { payload, type }) => {
     switch (type) {
+        case Types.ORDER_SUCCESS:
+            return { ...state, can_confirm_payment: false };
         case Types.CHECKOUT_CHANGE_PAGE:
             return { ...state, page: payload };
         case Types.SET_SELECTED_PAYMENT_TYPE:
@@ -48,6 +52,10 @@ export default (state = INITIAL_STATE, { payload, type }) => {
             return {...state, select_address_done: false};
         case Types.SELECT_ADDRESS:
             return {...state, selected_address: payload, select_address_done: true};
+        case Types.SELECT_DELIVERY_TYPE:
+            return {...state, delivery_method: payload};
+        case Types.CHANGE_ORDER_NOTE:
+            return {...state, order_note: payload};
         default:
             return state;
     }

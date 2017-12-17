@@ -45,9 +45,8 @@ class PhotosScreen extends Component {
     });
 
     componentWillMount() {
-        const { getAllPhotos, getAllGalleries, token } = this.props;
+        const { getAllGalleries, token } = this.props;
 
-        getAllPhotos(token);
         getAllGalleries(token);
     }
 
@@ -59,67 +58,42 @@ class PhotosScreen extends Component {
 
     _keyExtractor = (item) => item.id;
 
-    _renderHeaderItem = ({item}) => {
-        return (
-            <View style={styles.headerImageContainer}>
-                <Image style={styles.headerImage} source={{ uri: item.heroImage.secure_url }} />
-                <Section top={5} bottom={5} left={15} right={15}>
-                    <Text style={styles.headerTitle}>{ item.name }</Text>
-                </Section>
-            </View>
-        )
-    };
+    _renderItem = ({item}) => {
+        const {
+            navigate,
+        } = this.props.navigation;
 
-    _renderItem = ({item, index}) => {
         return (
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('Photo', { photo: item })}>
-                <Image style={index % 2 === 0 ? styles.leftImage : styles.rightImage} source={{ uri: item.image.secure_url }} />
+            <TouchableOpacity onPress={() => navigate('Gallery', { gallery: item })}>
+                <View style={styles.headerImageContainer}>
+                    <Image style={styles.headerImage} source={{ uri: item.heroImage.secure_url }} />
+                    <Section top={5} bottom={5} left={15} right={15}>
+                        <Text style={styles.headerTitle}>{ item.name }</Text>
+                    </Section>
+                </View>
             </TouchableOpacity>
         )
     };
 
     _renderPhotos() {
-        const { loading, photos } = this.props;
+        const { galleriesLoading, galleries } = this.props;
 
-        if (loading) {
-            return <Spinner color='white' size={17} type="Arc" />
+        if (galleriesLoading) {
+            return (
+                <Center full>
+                    <Spinner color='white' size={17} type="Arc" />
+                </Center>
+            )
         }
 
         return (
             <FlatList
-                data={photos}
-                numColumns={2}
-                ListHeaderComponent={this._renderHeader.bind(this)}
+                data={galleries}
+                numColumns={1}
                 keyExtractor={this._keyExtractor}
-                renderItem={this._renderItem}
+                renderItem={this._renderItem.bind(this)}
             />
         )
-    }
-
-    _renderHeader() {
-        const { galleriesLoading, galleries } = this.props;
-
-        if (galleriesLoading) {
-            return <Spinner color='white' size={17} type="Arc" />
-        }
-
-        if (galleries && galleries.length > 0) {
-            return (
-                <View style={styles.carouselContainer}>
-                    <Carousel
-                        data={galleries}
-                        sliderWidth={Metrics.fullWidth}
-                        itemWidth={Metrics.fullWidth}
-                        sliderHeight={300}
-                        itemHeight={200}
-                        autoplay
-                        renderItem={this._renderHeaderItem}
-                    />
-                </View>
-            )
-        }
-
-        return null;
     }
 
     render() {
@@ -127,10 +101,9 @@ class PhotosScreen extends Component {
 
         let galleriesTitle = galleries && galleries.length > 0 ?
         (
-
             <Row size={1}>
                 <Section left={12} top={10}>
-                    <Text style={styles.galleryTitle}>Galleries</Text>
+                    <Text style={styles.galleryTitle}>{ strings.galleries }</Text>
                 </Section>
             </Row>
         ) : null;

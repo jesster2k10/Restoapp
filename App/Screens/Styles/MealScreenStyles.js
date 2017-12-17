@@ -10,7 +10,8 @@ export default StyleSheet.create({
         ...ApplicationStyles.screen.container,
         marginTop: 0,
         paddingTop: 0,
-        backgroundColor: Colours.darkBody
+        backgroundColor: Colours.darkBody,
+        height: Metrics.fullHeight,
     },
     tabBarUnderline: {
         backgroundColor: Colours.lightBody

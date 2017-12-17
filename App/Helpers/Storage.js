@@ -87,7 +87,7 @@ export const removeUserToken = () => {
 };
 
 export const cartExists = (callback) => {
-    AsyncStorage.getItem(CART_KEY)
+    RNSecureKeyStore.getItem(CART_KEY)
         .then((item) => {
             if (item) {
                 callback(true, item);
@@ -103,11 +103,9 @@ export const cartExists = (callback) => {
 export const getCart = (callback) => {
     RNSecureKeyStore.get(CART_KEY)
         .then(item => {
-            console.log(item)
             callback(item, null)
         })
         .catch(err => {
-            console.log(err)
             callback(null, err)
         })
 };
@@ -124,7 +122,7 @@ export const saveCart = (cart, callback) => {
 
 export const clearCart = () => {
     return new Promise((resolve, reject) => {
-        AsyncStorage.removeItem(CART_KEY)
+        RNSecureKeyStore.removeItem(CART_KEY)
             .then(() => {
                 resolve()
             })

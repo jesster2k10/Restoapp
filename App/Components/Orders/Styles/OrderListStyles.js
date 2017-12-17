@@ -13,7 +13,8 @@ export default StyleSheet.create({
     container: {
         ...ApplicationStyles.screen.container,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+
     },
     label: {
         ...Fonts.style.normalSmall,

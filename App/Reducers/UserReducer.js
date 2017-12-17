@@ -1,12 +1,7 @@
 import * as Types from '../Config/ActionTypes';
 
 const INITIAL_STATE = {
-    currentUser: {
-        name: {
-            first: 'EMPTY_NAME',
-            last: 'EMPTY_NAME'
-        },
-    },
+    currentUser: null,
     addresses: [],
     get_addresses_loading: false,
     get_addresses_success: false,
@@ -17,6 +12,8 @@ const INITIAL_STATE = {
     loading: false,
     error: null
 };
+
+export { INITIAL_STATE };
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
