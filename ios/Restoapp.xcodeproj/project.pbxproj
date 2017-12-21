@@ -53,7 +53,6 @@
 		7D0AC859B3B74681B5265711 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C0E59F73127143238F33CEC7 /* libRNDeviceInfo.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		90D6F920AB010BD83EA16844 /* Pods_Restoapp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E5029C938AD6D21CD8BAAA5 /* Pods_Restoapp.framework */; };
-		9524F8381F4C9F120081171B /* RestaurantManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9524F8371F4C9F120081171B /* RestaurantManager.m */; };
 		953662A41F4A3148003B8F98 /* libART.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 953662761F4A3112003B8F98 /* libART.a */; };
 		953662A51F4A314F003B8F98 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9536619B1F4A1F09003B8F98 /* libRNDeviceInfo.a */; };
 		956133031F44D90900716DB9 /* libTPSStripe.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 956132B61F44D58500716DB9 /* libTPSStripe.a */; };
@@ -585,8 +584,6 @@
 		8BD420C7C44D4994861D6750 /* OAuthManager.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = OAuthManager.xcodeproj; path = "../node_modules/react-native-oauth/ios/OAuthManager.xcodeproj"; sourceTree = "<group>"; };
 		906AF67BB2494C59BDA29D92 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		9204416CD9994928B091F795 /* libRCTActionSheet.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTActionSheet.a; sourceTree = "<group>"; };
-		9524F8361F4C9F120081171B /* RestaurantManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RestaurantManager.h; path = Restoapp/RestaurantManager.h; sourceTree = "<group>"; };
-		9524F8371F4C9F120081171B /* RestaurantManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RestaurantManager.m; path = Restoapp/RestaurantManager.m; sourceTree = "<group>"; };
 		953662701F4A3111003B8F98 /* ART.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ART.xcodeproj; path = "../node_modules/react-native/Libraries/ART/ART.xcodeproj"; sourceTree = "<group>"; };
 		9561326A1F44D4AE00716DB9 /* Restoapp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Restoapp.entitlements; path = Restoapp/Restoapp.entitlements; sourceTree = "<group>"; };
 		956133011F44D87600716DB9 /* libStripe.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libStripe.a; path = "Pods/../build/Debug-iphoneos/Stripe/libStripe.a"; sourceTree = "<group>"; };
@@ -1021,8 +1018,6 @@
 			children = (
 				956133531F45087500716DB9 /* ApplePayManager.h */,
 				956133541F45087500716DB9 /* ApplePayManager.m */,
-				9524F8361F4C9F120081171B /* RestaurantManager.h */,
-				9524F8371F4C9F120081171B /* RestaurantManager.m */,
 			);
 			name = "Native Modules";
 			sourceTree = "<group>";
@@ -2112,7 +2107,6 @@
 			files = (
 				956133551F45087500716DB9 /* ApplePayManager.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
-				9524F8381F4C9F120081171B /* RestaurantManager.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2254,7 +2248,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 964QFWYN42;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"COCOAPODS=1",
@@ -2311,7 +2305,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 964QFWYN42;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"COCOAPODS=1",

@@ -71,7 +71,7 @@ class RegistrationScreen extends Component {
     _needHelp = () => {
         const { navigate } = this.props.navigation;
 
-        let buttons = [strings.forgotPassword, strings.forgotEmail, strings.other, strings.cancel];
+        let buttons = [strings.forgotPassword, strings.cancel];
         let cancelIndex = buttons.length - 1;
 
         ActionSheet.show({

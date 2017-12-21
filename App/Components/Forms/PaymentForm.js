@@ -399,7 +399,7 @@ const mapStateToProps = ({ checkout, cart, auth, payments, user, shippingForm, o
         orderDate: Date.now(),
         orderNote: checkout.order_note,
         products: cart.cart.products.map(({ _id }) => _id),
-        user: user.currentUser._id || null,
+        user: user.currentUser ? user.currentUser._id : null,
         type: checkout.delivery_method,
         paymentType: payments.type,
         currency: getCurrency(cart.cart, false),
