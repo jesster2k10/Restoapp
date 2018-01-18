@@ -16,6 +16,7 @@ export default StyleSheet.create({
             width: 0,
             height: 5,
         },
+        elevation: 3,
         width: (Metrics.fullWidth / 2) - 20,
         borderRadius: 2,
         margin: Metrics.baseMargin,

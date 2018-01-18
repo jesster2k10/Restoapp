@@ -58,7 +58,7 @@ class CheckoutConfirmation extends Component {
                     <Text style={styles.arrivalTime}>{ `${order.waitTime} ${strings.minutes}` }</Text>
                 </Section>
                 <View style={styles.rowContainer} big>
-                    <Row action={() => this.props.navigation.navigate('Receipt')} title="Show Receipt" style={styles.row} disclosure />
+                    {/*<Row action={() => this.props.navigation.navigate('Receipt')} title="Show Receipt" style={styles.row} disclosure />*/}
                     <Row title="Contact Support" style={styles.row} disclosure action={() => window.EventBus.trigger(Constants.EVENTS.INFO_NAV_BUTTON_PRESS)}/>
                 </View>
             </View>

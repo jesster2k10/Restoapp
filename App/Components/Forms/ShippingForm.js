@@ -198,7 +198,6 @@ class ShippingForm extends Component {
                             style={styles.row}
                             bodyStyle={styles.body}
                             disclosure
-                            first
                             action={() => this.props.navigation.navigate('SelectDelivery')}
                         />
                     </View>

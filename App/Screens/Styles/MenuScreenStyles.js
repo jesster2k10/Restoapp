@@ -9,7 +9,9 @@ export default StyleSheet.create({
     container: {
         ...ApplicationStyles.screen.container,
         paddingTop: 0,
-        marginTop: 0
+        marginTop: 0,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     addButtonStyle: {
         paddingLeft: 0,

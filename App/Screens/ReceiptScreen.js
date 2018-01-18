@@ -67,9 +67,9 @@ class ReceiptScreen extends Component {
             order,
         } = this.props;
 
-        let currency = charge.currency || order.currency;
-        let status = charge.status || order.status;
-        let amount = charge.amount || order.total;
+        let currency = charge ? charge.currency : order.currency;
+        let status = charge ? charge.status : order.status;
+        let amount = charge ? charge.amount : order.total;
 
         const {
             orderDate,

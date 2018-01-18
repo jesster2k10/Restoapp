@@ -47,7 +47,7 @@ const CartItem = ({ deleteAction, meal,onQuantityIncreased, onQuantityDecreased,
     } = navigation;
 
     return (
-        <TouchableOpacity onPress={() => navigate('Meal', { meal })}>
+        <TouchableOpacity onPress={!meal.isAnExtra ? () => navigate('Meal', { meal }) : null}>
             <View style={styles.container}>
                 <Grid>
                     { featuredImage ?

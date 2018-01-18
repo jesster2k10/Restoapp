@@ -22,7 +22,8 @@ import { connect } from 'react-redux';
 class FavouritesScreen extends Component {
     static navigationOptions = ({ navigation }) => ({
         title: strings.favourites,
-        headerLeft: <NavigationButton navigation={navigation} size={25} />
+        headerLeft: <NavigationButton navigation={navigation} size={25} />,
+        headerRight: <NavigationButton navigation={navigation} size={25} cart />
     });
 
     componentWillReceiveProps(props) {

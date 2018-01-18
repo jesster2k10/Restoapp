@@ -11,6 +11,7 @@ import {
     KeyboardAvoidingView,
     Alert,
     Linking,
+    Platform,
 } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import {
@@ -181,7 +182,8 @@ class CheckoutScreen extends Component {
                 }
             }
         );
-        this.props.resetCart();
+
+        this.props.resetCart(this.props.token, this.props.cart);
     };
 
     _nextPaymentInfo = () => {
@@ -197,6 +199,12 @@ class CheckoutScreen extends Component {
                     </Button>
                 </View>
             )
+        } else {
+            return <View style={styles.buttonContainer}>
+                <Button full style={styles.badButton} onPress={() => alert(strings.checkForErrors)}>
+                    <Text style={styles.badButtonTitle}>{ strings.checkForErrors }</Text>
+                </Button>
+            </View>
         }
     };
 
@@ -228,7 +236,7 @@ class CheckoutScreen extends Component {
                     ref={(tabView) => { this.tabView = tabView; }}
                 >
                     <View style={styles.container} tabLabel={`ios-pin-outline,${strings.delivery}`}>
-                        <KeyboardAwareScrollView extraHeight={200} style={styles.container}>
+                        <KeyboardAwareScrollView extraHeight={Platform.os === 'ios' ? 200 : 250} style={styles.container}>
                             <View style={styles.container}>
                                 <Section top={20} left={20} right={20}>
                                     <RowHeader capital center>
@@ -268,7 +276,7 @@ class CheckoutScreen extends Component {
     };
 }
 
-const mapStateToProps = ({ checkout, shippingForm, orders, payments, }) => ({
+const mapStateToProps = ({ checkout, auth, shippingForm, orders, payments, cart }) => ({
     selectedPage: checkout.page,
     canConfirmPayment: checkout.can_confirm_payment,
     canConfirmShipping: shippingForm.valid,
@@ -285,6 +293,8 @@ const mapStateToProps = ({ checkout, shippingForm, orders, payments, }) => ({
     address: shippingForm.address,
     city: shippingForm.city,
     postcode: shippingForm.zip,
+    cart: cart.cart._id,
+    token: auth.token,
 });
 
 export default connect(mapStateToProps, { changePage, geoCodeAddress, resetCart })(CheckoutScreen);

@@ -22,6 +22,7 @@ import {
 import ParallaxView from 'react-native-parallax-view';
 import SafariView from "react-native-safari-view";
 import strings from '../Config/Localization';
+import Info from '../Config/Info';
 import styles from './Styles/InfoScreenStyles';
 import MapView from 'react-native-maps';
 
@@ -74,28 +75,65 @@ class InfoScreen extends Component {
                                 }}
                             >
                                 <MapView.Marker.Animated
-                                    coordinate={new MapView.AnimatedRegion({ latitude: 37.78825, longitude: -122.4324})}
-                                    title="location" />
+                                    coordinate={new MapView.AnimatedRegion({ latitude: 37.78825, longitude: -122.4324})}/>
                             </MapView>
-                            <Text style={styles.addressFirst}>123 Some Street</Text>
-                            <Text style={styles.address}>Some City</Text>
-                            <Text style={styles.address}>Some State</Text>
-                            <Text style={styles.address}>Some Zip</Text>
-                            <Text style={styles.addressLast}>Some Country</Text>
+                            <Text style={styles.addressFirst}>{ Info.address.street }</Text>
+                            <Text style={styles.address}>{ Info.address.city }</Text>
+                            <Text style={styles.address}>{ Info.address.state }</Text>
+                            <Text style={styles.address}>{ Info.address.zip }</Text>
+                            <Text style={styles.addressLast}>{ Info.address.country }</Text>
                         </Section>
                         <Section left={15} top={15} bottom={5} column full>
                             <Text style={styles.title}>{ strings.openingTimes }</Text>
                         </Section>
-                        <Row icon="ios-clock" big first title={strings.mondayToFriday} body="9.00 AM - 9:00 PM" />
+                        <Row icon="ios-clock" big first title={strings.mondayToFriday} body={Info.openingTimes} />
                         <Section left={15} right={15} bottom={5} top={15} column full>
                             <Text style={styles.title}>{ strings.links }</Text>
                         </Section>
-                        <Row icon="ios-globe" action={() => this._openURL('https://flatboxstudio.com')} big disclosure first title={strings.website} body="flatboxstudio" />
-                        <Row icon="logo-facebook" big disclosure colOneSize={2} title={strings.facebook} body="@oneplusoneclothing" />
-                        <Row icon="logo-twitter" big disclosure title={strings.twitter} body="@one_oneclothing" />
-                        <Row icon="logo-snapchat" big disclosure last title={strings.snapchat} body="oneplusoneclothing" />
-                        <Row icon="ios-mail" big disclosure last colOneSize={4} title={strings.email} body="email@email.com" />
-                        <Row icon="logo-googleplus" big disclosure last title={strings.google} body="flatboxstudio" />
+                        <Row
+                            icon="ios-globe"
+                            action={() => this._openURL(Info.website)}
+                            big
+                            disclosure
+                            first
+                            title={strings.website}
+                            body={Info.website}
+                        />
+                        <Row
+                            icon="logo-facebook"
+                            action={() => this._openURL(`https://facbeook.com/${Info.facebook}`)}
+                            big
+                            disclosure
+                            colOneSize={2}
+                            title={strings.facebook}
+                            body={`@${Info.facebook}`}
+                        />
+                        <Row
+                            icon="logo-twitter"
+                            action={() => this._openURL(`https://twitter.com/${Info.twitter}`)}
+                            big
+                            disclosure
+                            title={strings.twitter}
+                            body={`@${Info.twitter}`}
+                        />
+                        <Row
+                            icon="logo-snapchat"
+                            action={() => this._openURL(`https://snapchat.com/add/${Info.snapchat}`)}
+                            big
+                            disclosure
+                            last
+                            title={strings.snapchat}
+                            body={Info.snapchat}
+                        />
+                        <Row
+                            icon="ios-mail"
+                            big
+                            disclosure
+                            last
+                            colOneSize={4}
+                            title={strings.email}
+                            body={Info.email}
+                        />
                     </View>
                 </ParallaxView>
             </View>

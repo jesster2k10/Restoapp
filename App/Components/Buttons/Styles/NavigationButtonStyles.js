@@ -20,7 +20,6 @@ export default StyleSheet.create({
         alignItems: 'flex-start'
     },
     badge: {
-        position: 'absolute',
         zIndex: 100,
         width: 20,
         height: 20,
@@ -30,6 +29,7 @@ export default StyleSheet.create({
     badgeText: {
         fontSize: 12,
         backgroundColor: 'transparent',
-        marginRight: 2
+        marginRight: 2,
+        color: 'white'
     }
 });

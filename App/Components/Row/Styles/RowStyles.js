@@ -19,9 +19,6 @@ export default StyleSheet.create({
         flex: 1,
         backgroundColor: Colours.lighterBody,
         alignItems: 'flex-start',
-        borderLeftWidth: 0,
-        borderRightWidth: 0.5,
-        borderBottomWidth: 0.5,
         borderColor: 'rgba(0,0,0,0.1)'
     },
     icon: {

@@ -53,6 +53,7 @@ const MenuNavigator = StackNavigator({
     Menu: { screen: MenuScreen },
     Meal: { screen: MealScreen },
     Cart: { screen: CartScreen },
+    Category: { screen: CategoryScreen },
     MealExtras: { screen: MealExtrasScreen },
     Checkout: { screen: CheckoutNavigator },
     Reservations: { screen: ReservationsScreen },
@@ -75,7 +76,6 @@ const OrderNavigator = new StackNavigator({
 });
 
 const CategoriesNavigator = new StackNavigator({
-    Categories: { screen: CategoriesScreen },
     Category: { screen: CategoryScreen }
 }, {
     headerMode: 'screen',
@@ -140,7 +140,6 @@ const FavouritesNavigator = new StackNavigator({
 
 export const MainNavigator = DrawerNavigator({
     Menu: { screen: MenuNavigator },
-    Categories: { screen: CategoriesNavigator },
     News: { screen: NewsNavigator },
     Orders: { screen: OrderNavigator },
     Favourites: { screen: FavouritesNavigator },

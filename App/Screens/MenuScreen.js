@@ -14,7 +14,7 @@ import {
 import {
     Colours
 } from '../Themes';
-import MenuList from  '../Components/MenuList';
+import CategoriesList from  '../Components/Categories/CategoriesList';
 import strings from  '../Config/Localization';
 import Constants from  '../Config/Constants';
 import styles from './Styles/MenuScreenStyles';
@@ -25,16 +25,7 @@ class MenuScreen extends Component {
         title: strings.menu,
         drawerLabel: strings.menu,
         headerLeft: <NavigationButton navigation={navigation} size={25} />,
-        headerRight: (
-            <Grid>
-                <Col size={1} style={styles.col}>
-                    <NavigationButton navigation={navigation} action={() => { MenuScreen._add() }} style={styles.addButtonStyle} size={25} icon="ios-add-outline" />
-                </Col>
-                <Col size={6} style={styles.col}>
-                    <NavigationButton navigation={navigation} size={25} cart />
-                </Col>
-            </Grid>
-        )
+        headerRight: <NavigationButton navigation={navigation} size={25} cart />
     });
 
     static _add = () => {
@@ -63,7 +54,7 @@ class MenuScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <MenuList navigation={this.props.navigation} />
+                <CategoriesList navigation={this.props.navigation} />
             </View>
         );
     }

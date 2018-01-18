@@ -58,7 +58,6 @@
 		956133031F44D90900716DB9 /* libTPSStripe.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 956132B61F44D58500716DB9 /* libTPSStripe.a */; };
 		956133551F45087500716DB9 /* ApplePayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 956133541F45087500716DB9 /* ApplePayManager.m */; };
 		959C005D1F4C323700C22ACC /* libOAuthManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 959C000C1F4C297400C22ACC /* libOAuthManager.a */; };
-		95A555551F80EBFA00ACD359 /* libCodePush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 95A555231F80EBE700ACD359 /* libCodePush.a */; };
 		95A555571F80EC0A00ACD359 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 95A555561F80EC0A00ACD359 /* libz.tbd */; };
 		95E6CC961FA5DFB5005CC73A /* libRNGeocoder.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 95E6CC951FA5DFA3005CC73A /* libRNGeocoder.a */; };
 		95E6CC971FA5DFBA005CC73A /* libRNMail.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 95E6CC811FA5DF4D005CC73A /* libRNMail.a */; };
@@ -456,20 +455,6 @@
 			remoteGlobalIDString = D91353961DA7849100AABC96;
 			remoteInfo = OAuthManager;
 		};
-		95A555201F80EBE700ACD359 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 95A555161F80EBE600ACD359 /* CodePush.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 134814201AA4EA6300B7C361;
-			remoteInfo = CodePush;
-		};
-		95A555221F80EBE700ACD359 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 95A555161F80EBE600ACD359 /* CodePush.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F886647B1F4ADB500036D01B;
-			remoteInfo = "CodePush-tvOS";
-		};
 		95B2A3B81F4CD3DC0061B2FC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BE6B5C81C9144B478170DCF7 /* RNSecureKeyStore.xcodeproj */;
@@ -590,7 +575,6 @@
 		956133041F44D90900716DB9 /* libStripe.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libStripe.a; path = "Pods/../build/Debug-iphoneos/Stripe/libStripe.a"; sourceTree = "<group>"; };
 		956133531F45087500716DB9 /* ApplePayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ApplePayManager.h; path = Restoapp/ApplePayManager.h; sourceTree = "<group>"; };
 		956133541F45087500716DB9 /* ApplePayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ApplePayManager.m; path = Restoapp/ApplePayManager.m; sourceTree = "<group>"; };
-		95A555161F80EBE600ACD359 /* CodePush.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CodePush.xcodeproj; path = "/Users/jesseonolememen/Documents/React/Restoapp/node_modules/react-native/Libraries/ART/../../../react-native-code-push/ios/CodePush.xcodeproj"; sourceTree = "<absolute>"; };
 		95A555561F80EC0A00ACD359 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		95E6CC4F1FA5DF40005CC73A /* RNMail.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNMail.xcodeproj; path = "../node_modules/react-native-mail/RNMail.xcodeproj"; sourceTree = "<group>"; };
 		95E6CC901FA5DF8B005CC73A /* RNGeocoder.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNGeocoder.xcodeproj; path = "../node_modules/react-native-geocoder/ios/RNGeocoder.xcodeproj"; sourceTree = "<group>"; };
@@ -647,7 +631,6 @@
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
 				00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */,
 				00C302E81ABCBA2D00DB3ED1 /* libRCTImage.a in Frameworks */,
-				95A555551F80EBFA00ACD359 /* libCodePush.a in Frameworks */,
 				959C005D1F4C323700C22ACC /* libOAuthManager.a in Frameworks */,
 				00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */,
 				139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */,
@@ -870,7 +853,6 @@
 			children = (
 				95E6CC901FA5DF8B005CC73A /* RNGeocoder.xcodeproj */,
 				95E6CC4F1FA5DF40005CC73A /* RNMail.xcodeproj */,
-				95A555161F80EBE600ACD359 /* CodePush.xcodeproj */,
 				953662701F4A3111003B8F98 /* ART.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
@@ -1077,15 +1059,6 @@
 			isa = PBXGroup;
 			children = (
 				959C000C1F4C297400C22ACC /* libOAuthManager.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		95A555171F80EBE600ACD359 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				95A555211F80EBE700ACD359 /* libCodePush.a */,
-				95A555231F80EBE700ACD359 /* libCodePush.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1311,10 +1284,6 @@
 				{
 					ProductGroup = 957BEC821F39BA64000615A8 /* Products */;
 					ProjectRef = 4C28E90F388748A5B3DA01FF /* BVLinearGradient.xcodeproj */;
-				},
-				{
-					ProductGroup = 95A555171F80EBE600ACD359 /* Products */;
-					ProjectRef = 95A555161F80EBE600ACD359 /* CodePush.xcodeproj */;
 				},
 				{
 					ProductGroup = 959C00051F4C297400C22ACC /* Products */;
@@ -1784,20 +1753,6 @@
 			fileType = archive.ar;
 			path = libOAuthManager.a;
 			remoteRef = 959C000B1F4C297400C22ACC /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		95A555211F80EBE700ACD359 /* libCodePush.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libCodePush.a;
-			remoteRef = 95A555201F80EBE700ACD359 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		95A555231F80EBE700ACD359 /* libCodePush.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libCodePush.a;
-			remoteRef = 95A555221F80EBE700ACD359 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		95B2A3B91F4CD3DC0061B2FC /* libRNSecureKeyStore.a */ = {
@@ -2275,6 +2230,7 @@
 					"$(SRCROOT)/../node_modules/react-native-blur/ios",
 					"$(SRCROOT)/../node_modules/react-native-safari-view",
 					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-braintree-xplat/ios/RCTBraintree/Braintree/**",
 				);
 				INFOPLIST_FILE = Restoapp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -2335,6 +2291,7 @@
 					"$(SRCROOT)/../node_modules/react-native-blur/ios",
 					"$(SRCROOT)/../node_modules/react-native-safari-view",
 					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
+					"$(SRCROOT)/../node_modules/react-native/React/**",
 				);
 				INFOPLIST_FILE = Restoapp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

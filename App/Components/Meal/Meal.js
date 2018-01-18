@@ -201,7 +201,7 @@ class Meal extends Component {
                                     </Button>
                                 </Col>
                                 <Col>
-                                    <Button style={styles.button} block light onPress={() => this.addToCart()}>
+                                    <Button style={styles.button} block onPress={() => this.addToCart()}>
                                         { addToCartLoading ?  <Spinner color='white' type="Arc" size={17} /> : <Text style={styles.buttonTitle}>{ cart && cart.products ? isMealInCart(meal, cart) ? strings.isAddedToCart : options.length == 0 ? strings.addToCart : strings.choseAnOption : options.length == 0 ? strings.addToCart : strings.choseAnOption }</Text> }
                                     </Button>
                                 </Col>

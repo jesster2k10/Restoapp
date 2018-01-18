@@ -13,8 +13,10 @@ import {
     FavouriteItem
 } from '../../Components';
 import {
-    Colours
+    Colours,
+    Fonts,
 } from '../../Themes';
+import strings from '../../Config/Localization';
 import Spinner from 'react-native-spinkit';
 import { connect } from 'react-redux';
 
@@ -41,6 +43,14 @@ class FavouritesList extends Component {
             return (
                 <Center>
                     <Spinner color={Colours.mainTextColor} size={17} type='Arc' />
+                </Center>
+            )
+        }
+
+        if (!favourites || favourites.length < 1) {
+            return (
+                <Center>
+                    <Text style={{ color: 'white', ...Fonts.style.normal, fontSize: 15 }}>{ strings.noFavs }</Text>
                 </Center>
             )
         }

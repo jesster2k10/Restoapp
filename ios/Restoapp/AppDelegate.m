@@ -10,7 +10,6 @@
 #import "AppDelegate.h"
 #import "RCTBraintree.h"
 #import "OAuthManager.h"
-#import <CodePush/CodePush.h>
 
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>

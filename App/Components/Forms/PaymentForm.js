@@ -311,15 +311,6 @@ class PaymentForm extends Component {
                         this.setState({ deviceSpecificPaymentButton: null });
                     }
                 });
-        } else {
-            stripe.deviceSupportsAndroidPay()
-                .then(canMakePayments => {
-                    if (canMakePayments) {
-                        this.setState({ deviceSpecificPaymentButton: androidButton });
-                    } else {
-                        this.setState({ deviceSpecificPaymentButton: null })
-                    }
-                });
         }
 
         return null;

@@ -10,7 +10,6 @@ import {
 import {
     Provider,
 } from 'react-redux';
-import codePush from 'react-native-code-push';
 import configureStore from './Store/Store';
 import Root from './Root';
 

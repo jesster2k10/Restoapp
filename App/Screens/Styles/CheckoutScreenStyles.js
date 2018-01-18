@@ -26,6 +26,15 @@ export default StyleSheet.create({
     tab: {
         height: 80
     },
+    badButton: {
+        backgroundColor: 'grey',
+        shadowColor: 'black',
+        shadowOpacity: 0.2,
+        shadowOffset: {
+            width: 0,
+            height: 0
+        },
+    },
     button: {
         backgroundColor: Colours.accent,
         shadowColor: 'black',
@@ -36,6 +45,11 @@ export default StyleSheet.create({
         },
     },
     buttonTitle: {
+        fontFamily: Fonts.type.medium,
+        fontSize: 13,
+        color: Colours.mainTextColor
+    },
+    badButtonTitle: {
         fontFamily: Fonts.type.medium,
         fontSize: 13,
         color: Colours.mainTextColor

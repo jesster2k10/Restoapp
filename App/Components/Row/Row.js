@@ -11,6 +11,9 @@ import {
     Grid,
     Col
 } from 'react-native-easy-grid';
+import {
+    Colours,
+} from '../../Themes';
 import Icon from 'react-native-vector-icons/Ionicons';
 import styles from './Styles/RowStyles';
 
@@ -36,7 +39,7 @@ const Row = ({ title, style, body, big, disclosure, bodyStyle, titleStyle, first
     return (
         <TouchableOpacity onPress={action}>
             <View style={[big ? styles.bigRow : styles.row, { borderTopWidth: first ? 0.5 : 0 }, style]}>
-                <Grid style={[{ padding: 15 }]}>
+                <Grid style={[{ padding: 15, backgroundColor: Colours.lighterBody, }]}>
                     <Col size={colOneSize || 5} style={[titleStyle, styles.rowAlign]}>
                         { _renderIcon(icon) }
                         <Text style={styles.medium}>{ title }</Text>

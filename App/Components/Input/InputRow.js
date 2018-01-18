@@ -96,7 +96,7 @@ const InputComponent = (props) => {
                     secureTextEntry={password}
                     keyboardType={keyboardType}
                     keyboardAppearance={keyboardAppearance}
-                    underlineColorAndroid='rgba(0,0,0,0.25)'
+                    underlineColorAndroid={Colours.lighterBody}
                     onChangeText={(arg1, arg2, arg3) => {
                     onChange(arg1, arg2, arg3);
 

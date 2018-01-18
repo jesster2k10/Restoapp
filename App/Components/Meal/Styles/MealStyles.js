@@ -79,10 +79,6 @@ export default StyleSheet.create({
     },
     button: {
         backgroundColor: Colours.darkBody,
-        borderLeftColor: Colours.navigation.background,
-        borderBottomColor: Colours.navigation.background,
-        borderLeftWidth: 0.5,
-        borderBottomWidth: 0.5,
         borderRadius: 0
     },
     priceContainer: {
