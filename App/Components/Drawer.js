@@ -47,12 +47,12 @@ class Drawer extends Component {
 
     componentWillReceiveProps({ userLoggedIn, success, error, requestedLogout, navigate, token, logout }) {
         if (requestedLogout) {
-            if (success && userLoggedIn) {
+            if (success && !userLoggedIn) {
                 navigate('LandingScreen');
             }
 
-            if (error && userLoggedIn) {
-                console.log(error)
+            if (error && !success) {
+                alert(error)
             }
         }
     }
@@ -60,7 +60,7 @@ class Drawer extends Component {
     _action = () => {
         const { userLoggedIn, token, logout, navigate } = this.props;
 
-        if (userLoggedIn) {
+        if (userLoggedIn && token) {
             logout(token)
         } else {
             navigate('LandingScreen', { register: false });
@@ -68,7 +68,7 @@ class Drawer extends Component {
     };
 
     render() {
-        const { props, userLoggedIn, user, userId, userError } = this.props;
+        const { props, userLoggedIn, user, token, userError } = this.props;
 
         let name = user && user.name.first != "EMPTY_NAME" && user.name.last != "EMPTY_NAME" ? `${user.name.first} ${user.name.last}` : strings.unknown;
         let image = user && user.profileImage ? user.profileImage.secure_url : Constants.BLANK_PROFILE_IMAGE;
@@ -90,7 +90,7 @@ class Drawer extends Component {
                                     </Section>
                                     <Section>
                                         <Button transparent onPress={this._action}>
-                                            <Text style={styles.logoutButtonText}>{ userLoggedIn && userId && !userError ? strings.logout : strings.login }</Text>
+                                            <Text style={styles.logoutButtonText}>{ userLoggedIn && token && !userError ? strings.logout : strings.login }</Text>
                                         </Button>
                                     </Section>
                                 </Row>

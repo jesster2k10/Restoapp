@@ -1,8 +1,10 @@
 /**
  * Created by jesseonolememen on 12/08/2017.
  */
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 import { Metrics, ApplicationStyles, Colours, Fonts } from '../../../Themes/'
+
+const isAndroid = Platform.OS === 'android';
 
 export default StyleSheet.create({
     container: {
@@ -21,15 +23,17 @@ export default StyleSheet.create({
     },
     badge: {
         zIndex: 100,
-        width: 20,
-        height: 20,
+        width: isAndroid ? 23: 20,
+        height: isAndroid ? 23: 20,
+        marginRight: isAndroid ? 10 : 0,
         justifyContent: 'center',
         alignItems: 'center'
     },
     badgeText: {
-        fontSize: 12,
+        fontSize: isAndroid ? 10 : 12,
         backgroundColor: 'transparent',
-        marginRight: 2,
+        marginRight: isAndroid ? 0 : 2,
+        marginBottom: isAndroid ? 8 : 0,
         color: 'white'
     }
 });

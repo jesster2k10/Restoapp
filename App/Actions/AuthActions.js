@@ -48,16 +48,11 @@ export const logout = (token) => (dispatch) => {
 
     axios.delete(`${Constants.BASE_API_URL}/auth/session/delete`, { data: { token }})
         .then(({ data }) => {
-            if (data.signed_out == true) {
+            if (data.signed_out) {
                 removeUserToken()
                     .then(() => {
+                        dispatch({ type: Types.LOG_OUT_SUCCESS });
                         clearCart()
-                            .then(() => {
-                                dispatch({ type: Types.LOG_OUT_SUCCESS });
-                            })
-                            .catch((error) => {
-                                dispatch({ type: Types.LOG_OUT_FAILED, payload: 'Failed to logout' });
-                            });
                     })
                     .catch(({ message }) => {
                         console.log(message);

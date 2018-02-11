@@ -29,7 +29,7 @@ export default (state = INITIAL_STATE, action) => {
             }
             return state;
         case Types.REGISTER:
-            return {...state, register_loading: true, register_success: false, register_error: null};
+            return {...state, register_loading: true, register_success: false, register_error: null, logout_success: false,};
         case Types.REGISTER_FAILED:
             return {...state, register_loading: false, register_success: false, register_error: action.payload};
         case Types.REGISTER_SUCCESS:
@@ -41,7 +41,7 @@ export default (state = INITIAL_STATE, action) => {
         case Types.LOG_OUT_SUCCESS:
             return {...state, loading: false, logout_success: true, logout_error: null, requested_logout: true, userLoggedIn: false, userId: '', token: Constants.ACCESS_TOKEN};
         case Types.LOGIN:
-            return {...state, login_loading: true, login_success: false, login_error: null};
+            return {...state, login_loading: true, login_success: false, login_error: null, logout_success: false,};
         case Types.LOGIN_FAILED:
             return {...state, login_loading: false, login_success: false, login_error: action.payload, };
         case Types.LOGIN_SUCCESS:
@@ -53,7 +53,7 @@ export default (state = INITIAL_STATE, action) => {
         case Types.GOOGLE_SIGN_IN_SUCCESS:
             return {...state, token: action.payload, loading: false, google_error: null, success: true, requested_logout: false, userLoggedIn: true};
         case Types.FACEBOOK_SIGN_IN:
-            return {...state, loading: true, facebook_error: null, success: false, requested_logout: false };
+            return {...state, loading: true, facebook_error: null, success: false, requested_logout: false};
         case Types.FACEBOOK_SIGN_IN_FAILED:
             return {...state, loading: false, facebook_error: action.error, success: false, requested_logout: false };
         case Types.FACEBOOK_SIGN_IN_SUCCESS:

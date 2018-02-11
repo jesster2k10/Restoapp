@@ -61,7 +61,7 @@ const renderBadge = (cart, productCount) => {
         return (
             <View style={styles.badgeContainer}>
                 <Badge style={styles.badge}>
-                    <Text style={styles.badgeText}>{ productCount }</Text>
+                    <Text style={styles.badgeText} allowFontScaling>{ productCount }</Text>
                 </Badge>
             </View>
         )

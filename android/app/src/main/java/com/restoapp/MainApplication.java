@@ -4,14 +4,15 @@ import android.app.Application;
 
 import com.facebook.react.ReactApplication;
 import com.airbnb.android.react.maps.MapsPackage;
-import com.cmcewen.blurview.BlurViewPackage;
+import com.chirag.RNMail.RNMail;
+import com.actionsheet.ActionSheetPackage;
+import com.airbnb.android.react.maps.MapsPackage;
 import com.paypal.android.sdk.BuildConfig;
 import com.actionsheet.ActionSheetPackage;
 import com.reactlibrary.securekeystore.RNSecureKeyStorePackage;
 import com.react.rnspinkit.RNSpinkitPackage;
 import io.fullstack.oauth.OAuthManagerPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
-import com.beefe.picker.PickerViewPackage;
 import com.gettipsi.stripe.StripeReactPackage;
 import com.pw.droplet.braintree.BraintreePackage;
 import com.cardio.RNCardIOPackage;
@@ -39,13 +40,12 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNMail(),
             new MapsPackage(),
-            new BlurViewPackage(),
             new RNSecureKeyStorePackage(),
             new RNSpinkitPackage(),
             new OAuthManagerPackage(),
             new RNDeviceInfo(),
-            new PickerViewPackage(),
             new StripeReactPackage(),
             new BraintreePackage(),
             new RNCardIOPackage(),

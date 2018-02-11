@@ -35,11 +35,11 @@ const _renderIcon = (icon) => {
     }
 };
 
-const Row = ({ title, style, body, big, disclosure, bodyStyle, titleStyle, first, action, colOneSize, colTwoSize, icon }) => {
+const Row = ({ title, style, noTouch, body, big, disclosure, bodyStyle, titleStyle, first, action, colOneSize, colTwoSize, icon }) => {
     return (
-        <TouchableOpacity onPress={action}>
+        <TouchableOpacity onPress={!noTouch ? action : null} activeOpacity={noTouch ? 0 : 0.5}>
             <View style={[big ? styles.bigRow : styles.row, { borderTopWidth: first ? 0.5 : 0 }, style]}>
-                <Grid style={[{ padding: 15, backgroundColor: Colours.lighterBody, }]}>
+                <Grid style={[{ paddingTop: 15, paddingBottom: 15, paddingRight: 15, backgroundColor: Colours.lighterBody, justifyContent: 'center' }]}>
                     <Col size={colOneSize || 5} style={[titleStyle, styles.rowAlign]}>
                         { _renderIcon(icon) }
                         <Text style={styles.medium}>{ title }</Text>

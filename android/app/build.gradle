@@ -91,11 +91,11 @@ def enableProguardInReleaseBuilds = false
 
 android {
     compileSdkVersion 23
-    buildToolsVersion '26.0.2'
+    buildToolsVersion '23.0.1'
 
     defaultConfig {
         applicationId "com.restoapp"
-        minSdkVersion 16
+        minSdkVersion 18
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -144,6 +144,9 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-maps')
+    compile project(':react-native-mail')
+    compile project(':@yfuks/react-native-action-sheet')
     compile(project(':react-native-maps')){
         exclude group: 'com.google.android.gms', module: 'play-services-base'
         exclude group: 'com.google.android.gms', module: 'play-services-maps'
@@ -152,12 +155,10 @@ dependencies {
     compile 'com.google.android.gms:play-services-maps:+'
     compile 'com.google.android.gms:play-services-wallet:+'
 
-    compile project(':react-native-blur')
     compile project(':react-native-secure-key-store')
     compile project(':react-native-spinkit')
     compile project(':react-native-oauth')
     compile project(':react-native-device-info')
-    compile project(':react-native-picker')
     compile project(':tipsi-stripe')
     compile project(':react-native-braintree-xplat')
     compile project(':react-native-awesome-card-io')

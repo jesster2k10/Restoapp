@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -88,6 +87,7 @@
 		F6CB8C705E224894B31E88FD /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C57137BEE5014AE187F381AD /* libRNVectorIcons.a */; };
 		FC89FB3704A2493B91937F98 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2062B17226164D7388AEDBB6 /* Foundation.ttf */; };
 		FFFD270CF6DA479E89652A8E /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E752AD96D40142B8A9B322D4 /* FontAwesome.ttf */; };
+		8596D44686DC4063843E4D4E /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8424B4BFA5D849359AF8C2A8 /* Feather.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -606,6 +606,7 @@
 		FB68F201E4AD4C42AD6A679B /* RNSpinkit.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNSpinkit.xcodeproj; path = "../node_modules/react-native-spinkit/ios/RNSpinkit.xcodeproj"; sourceTree = "<group>"; };
 		FD5D3506FFCD4C648159876E /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/native-base/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		FEADB4A97F834DA7A97291E0 /* Poppins-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Bold.ttf"; path = "../App/Assets/Fonts/Poppins-Bold.ttf"; sourceTree = "<group>"; };
+		8424B4BFA5D849359AF8C2A8 /* Feather.ttf */ = {isa = PBXFileReference; name = "Feather.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -844,6 +845,7 @@
 				B3BDC8CBECA54189AC00E99A /* Poppins-Medium.ttf */,
 				ACEDA0AACFE94F85AC072EA5 /* Poppins-Regular.ttf */,
 				51EF09AF4BAC483AAEB65AC6 /* Poppins-SemiBold.ttf */,
+				8424B4BFA5D849359AF8C2A8 /* Feather.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1847,6 +1849,7 @@
 				98BDC87C449F40408FF2B719 /* Poppins-Medium.ttf in Resources */,
 				DC12497E02E94762A3BE141E /* Poppins-Regular.ttf in Resources */,
 				E56332CFA8124745B830BEA7 /* Poppins-SemiBold.ttf in Resources */,
+				8596D44686DC4063843E4D4E /* Feather.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

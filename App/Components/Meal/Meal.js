@@ -140,9 +140,11 @@ class Meal extends Component {
         if (meal.options.length > 0) {
             meal.options.forEach(option => {
                 rows.push(
-                    <View style={styles.padding} key={option._id}>
-                        <Text style={styles.rowHeader}>{strings.options}</Text>
-                        <RowComponent title={ option.name } body={ getPrice(meal) } />
+                    <View key={option._id}>
+                        <View style={styles.padding}>
+                            <Text style={styles.rowHeader}>{strings.options}</Text>
+                        </View>
+                        <RowComponent noTouch title={ option.name } body={ getPrice(meal) } />
                     </View>
                 )
             })
@@ -171,7 +173,7 @@ class Meal extends Component {
         return (
             <View style={styles.container}>
                 <ScrollView style={styles.container}>
-                    <Container>
+                    <Container noPadding>
                         <Grid>
                             <Row style={{ height: 200 }}>
                                 <ImageBackground style={styles.image} source={{ uri: featuredImage.secure_url }}>

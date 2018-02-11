@@ -18,6 +18,7 @@ export default StyleSheet.create({
             width: 0,
             height: 5
         },
+        elevation: 3,
         shadowOpacity: 0.15,
     },
     image: {

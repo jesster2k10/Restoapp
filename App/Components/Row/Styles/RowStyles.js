@@ -12,7 +12,7 @@ import {
 
 export default StyleSheet.create({
     row: {
-        height: 30,
+        height: 30+20,
         borderColor: 'rgba(0,0,0,0.1)',
     },
     bigRow: {
@@ -26,7 +26,9 @@ export default StyleSheet.create({
         paddingRight: 5
     },
     end: {
+        height: '52%',
         alignItems: 'flex-end',
+        justifyContent: 'center',
     },
     medium: {
         ...Fonts.style.medium,
@@ -39,6 +41,7 @@ export default StyleSheet.create({
         fontSize: normalize(13),
     },
     rowAlign: {
-        flexDirection: 'row'
+        flexDirection: 'row',
+        justifyContent: 'center',
     }
 });

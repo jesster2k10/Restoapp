@@ -1,8 +1,12 @@
 rootProject.name = 'Restoapp'
 include ':react-native-maps'
 project(':react-native-maps').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-maps/lib/android')
-include ':react-native-blur'
-project(':react-native-blur').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-blur/android')
+include ':react-native-mail'
+project(':react-native-mail').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-mail/android')
+include ':@yfuks/react-native-action-sheet'
+project(':@yfuks/react-native-action-sheet').projectDir = new File(rootProject.projectDir, '../node_modules/@yfuks/react-native-action-sheet/android')
+include ':react-native-maps'
+project(':react-native-maps').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-maps/lib/android')
 include ':react-native-secure-key-store'
 project(':react-native-secure-key-store').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-secure-key-store/android')
 include ':react-native-spinkit'
@@ -11,8 +15,6 @@ include ':react-native-oauth'
 project(':react-native-oauth').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-oauth/android')
 include ':react-native-device-info'
 project(':react-native-device-info').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-device-info/android')
-include ':react-native-picker'
-project(':react-native-picker').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-picker/android')
 include ':tipsi-stripe'
 project(':tipsi-stripe').projectDir = new File(rootProject.projectDir, '../node_modules/tipsi-stripe/android')
 include ':react-native-braintree-xplat'
