@@ -17,6 +17,7 @@ export default (state = INITIAL_STATE, action) => {
         case Types.GET_CATEGORIES_SUCCESS:
             return {...state, loading: false, success: true, error: null, categories: action.categories};
 
+
         default:
             return state;
     }

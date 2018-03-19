@@ -2,7 +2,8 @@
  * Created by jesseonolememen on 15/08/2017.
  */
 import {
-    StyleSheet
+    StyleSheet,
+    Platform,
 } from 'react-native';
 import {
     Fonts,
@@ -33,14 +34,14 @@ export default StyleSheet.create({
         backgroundColor: Colours.lighterBody
     },
     title: {
+        height: 60,
         alignItems: 'flex-end',
         justifyContent: 'center',
-        height: 25,
     },
     body: {
+        height: 60,
         alignItems: 'flex-end',
         justifyContent: 'center',
-        height: 25,
     },
     countryPicker: {
         height: 60
@@ -48,7 +49,7 @@ export default StyleSheet.create({
     centeredContainer: {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     loader: {
         ...Fonts.style.normalSmall,

@@ -236,7 +236,7 @@ class CheckoutScreen extends Component {
                     ref={(tabView) => { this.tabView = tabView; }}
                 >
                     <View style={styles.container} tabLabel={`ios-pin-outline,${strings.delivery}`}>
-                        <KeyboardAwareScrollView extraHeight={Platform.os === 'ios' ? 200 : 250} style={styles.container}>
+                        <KeyboardAwareScrollView extraHeight={Platform.OS === 'ios' ? 200 : 550} style={styles.container}>
                             <View style={styles.container}>
                                 <Section top={20} left={20} right={20}>
                                     <RowHeader capital center>

@@ -36,6 +36,9 @@ export default (state = INITIAL_STATE, action) => {
         case Types.CLEAR_MEAL_ERRORS:
             return {...state, error: null, success: false };
 
+        case Types.LOG_OUT_SUCCESS:
+            return INITIAL_STATE;
+
         default:
             return state;
     }

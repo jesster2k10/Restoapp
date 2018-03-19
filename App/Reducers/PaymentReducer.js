@@ -45,6 +45,8 @@ export default (state = INITIAL_STATE, action) => {
     }
 
     switch (action.type) {
+        case Types.LOG_OUT_SUCCESS:
+            return INITIAL_STATE;
         case Types.GET_BRAINTREE_CLIENT_TOKEN:
             return {...state, get_bt_token_loading: true, get_bt_token_error: null, get_bt_token_success: false};
         case Types.GET_BRAINTREE_CLIENT_TOKEN_FAILED:

@@ -39,13 +39,13 @@ const Row = ({ title, style, noTouch, body, big, disclosure, bodyStyle, titleSty
     return (
         <TouchableOpacity onPress={!noTouch ? action : null} activeOpacity={noTouch ? 0 : 0.5}>
             <View style={[big ? styles.bigRow : styles.row, { borderTopWidth: first ? 0.5 : 0 }, style]}>
-                <Grid style={[{ paddingTop: 15, paddingBottom: 15, paddingRight: 15, backgroundColor: Colours.lighterBody, justifyContent: 'center' }]}>
-                    <Col size={colOneSize || 5} style={[titleStyle, styles.rowAlign]}>
+                <Grid style={[{ backgroundColor: Colours.lighterBody, justifyContent: 'center' }]}>
+                    <Col size={colOneSize || 5} style={styles.title}>
                         { _renderIcon(icon) }
                         <Text style={styles.medium}>{ title }</Text>
                     </Col>
-                    <Col style={[styles.end, bodyStyle]} size={colTwoSize || 5}>
-                        <Grid style={[styles.end, bodyStyle]}>
+                    <Col style={[styles.end, bodyStyle, styles.bodyCol]} size={colTwoSize || 5}>
+                        <Grid>
                             <Col size={9} style={[styles.end, bodyStyle]}>
                                 <Text minimumFontScale={0.5} style={styles.body}>{ body }</Text>
                             </Col>

@@ -163,7 +163,7 @@ export const Root = StackNavigator({
         visible: false
     },
     mode: 'modal',
-    initialRouteName: 'LandingScreen',
+    initialRouteName: 'MainScreen',
     navigationOptions: {
         ...AppNavigationStyles
     }

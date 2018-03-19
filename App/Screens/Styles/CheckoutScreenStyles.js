@@ -14,6 +14,9 @@ export default StyleSheet.create({
         paddingTop: 0,
         paddingLeft: 0,
         paddingRight: 0,
+        marginBottom: 25,
+        bottom: 25,
+        paddingBottom: 25,
     },
     iconContainer: {
         paddingTop: 15,

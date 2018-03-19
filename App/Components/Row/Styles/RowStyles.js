@@ -12,7 +12,6 @@ import {
 
 export default StyleSheet.create({
     row: {
-        height: 30+20,
         borderColor: 'rgba(0,0,0,0.1)',
     },
     bigRow: {
@@ -26,7 +25,6 @@ export default StyleSheet.create({
         paddingRight: 5
     },
     end: {
-        height: '52%',
         alignItems: 'flex-end',
         justifyContent: 'center',
     },
@@ -35,6 +33,14 @@ export default StyleSheet.create({
         fontSize: normalize(13),
         color: Colours.mainTextColor
     },
+    title: {
+        alignItems: 'flex-start',
+        justifyContent: 'center',
+        marginLeft: 20,
+    },
+    bodyCol: {
+        marginRight: 20,
+    },
     body: {
         ...Fonts.style.normalSmall,
         color: Colours.mainTextColor,
@@ -42,6 +48,8 @@ export default StyleSheet.create({
     },
     rowAlign: {
         flexDirection: 'row',
+        alignItems: 'flex-start',
         justifyContent: 'center',
-    }
+        backgroundColor: 'red',
+    },
 });

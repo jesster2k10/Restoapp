@@ -39,7 +39,7 @@ export default (state = INITIAL_STATE, action) => {
         case Types.LOG_OUT_FAILED:
             return {...state, loading: false, logout_success: false, logout_error: action.payload, requested_logout: true};
         case Types.LOG_OUT_SUCCESS:
-            return {...state, loading: false, logout_success: true, logout_error: null, requested_logout: true, userLoggedIn: false, userId: '', token: Constants.ACCESS_TOKEN};
+            return {...INITIAL_STATE, loading: false, logout_success: true, logout_error: null, requested_logout: true, userLoggedIn: false, userId: '', token: Constants.ACCESS_TOKEN};
         case Types.LOGIN:
             return {...state, login_loading: true, login_success: false, login_error: null, logout_success: false,};
         case Types.LOGIN_FAILED:

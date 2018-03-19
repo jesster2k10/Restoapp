@@ -17,6 +17,8 @@ export { INITIAL_STATE };
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
+        case Types.LOG_OUT_SUCCESS:
+            return INITIAL_STATE;
         case Types.GET_CURRENT_USER:
             return {...state, loading: true, error: null};
         case Types.GET_CURRENT_USER_SUCCESS:

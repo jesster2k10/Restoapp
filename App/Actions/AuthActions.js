@@ -52,7 +52,6 @@ export const logout = (token) => (dispatch) => {
                 removeUserToken()
                     .then(() => {
                         dispatch({ type: Types.LOG_OUT_SUCCESS });
-                        clearCart()
                     })
                     .catch(({ message }) => {
                         console.log(message);
