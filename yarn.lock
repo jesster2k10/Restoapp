@@ -3708,7 +3708,7 @@ react-native-secure-key-store@^1.0.5:
 
 "react-native-simple-stepper@git+https://github.com/jesster2k10/react-native-simple-stepper.git":
   version "1.18.0"
-  resolved "git+https://github.com/jesster2k10/react-native-simple-stepper.git#291df676df8a3ccfd83201eaf95d40737afdc5ff"
+  resolved "git+https://github.com/jesster2k10/react-native-simple-stepper.git#dda5e7d5a895391fe6eebf0b9d60f56c40d39e03"
 
 react-native-snap-carousel@^3.2.1:
   version "3.4.0"
