@@ -9,7 +9,7 @@ const INITIAL_STATE = {
 };
 
 export default (state = INITIAL_STATE, action) => {
-    if (action.key === 'REGISTER') {
+    if (action.key === 'REGISTER' || action.key === 'ADDRESS') {
         switch (action.type) {
             case REHYDRATE:
                 return {...state};

@@ -11,7 +11,8 @@ import {
 } from 'react-native-easy-grid';
 import {
     selectPreviousAddress,
-    resetSelectAddressDone
+    resetSelectAddressDone,
+    selectAddress,
 } from '../../Actions/FormActions';
 import Icon from 'react-native-vector-icons/Ionicons';
 import styles from './Styles/AddressItemStyles';
@@ -26,9 +27,16 @@ class AddressItem extends Component {
         }
     }
 
+    selectAddress = address => {
+        console.log(address);
+        this.props.selectAddress(false, address, 'ADDRESS');
+        this.props.navigation.navigate('CreateAddress', { address, create: false })
+    }
+
     render() {
         const {
-            selectPreviousAddress
+            selectPreviousAddress,
+            checkout
         } = this.props;
 
         const {
@@ -46,11 +54,11 @@ class AddressItem extends Component {
 
        return (
            <View style={styles.container}>
-               <TouchableOpacity onPress={() => selectPreviousAddress(address)}>
+               <TouchableOpacity onPress={() => checkout ? selectPreviousAddress({ address, name }) : this.selectAddress({ address, name })}>
                    <Grid>
                        <Col size={9}>
                            <Row>
-                               <Text style={styles.name}>{ `${name.first != 'EMPTY_NAME' ? name.first : ''} ${name.last != 'EMPTY_NAME' || ''}` }</Text>
+                               <Text style={styles.name}>{ `${name.first != 'EMPTY_NAME' ? name.first : ''} ${name.last != 'EMPTY_NAME' ? name.last : ''}` }</Text>
                            </Row>
                            <Row>
                                <Text style={styles.address}>{ street1 }</Text>
@@ -82,4 +90,4 @@ const mapStateToProps = ({ checkout }) => ({
     done: checkout.select_address_done,
 });
 
-export default connect(mapStateToProps, { selectPreviousAddress, resetSelectAddressDone })(AddressItem);
+export default connect(mapStateToProps, { selectPreviousAddress, resetSelectAddressDone, selectAddress })(AddressItem);

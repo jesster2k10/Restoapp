@@ -89,7 +89,7 @@ class Root extends Component {
             merchantId: Constants.APPLE_PAY_MERCHANT_ID,
         });
 
-        window.EventBus = BackboneEvents.mixin({});
+        window.EventBus = BackboneEvents.mixin({});      
     };
 
     _updateRootComponent = (rootComponent) => {

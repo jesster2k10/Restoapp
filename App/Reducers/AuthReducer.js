@@ -60,6 +60,8 @@ export default (state = INITIAL_STATE, action) => {
             return {...state, token: action.payload, loading: false, facebook_error: null, success: true, requested_logout: false, userLoggedIn: true };
         case Types.IS_USER_LOGGED_IN:
             return {...state, userLoggedIn: action.payload, requested_user_login: true, token: action.token || Constants.ACCESS_TOKEN, userId: action.userId };
+        case Types.CHANGE_USER_PASSWORD_SUCCESS:
+            return {...state, token: action.payload};
         default:
             return state;
     }

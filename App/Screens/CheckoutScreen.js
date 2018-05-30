@@ -48,7 +48,7 @@ import Toast, { DURATION } from 'react-native-easy-toast';
 class CheckoutScreen extends Component {
     static navigationOptions = ({ navigation }) => ({
         title: strings.checkout,
-        headerLeft: <NavigationButton navigation={navigation} size={24} icon="ios-close-outline" action={() => navigation.dispatch(NavigationActions.back())} />,
+        headerLeft: <NavigationButton navigation={navigation} size={24} icon="ios-close-outline" action={() => navigation.dispatch(NavigationActions.back('Landing'))} />,
         headerRight: <NavigationButton navigation={navigation} action={() => { CheckoutScreen._info() }} size={24} icon="ios-help-buoy-outline" />,
     });
 
@@ -236,7 +236,7 @@ class CheckoutScreen extends Component {
                     ref={(tabView) => { this.tabView = tabView; }}
                 >
                     <View style={styles.container} tabLabel={`ios-pin-outline,${strings.delivery}`}>
-                        <KeyboardAwareScrollView extraHeight={Platform.OS === 'ios' ? 200 : 550} style={styles.container}>
+                        <KeyboardAwareScrollView extraHeight={Platform.OS === 'ios' ? 200 : 550} >
                             <View style={styles.container}>
                                 <Section top={20} left={20} right={20}>
                                     <RowHeader capital center>

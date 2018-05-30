@@ -17,6 +17,8 @@ import Geocoder from '../Networking/Geocoder';
 
 const geocoder = new Geocoder(Constants.GEO_CODER_API_KEY);
 
+export const resetAddressForm = () => ({ type: Types.ADDRESS_RESET });
+
 export const geoCodeAddress = (streetName, postalCode, locality) => async (dispatch) => {
     dispatch({ type: Types.GEO_CODE_ADDRESS });
 
@@ -54,23 +56,23 @@ export const selectAddress = (validate, address, key = 'SHIPPING') => (dispatch)
     }
 
     if (address.address.street1) {
-        dispatch(changeAddress(validate, address.street1, key));
+        dispatch(changeAddress(validate, address.address.street1, key));
     }
 
     if (address.address.suburb) {
-        dispatch(changeCity(address.subrub, key));
+        dispatch(changeCity(address.address.suburb, key));
     }
 
     if (address.address.postcode) {
-        dispatch(changeZip(address.postcode, key));
+        dispatch(changeZip(address.address.postcode, key));
     }
 
     if (address.address.state) {
-        dispatch(changeState(address.state, key));
+        dispatch(changeState(address.address.state, key));
     }
 
     if (address.address.country) {
-        dispatch(changeCountry(validate, address.country, key));
+        dispatch(changeCountry(validate, address.address.country, key));
     }
 };
 

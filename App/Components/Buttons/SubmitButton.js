@@ -17,7 +17,7 @@ import {
     isiPhoneX
 } from '../../Helpers';
 
-const SubmitButton = ({ title, onPress, loading, children, height, width, custom }) => {
+const SubmitButton = ({ style, title, onPress, loading, children, height, width, custom }) => {
     let body = children && custom ? children : loading ?
         <Spinner
             isVisible
@@ -25,7 +25,7 @@ const SubmitButton = ({ title, onPress, loading, children, height, width, custom
             type='Arc'
             color='white'/> : <Text style={styles.buttonTitle}>{ title }</Text>;
     return (
-        <Button block style={[styles.button, { height: height ? height : isiPhoneX() ? 75 : 55 }, { width: width || null }]} onPress={onPress}>
+        <Button block style={[styles.button, { height: height ? height : isiPhoneX() ? 75 : 55 }, { width: width || null }, { ...style }]} onPress={onPress}>
             {body}
         </Button>
     );

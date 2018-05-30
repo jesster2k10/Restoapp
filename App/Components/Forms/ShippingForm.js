@@ -29,12 +29,10 @@ import {
     changeZip
 } from '../../Actions/FormActions';
 import strings from '../../Config/Localization';
-import styles, { countryPickerStyles } from './Styles/ShippingFormStyles';
+import styles, { countryPickerStyles } from './Styles/SharedFormStyles';
 import CountryPicker from 'react-native-country-picker-modal';
 import Spinner from 'react-native-spinkit';
 import countries from '../../Config/countries.json';
-
-const KEY = 'SHIPPING';
 
 String.prototype.capitalize = function(){
     return this.replace( /(^|\s)([a-z])/g , function(m,p1,p2){ return p1+p2.toUpperCase(); } );
@@ -49,18 +47,22 @@ class ShippingForm extends Component {
         cca2: countries.countries.first
     };
 
-    componentWillReceiveProps({ selectedAddress, user }) {
+    componentWillReceiveProps({ selectedAddress, user, type }) {
         const {
             changeCity,
             changeState,
             changeAddress,
             changeCountry,
-            changeZip
+            changeZip,
+            changePhone,
+            changeEmail,
         } = this.props;
         
         if (selectedAddress && selectedAddress.address && selectedAddress.name && !this.hasChanged) {
             const {
-                name
+                name,
+                phone,
+                email,
             } = selectedAddress;
 
             const {
@@ -71,24 +73,32 @@ class ShippingForm extends Component {
                 country,
             } = selectedAddress.address;
 
+            if (phone) {
+                changePhone(false, phone, type);
+            }
+
+            if (email) {
+                changeEmail(false, email, type);
+            }
+
             if (street1) {
-                changeAddress(false, street1, KEY);
+                changeAddress(false, street1, type);
             }
 
             if (suburb) {
-                changeCity(suburb, KEY);
+                changeCity(suburb, type);
             }
 
             if (country) {
-                changeCountry(country, KEY);
+                changeCountry(country, type);
             }
 
             if (state) {
-                changeState(state, KEY);
+                changeState(state, type);
             }
 
             if (postcode) {
-                changeZip(postcode, KEY);
+                changeZip(postcode, type);
             }
 
             if (name) {
@@ -108,23 +118,24 @@ class ShippingForm extends Component {
 
         const {
             user,
-            userLoggedIn
+            userLoggedIn,
+            type,
         } = this.props;
 
         if (user && userLoggedIn && user.name) {
             let name = `${user.name.first} ${user.name.last && user.name.last != 'BLANK_NAME' ? user.name.last : ''}`
 
             if (name != '') {
-                changeName(false, name, 'SHIPPING');
+                changeName(false, name, type);
             }
         }
 
         if (user && user.email) {
-            changeEmail(false, user.email, 'SHIPPING');
+            changeEmail(false, user.email, type);
         }
 
         if (user && user.phone) {
-            changePhone(false, user.phone, 'SHIPPING')
+            changePhone(false, user.phone, type)
         }
     }
 
@@ -136,13 +147,14 @@ class ShippingForm extends Component {
             address,
             city,
             zip,
-            postcode,
+            state,
             errors,
             country,
             user,
             token,
             userId,
-            userLoggedIn
+            userLoggedIn,
+            type,
         } = this.props;
 
         const {
@@ -157,6 +169,8 @@ class ShippingForm extends Component {
             method,
             loading
         } = this.props;
+
+        console.log(this.props);
 
         if (loading) {
             return (
@@ -173,10 +187,11 @@ class ShippingForm extends Component {
 
         return (
             <View style={styles.container}>
+                { type == 'SHIPPING' ? 
                 <Section top={5} bottom={20}>
                     <RowHeader capital center textStyle={styles.header} spacing={4}>All Fields are required</RowHeader>
-                </Section>
-                { user && userId && token && userLoggedIn && method == 'DELIVERY'  ? (
+                </Section> : null }
+                { user && userId && token && userLoggedIn && type == 'SHIPPING' && method == 'DELIVERY'  ? (
                         <Section bottom={25}>
                             <View style={styles.rowContainer}>
                                 <Row
@@ -185,11 +200,12 @@ class ShippingForm extends Component {
                                     style={styles.row}
                                     disclosure
                                     first
-                                    action={() => this.props.navigation.navigate('SelectAddress')}
+                                    action={() => this.props.navigation.navigate('SelectAddress', { backRoute: 'Checkout', checkout: true })}
                                 />
                             </View>
                         </Section>
                     ) : null }
+                { type == 'SHIPPING' ? 
                 <Section bottom={25}>
                     <View style={styles.rowContainer}>
                         <Row
@@ -201,7 +217,7 @@ class ShippingForm extends Component {
                             action={() => this.props.navigation.navigate('SelectDelivery')}
                         />
                     </View>
-                </Section>
+                </Section> : null }
                 <Section>
                     <InputRow
                         placeholder={ strings.enterFullName }
@@ -210,7 +226,7 @@ class ShippingForm extends Component {
                         error={errors.name}
                         value={name}
                         autoCapitalize="words"
-                        onChangeText={(val) => changeName(true, val, KEY)}>
+                        onChangeText={(val) => changeName(true, val, this.props.type)}>
                         { strings.fullName }
                     </InputRow>
                 </Section>
@@ -220,7 +236,7 @@ class ShippingForm extends Component {
                         value={email}
                         keyboardType='email-address'
                         placeholder={ strings.enterEmail }
-                        onChangeText={(val) => changeEmail(true, val, KEY)}>
+                        onChangeText={(val) => changeEmail(true, val, this.props.type)}>
                         { strings.email }
                     </InputRow>
                 </Section>
@@ -230,7 +246,7 @@ class ShippingForm extends Component {
                         error={errors.phone}
                         value={phone}
                         placeholder={ strings.enterPhone }
-                        onChangeText={(val) => changePhone(true, val, KEY)}>
+                        onChangeText={(val) => changePhone(true, val, this.props.type)}>
                         { strings.phone }
                     </InputRow>
                 </Section>
@@ -242,7 +258,7 @@ class ShippingForm extends Component {
                                     value={address}
                                     autoCapitalize="words"
                                     placeholder={ strings.enterAddress }
-                                    onChangeText={(val) => changeAddress(true, val, KEY)}>
+                                    onChangeText={(val) => changeAddress(true, val, this.props.type)}>
                                     { strings.address }
                                 </InputRow>
                             </Section>
@@ -252,7 +268,7 @@ class ShippingForm extends Component {
                                     value={city}
                                     autoCapitalize="words"
                                     placeholder={ strings.enterCity }
-                                    onChangeText={(val) => changeCity(val, KEY)}>
+                                    onChangeText={(val) => changeCity(val, this.props.type)}>
                                     { strings.city }
                                 </InputRow>
                             </Section>
@@ -262,17 +278,17 @@ class ShippingForm extends Component {
                                     error={errors.zip}
                                     value={zip}
                                     placeholder={ strings.enterPostcode }
-                                    onChangeText={(val) => changeZip(val, KEY)}>
+                                    onChangeText={(val) => changeZip(val, this.props.type)}>
                                     { strings.postcode }
                                 </InputRow>
                                 <InputRow
                                     half
                                     error={errors.state}
-                                    value={postcode}
+                                    value={state}
                                     returnKeyType="done"
                                     autoCapitalize="words"
                                     placeholder={ strings.enterState }
-                                    onChangeText={(val) => changeState(val, KEY)}>
+                                    onChangeText={(val) => changeState(val, this.props.type)}>
                                     { strings.state }
                                 </InputRow>
                             </Section>
@@ -286,12 +302,17 @@ class ShippingForm extends Component {
     };
 }
 
+ShippingForm.defaultProps = {
+    type: 'SHIPPING'
+}
+
 const mapStateToProps = ({ shippingForm, user, checkout, auth }) => {
     const {
         name,
         email,
         phone,
         address,
+        selectedAddress,
         city,
         zip,
         state,

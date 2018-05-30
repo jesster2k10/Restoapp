@@ -12,8 +12,6 @@ import styles from './Styles/TableStyles';
 const Table = ({ table, onPress, style }) => {
     const { name } = table;
 
-    console.log(table)
-
     return (
         <TouchableOpacity onPress={onPress}>
             <View style={[styles.container, style]}>

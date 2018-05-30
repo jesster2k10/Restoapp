@@ -14,6 +14,7 @@ import AuthReducer from './AuthReducer';
 import LoginFormReducer from './Forms/LoginFormReducer';
 import RegistrationFormReducer from './Forms/RegistrationFormReducer';
 import ShippingFormReducer from './Forms/ShippingFormReducer';
+import AddressFormReducer from './Forms/AddressFormReducer';
 import NewsReducer from './NewsReducer';
 import CategoryReducer from './CategoryReducer';
 import UserReducer from './UserReducer';
@@ -37,6 +38,7 @@ export default combineReducers({
     loginForm: LoginFormReducer,
     registrationForm: RegistrationFormReducer,
     shippingForm: ShippingFormReducer,
+    addressForm: AddressFormReducer,
     reduxForms: formReducer.plugin({
         login: (state, { type }) => {
             switch (type) {

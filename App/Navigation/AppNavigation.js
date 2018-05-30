@@ -28,6 +28,9 @@ import ReservationsScreen from '../Screens/ReservationScreen';
 import ReceiptScreen from '../Screens/ReceiptScreen';
 import FavouritesScreen from '../Screens/FavouritesScreen';
 import SelectDeliveryScreen from '../Screens/SelectDeliveryScreen';
+import ProfileScreen from '../Screens/ProfileScreen';
+import CreateAddressScreen from '../Screens/CreateAddressScreen';
+import ChangePasswordScreen from '../Screens/ChangePasswordScreen';
 
 import {
     Drawer
@@ -138,6 +141,16 @@ const FavouritesNavigator = new StackNavigator({
     }
 });
 
+const ProfileNavigator = StackNavigator({
+    Profile: { screen: ProfileScreen },
+    CreateAddress: { screen: CreateAddressScreen },
+    ChangePassword: { screen: ChangePasswordScreen },
+}, {
+    navigationOptions: {
+        ...AppNavigationStyles
+    }
+})
+
 export const MainNavigator = DrawerNavigator({
     Menu: { screen: MenuNavigator },
     News: { screen: NewsNavigator },
@@ -145,6 +158,7 @@ export const MainNavigator = DrawerNavigator({
     Favourites: { screen: FavouritesNavigator },
     Photos: { screen: PhotosNavigator },
     Info: { screen: InfoNavigator },
+    Profile: { screen: ProfileNavigator },
 }, {
     initialRouteName: 'Menu',
     headerMode: 'screen',
@@ -163,7 +177,7 @@ export const Root = StackNavigator({
         visible: false
     },
     mode: 'modal',
-    initialRouteName: 'MainScreen',
+    initialRouteName: 'LandingScreen',
     navigationOptions: {
         ...AppNavigationStyles
     }

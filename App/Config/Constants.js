@@ -35,4 +35,10 @@ export default {
         CURRENCY: ''
     },
     MIN_ORDER_AMOUNT: 10,
+    CLOUDINARY: {
+        API_KEY: '454511749272264',
+        API_SECRET: 'ospMI6HSSBOcbjmFvLfeyg3C3uw',
+        NAME: 'hukd1lv3k',
+        UPLOAD_PRESET: 'co38jtpx',
+    }
 };

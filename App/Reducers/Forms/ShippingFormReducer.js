@@ -85,6 +85,8 @@ export default (state = INITIAL_STATE, action) => {
         }
     } else {
         switch (action.type) {
+            case Types.SELECT_ADDRESS:
+                return {...state, address: action.payload};
             case Types.SELECT_DELIVERY_TYPE:
                 return {...state, method: action.payload}
             case Types.GEO_CODE_ADDRESS:

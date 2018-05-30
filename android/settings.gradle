@@ -1,10 +1,12 @@
 rootProject.name = 'Restoapp'
+include ':react-native-exception-handler'
+project(':react-native-exception-handler').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-exception-handler/android')
 include ':react-native-maps'
 project(':react-native-maps').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-maps/lib/android')
 include ':react-native-mail'
 project(':react-native-mail').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-mail/android')
-include ':@yfuks/react-native-action-sheet'
-project(':@yfuks/react-native-action-sheet').projectDir = new File(rootProject.projectDir, '../node_modules/@yfuks/react-native-action-sheet/android')
+include ':react-native-action-sheet'
+project(':react-native-action-sheet').projectDir = new File(rootProject.projectDir, '../node_modules/@yfuks/react-native-action-sheet/android')
 include ':react-native-maps'
 project(':react-native-maps').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-maps/lib/android')
 include ':react-native-secure-key-store'
@@ -29,8 +31,8 @@ include ':react-native-vector-icons'
 project(':react-native-vector-icons').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-vector-icons/android')
 include ':react-native-localization'
 project(':react-native-localization').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-localization/android')
-include ':react-native-action-sheet'
-project(':react-native-action-sheet').projectDir = new File(settingsDir, '../node_modules/@yfuks/react-native-action-sheet/android')
 include ':tipsi-stripe'
 project(':tipsi-stripe').projectDir = new File(rootProject.projectDir, '../node_modules/tipsi-stripe/android')
+include ':react-native-image-picker'
+project(':react-native-image-picker').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-image-picker/android')
 include ':app'

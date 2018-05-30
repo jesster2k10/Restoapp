@@ -25,12 +25,12 @@ const MenuItem = ({ meal, navigation }) => {
     return (
         <TouchableOpacity onPress={() => navigation.navigate('Meal', { meal: meal })}>
             <View style={styles.container}>
-                <ImageBackground style={styles.image} source={{ uri: featuredImage.secure_url }} >
+                { featuredImage ? <ImageBackground style={styles.image} source={{ uri: featuredImage.secure_url }} >
                     <LinearGradient
                         colors={Colours.mainGradient}
                         style={styles.gradient}
                     />
-                </ImageBackground>
+                </ImageBackground> : null }
                 <View style={styles.priceContainer}>
                     <Ribbon title={getPrice(meal)} />
                 </View>

@@ -5,3 +5,4 @@ export { default as ShippingForm } from './ShippingForm';
 export { default as PaymentForm } from './PaymentForm';
 export { default as RegistrationForm } from './RegistrationForm';
 export { default as LoginForm } from './LoginForm';
+export { default as AddressForm } from './AddressForm';

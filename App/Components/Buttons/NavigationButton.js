@@ -18,8 +18,7 @@ import styles from './Styles/NavigationButtonStyles';
 function handleAction ({ navigate, goBack }, back, cart, action, route) {
     if (back) {
         if (route) {
-            console.log(route);
-            goBack({ key: route });
+            navigate(route)
             return;
         }
 

@@ -176,12 +176,12 @@ class Meal extends Component {
                     <Container noPadding>
                         <Grid>
                             <Row style={{ height: 200 }}>
-                                <ImageBackground style={styles.image} source={{ uri: featuredImage.secure_url }}>
+                                { featuredImage ? <ImageBackground style={styles.image} source={{ uri: featuredImage.secure_url }}>
                                     <LinearGradient
                                         colors={Colours.mainGradient}
                                         style={styles.gradient}
                                     />
-                                </ImageBackground>
+                                </ImageBackground> : null }
                                 <View style={styles.priceContainer}>
                                     { this.renderRibbon }
                                 </View>

@@ -23,6 +23,15 @@ export const GET_ADDRESSES_SUCCESS = 'GET_ADDRESSES_SUCCESS'.toLowerCase();
 export const GET_ADDRESSES_FAILED = 'GET_ADDRESSES_FAILED'.toLowerCase();
 export const SELECT_ADDRESS = 'SELECT_ADDRESS'.toLowerCase();
 export const RESET_SELECT_ADDRESS_DONE = 'RESET_SELECT_ADDRESS_DONE'.toLowerCase();
+export const UPDATE_USER_PROFILE = 'UPDATE_USER_PROFILE'.toLocaleLowerCase();
+export const UPDATE_USER_PROFILE_FAILED = 'UPDATE_USER_PROFILE_FAILED'.toLocaleLowerCase();
+export const UPDATE_USER_PROFILE_SUCCESS = 'UPDATE_USER_PROFILE_SUCCESS'.toLocaleLowerCase();
+export const UPDATE_USER = 'UPDATE_USER'.toLocaleLowerCase();
+export const UPDATE_USER_FAILED = 'UPDATE_USER_FAILED'.toLocaleLowerCase();
+export const UPDATE_USER_SUCCESS = 'UPDATE_USER_SUCCESS'.toLocaleLowerCase();
+export const CHANGE_USER_PASSWORD = 'CHANGE_USER_PASSWORD'.toLowerCase();
+export const CHANGE_USER_PASSWORD_SUCCESS = 'CHANGE_USER_PASSWORD_SUCCESS'.toLowerCase();
+export const CHANGE_USER_PASSWORD_FAILED = 'CHANGE_USER_PASSWORD_FAILED'.toLowerCase();
 
 /**** REVIEWS *****/
 export const GET_REVIEWS = 'GET_REVIEWS'.toLowerCase();
@@ -189,3 +198,5 @@ export const ORDER = 'ORDER'.toLowerCase();
 export const ORDER_REQUEST = 'ORDER_REQUEST'.toLowerCase();
 export const ORDER_FAILED = 'ORDER_FAILED'.toLowerCase();
 export const ORDER_SUCCESS = 'ORDER_SUCCESS'.toLowerCase();
+
+export const ADDRESS_RESET = 'ADDRESS_RESET'.toLowerCase()

@@ -61,7 +61,7 @@ const InputComponent = (props) => {
         value,
         label,
         keyboardAppearance,
-        keyboardType
+        keyboardType,
     } = props.props;
 
     let _input = null;

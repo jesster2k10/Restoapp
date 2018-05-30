@@ -152,7 +152,22 @@ let strings = new LocalizedStrings({
         doneAddingExtras: 'Done adding Extras',
         checkForErrors: 'Check for errors',
         payWithCashMessage: 'You will have to pay in person when the meal is delivered/collected',
-        minOrderAlertText: `You must spend at least {0}${Constants.MIN_ORDER_AMOUNT}`
+        minOrderAlertText: `You must spend at least {0}${Constants.MIN_ORDER_AMOUNT}`,
+        profile: 'Profile',
+        addresses: 'Addresses',
+        viewPreviousAddresses: 'View Previous Addresses',
+        createAddress: 'Create Address',
+        currentPassword: 'Current Password',
+        enterCurrentPassword: 'Enter Your Current Password',
+        enterNewPassword: 'Enter Your New Password',
+        newPassword: 'New Password',
+        changePassword: 'Change Password',
+        submit: 'Submit',
+        changedPasswordSuccess: 'Successfully changed your password',
+        failedToChangePassword: 'Failed to change your password',
+        selectProfileImage: 'Select Profile Image',
+        changeProfileImage: 'Change Profile Image',
+        updateAddress: 'Update Address'
     },
     "en-US": {
         enterState: 'Choose your state',
@@ -160,6 +175,9 @@ let strings = new LocalizedStrings({
         enterPostcode: 'Enter your zip code',
         postcode: 'Zip Code',
     },
+    "de-CH": {
+        state: 'Canton'
+    }
 });
 
 export default strings;

@@ -6,7 +6,8 @@ import {
 } from 'react-native';
 import {
     NavigationButton,
-    AddressItem
+    AddressItem,
+    TextButton,
 } from '../Components';
 import {
     selectAddress,
@@ -23,8 +24,13 @@ import { connect } from 'react-redux';
 class SelectAddressScreen extends Component {
     static navigationOptions = ({ navigation }) => ({
         title: strings.selectAddress,
-        headerLeft: <NavigationButton navigation={navigation} back size={25} />
+        headerLeft: <NavigationButton navigation={navigation} back size={25} route={navigation.state.params.backRoute ? navigation.state.params.backRoute  : null} />,
+        headerRight: !navigation.state.params.checkout ? <NavigationButton navigation={navigation}  size={25} icon="ios-add" action={SelectAddressScreen.create} /> : null
     });
+
+    static create = () => {
+        window.EventBus.trigger('SelectAddressScreen.Create');
+    };
 
     state = {
         message: strings.noSavedAddresses
@@ -40,15 +46,23 @@ class SelectAddressScreen extends Component {
         getAddresses(token, userId);
         this.setErrorMessage = false;
 
+        window.EventBus.on('SelectAddressScreen.Create', this._create);
     }
+
+    _create = () => {
+        this.props.navigation.navigate('CreateAddress', { create: true, address: {} });
+    };
 
     renderAddresses = () => {
         const {
             loading,
             error,
             success,
-            addresses
+            addresses,
+            navigation,
         } = this.props;
+
+        const { navigate } = navigation;
 
         if (loading) {
             return (
@@ -68,7 +82,7 @@ class SelectAddressScreen extends Component {
                 <ScrollView style={styles.container}>
                     {addresses.map(address => {
                         return (
-                            <AddressItem address={address} navigation={this.props.navigation} />
+                            <AddressItem key={address._id} address={address} navigation={this.props.navigation} checkout={this.props.navigation.state.params.checkout} />
                         )
                     })}
                 </ScrollView>
@@ -77,6 +91,7 @@ class SelectAddressScreen extends Component {
             return (
                 <View style={[styles.container, styles.centered]}>
                     <Text style={styles.body}>{this.state.message}</Text>
+                    <TextButton onPress={() => navigate('CreateAddress', { create: true, })}>{strings.createAddress}</TextButton>
                 </View>
             )
         }

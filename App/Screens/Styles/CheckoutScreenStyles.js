@@ -9,14 +9,10 @@ export default StyleSheet.create({
     container: {
         ...ApplicationStyles.screen.container,
         flex: 1,
-        height: Metrics.fullHeight,
         backgroundColor: Colours.lightBody,
         paddingTop: 0,
         paddingLeft: 0,
         paddingRight: 0,
-        marginBottom: 25,
-        bottom: 25,
-        paddingBottom: 25,
     },
     iconContainer: {
         paddingTop: 15,
