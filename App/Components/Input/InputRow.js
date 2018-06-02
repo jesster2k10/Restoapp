@@ -186,7 +186,8 @@ InputRow.defaultProps = {
     password: false,
     onTextChange: null,
     keyboardAppearance: 'dark',
-    keyboardType: 'default'
+    keyboardType: 'default',
+    required: true,
 };
 
 export default InputRow;
