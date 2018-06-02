@@ -11,6 +11,8 @@ import {
   InputRow,
   NavigationButton,
   SubmitButton,
+  RowHeader,
+  Section,
 } from '../Components';
 import * as actions from '../Actions/FormActions';
 import { addAddress } from '../Actions/UserActions';
@@ -79,6 +81,9 @@ class CreateAddressScreen extends Component {
       <View style={styles.container}>
         <ScrollView style={styles.scroll}>
           <View>
+            <Section top={5} bottom={20}>
+                <RowHeader capital center textStyle={styles.header} spacing={4}>All Fields are required</RowHeader>
+            </Section>
             <InputRow
               placeholder={strings.enterFullName}
               label={strings.fullName} 
