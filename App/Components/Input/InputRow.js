@@ -62,6 +62,7 @@ const InputComponent = (props) => {
         label,
         keyboardAppearance,
         keyboardType,
+        required
     } = props.props;
 
     let _input = null;
@@ -144,7 +145,7 @@ const InputComponent = (props) => {
         <View>
             <View style={styles.titleContainer}>
                 <Text style={error != undefined ? styles.errorLabel : styles.label}> { error != undefined ? error : children != undefined ? children : label } </Text>
-                { this.props.required ? <Text style={styles.required}>*</Text> : null }
+                { required ? <Text style={styles.required}>*</Text> : null }
             </View>
             <View>
                 { _input }
