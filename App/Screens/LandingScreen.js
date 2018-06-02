@@ -28,7 +28,9 @@ import {
     Section
 } from '../Components';
 import {
-    isiPhoneX
+    isiPhoneX,
+    signInWithGoogle as googleSignIn,
+    signInWithFacebook as facebookSignIn,
 } from '../Helpers';
 import strings from '../Config/Localization';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -55,6 +57,36 @@ class LandingScreen extends Component {
         }
     }
 
+    signInWithGoogle() {
+        googleSignIn((details, error) => {
+            if (error) {
+                Toast.show({
+                    text: error.message,
+                    position: 'bottom',
+                    buttonText: 'Dismiss'
+                });
+            } else {
+                this.props.signInWithGoogle(details);
+            }
+        })
+    }
+
+    signInWithFacebook() {
+        facebookSignIn((details, error) => {
+            console.log('DETAILS')
+            console.log(details)
+            if (error) {
+                Toast.show({
+                    text: error.message,
+                    position: 'bottom',
+                    buttonText: 'Dismiss'
+                });
+            } else {
+                this.props.signInWithFacebook(details);
+            }
+        })
+    }
+
     render() {
         const { navigation, signInWithFacebook, signInWithGoogle } = this.props;
 
@@ -77,7 +109,7 @@ class LandingScreen extends Component {
                                 backgroundColor={Colours.darkGoogle}
                                 iconBackgroundColor={Colours.lightGoogle}
                                 fontawesome
-                                onPress={() => signInWithGoogle()}>
+                                onPress={() => this.signInWithGoogle()}>
                                 { strings.googleSignup }
                             </IconButton>
                         </View>
@@ -86,7 +118,7 @@ class LandingScreen extends Component {
                                 icon='facebook'
                                 backgroundColor={Colours.darkFacebook}
                                 iconBackgroundColor={Colours.lightFacebook}
-                                onPress={() => signInWithFacebook()}
+                                onPress={() => this.signInWithFacebook()}
                                 fontawesome>
                                 { strings.facebookSignup }
                             </IconButton>

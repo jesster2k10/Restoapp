@@ -83,7 +83,7 @@ class MealExtraItem extends Component {
             <View>
                 <View style={[styles.container, { borderTopWidth: first ? 0.5 : 0 }]}>
                     <Grid>
-                        <Col size={8} style={styles.rowAlign}>
+                        <Col size={10} style={styles.rowAlign}>
                             <Text style={styles.medium}>{ extra.name }</Text>
                             <Text style={styles.body}>{ `${getPrice(extra)}` }</Text>
                         </Col>

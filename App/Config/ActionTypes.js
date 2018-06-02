@@ -199,4 +199,5 @@ export const ORDER_REQUEST = 'ORDER_REQUEST'.toLowerCase();
 export const ORDER_FAILED = 'ORDER_FAILED'.toLowerCase();
 export const ORDER_SUCCESS = 'ORDER_SUCCESS'.toLowerCase();
 
-export const ADDRESS_RESET = 'ADDRESS_RESET'.toLowerCase()
+export const ADDRESS_RESET = 'ADDRESS_RESET'.toLowerCase();
+export const CLEAR_CHECKOUT = 'CLEAR_CHECKOUT'.toLowerCase();

@@ -67,50 +67,36 @@ export const logout = (token) => (dispatch) => {
         })
 };
 
-export const signInWithFacebook = () => (dispatch) => {
+export const signInWithFacebook = (details) => (dispatch) => {
     dispatch({ type: Types.FACEBOOK_SIGN_IN });
-
-    facebookSignIn()
-        .then(details => {
-
-            axios.post(`${Constants.BASE_API_URL}/auth/facebook/`, { facebook_user: details[0], access_token: details[1].token })
-                .then(({ data }) => {
-                    if (data.success == false) {
-                        dispatch({ type: Types.FACEBOOK_SIGN_IN, payload: data.error });
-                    } else {
-                        saveUserToken(data.token);
-                        dispatch(getCurrentUser(data.token, data.userId));
-                        dispatch({ type: Types.FACEBOOK_SIGN_IN_SUCCESS, payload: data.token });
-                    }
-                })
-                .catch(({ message }) => {
-                    dispatch({ type: Types.FACEBOOK_SIGN_IN_FAILED, error: message });
-                })
+    
+    axios.post(`${Constants.BASE_API_URL}/auth/facebook/`, { facebook_user: details[0], access_token: details[1].token })
+        .then(({ data }) => {
+            if (data.success == false) {
+                dispatch({ type: Types.FACEBOOK_SIGN_IN, payload: data.error });
+            } else {
+                saveUserToken(data.token);
+                dispatch(getCurrentUser(data.token, data.userId));
+                dispatch({ type: Types.FACEBOOK_SIGN_IN_SUCCESS, payload: data.token });
+            }
         })
         .catch(({ message }) => {
             dispatch({ type: Types.FACEBOOK_SIGN_IN_FAILED, error: message });
         })
 };
 
-export const signInWithGoogle = () => (dispatch) => {
+export const signInWithGoogle = (details) => (dispatch) => {
     dispatch({ type: Types.GOOGLE_SIGN_IN });
 
-    googleSignIn()
-        .then(details => {
-
-            axios.post(`${Constants.BASE_API_URL}/auth/google/`, { google_user: details[0], access_token: details[1].token })
-                .then(({ data }) => {
-                    if (data.success == false) {
-                        dispatch({ type: Types.GOOGLE_SIGN_IN, payload: data.error });
-                    } else {
-                        saveUserToken(data.token);
-                        dispatch(getCurrentUser(data.token, data.userId));
-                        dispatch({ type: Types.GOOGLE_SIGN_IN_SUCCESS, payload: data.token });
-                    }
-                })
-                .catch(({ message }) => {
-                    dispatch({ type: Types.GOOGLE_SIGN_IN_FAILED, error: message });
-                })
+    axios.post(`${Constants.BASE_API_URL}/auth/google/`, { google_user: details[0], access_token: details[1].token })
+        .then(({ data }) => {
+            if (data.success == false) {
+                dispatch({ type: Types.GOOGLE_SIGN_IN, payload: data.error });
+            } else {
+                saveUserToken(data.token);
+                dispatch(getCurrentUser(data.token, data.userId));
+                dispatch({ type: Types.GOOGLE_SIGN_IN_SUCCESS, payload: data.token });
+            }
         })
         .catch(({ message }) => {
             dispatch({ type: Types.GOOGLE_SIGN_IN_FAILED, error: message });

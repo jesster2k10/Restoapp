@@ -56,6 +56,8 @@ export default (state = INITIAL_STATE, { payload, type }) => {
             return {...state, delivery_method: payload};
         case Types.CHANGE_ORDER_NOTE:
             return {...state, order_note: payload};
+        case Types.CLEAR_CHECKOUT:
+            return INITIAL_STATE;
         default:
             return state;
     }

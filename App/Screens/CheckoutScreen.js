@@ -35,7 +35,7 @@ import {
 } from '../Themes';
 import Mailer from 'react-native-mail';
 import { changePage } from '../Actions/CheckoutActions';
-import { geoCodeAddress } from '../Actions/FormActions';
+import { geoCodeAddress, clearCheckout } from '../Actions/FormActions';
 import { resetCart } from '../Actions/CartActions';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
@@ -183,6 +183,7 @@ class CheckoutScreen extends Component {
             }
         );
 
+        this.props.clearCheckout();
         this.props.resetCart(this.props.token, this.props.cart);
     };
 
@@ -297,4 +298,4 @@ const mapStateToProps = ({ checkout, auth, shippingForm, orders, payments, cart 
     token: auth.token,
 });
 
-export default connect(mapStateToProps, { changePage, geoCodeAddress, resetCart })(CheckoutScreen);
+export default connect(mapStateToProps, { changePage, geoCodeAddress, resetCart, clearCheckout })(CheckoutScreen);

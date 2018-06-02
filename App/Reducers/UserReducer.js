@@ -33,7 +33,7 @@ export default (state = INITIAL_STATE, action) => {
     if (action.key == 'PROFILE') {
         switch (action.type) {
             case Types.CHANGE_NAME:
-                return {...state, currentUser: {...state.currentUser, name: splitName(action.name) }};
+                return {...state, changeNameError: null, currentUser: {...state.currentUser, name: splitName(action.name), fullName: action.name }};
             case Types.CHANGE_NAME_FAILED:
                 return {...state, changeNameError: action.error, currentUser: {...state.currentUser, name: splitName(action.name) }};
             default:

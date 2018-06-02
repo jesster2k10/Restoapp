@@ -10,6 +10,7 @@ import {
     Section,
     Row
 } from '../../Components';
+import Info from '../../Config/Info';
 import { connect } from 'react-redux';
 import styles from './Styles/CheckoutConfirmationStyles';
 import strings from '../../Config/Localization';
@@ -38,14 +39,9 @@ class CheckoutConfirmation extends Component {
             <View style={styles.container}>
                 {  method === 'DELIVERY' ? <MapView
                     style={styles.map}
-                    initialRegion={{
-                        latitude: location.lat,
-                        longitude: location.lng,
-                        latitudeDelta: 0.0922,
-                        longitudeDelta: 0.0421,
-                    }}>
+                    initialRegion={Info.address.coordinates}>
                     <MapView.Marker.Animated
-                        coordinate={new MapView.AnimatedRegion({ latitude: location.lat, longitude: location.lng })}
+                        coordinate={new MapView.AnimatedRegion(Info.address.coordinates)}
                         title="location" />
                 </MapView> : null }
                 <Section left={10} right={10} top={20} style={styles.section}>
@@ -74,7 +70,6 @@ const mapStateToProps = ({ checkout, auth, payments, shippingForm, orders, }) =>
 });
 
 const actions = {
-
 };
 
 export default connect(mapStateToProps, actions)(CheckoutConfirmation);

@@ -12,6 +12,7 @@ import {
 } from 'react-redux';
 import configureStore from './Store/Store';
 import Root from './Root';
+import './Helpers/ErrorHandling';
 
 const store = configureStore();
 

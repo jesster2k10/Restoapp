@@ -198,6 +198,8 @@ class ShippingForm extends Component {
                                     title={strings.useSavedAddress}
                                     body={strings.selectAddress}
                                     style={styles.row}
+                                    colOneSize={7}
+                                    colTwoSize={5}
                                     disclosure
                                     first
                                     action={() => this.props.navigation.navigate('SelectAddress', { backRoute: 'Checkout', checkout: true })}
@@ -213,6 +215,8 @@ class ShippingForm extends Component {
                             body={method ? method.toLowerCase().capitalize() : strings.deliveryOrCollection}
                             style={styles.row}
                             bodyStyle={styles.body}
+                            colOneSize={7}
+                            colTwoSize={5}
                             disclosure
                             action={() => this.props.navigation.navigate('SelectDelivery')}
                         />

@@ -3,7 +3,6 @@ package com.restoapp;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import com.avishayil.rnrestart.ReactNativeRestartPackage;
 import com.masteratul.exceptionhandler.ReactNativeExceptionHandlerPackage;
 import com.actionsheet.ActionSheetPackage;
 import com.airbnb.android.react.maps.MapsPackage;
@@ -59,7 +58,6 @@ public class MainApplication extends Application implements ReactApplication {
             new LinearGradientPackage(),
             new VectorIconsPackage(),
             new ReactNativeLocalizationPackage(),
-            new ActionSheetPackage(),
             new ImagePickerPackage()
       );
     }

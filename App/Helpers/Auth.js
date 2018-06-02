@@ -33,48 +33,44 @@ const getGoogleUserDetails = () => {
     })
 };
 
-export const signInWithGoogle = () => {
-    return new Promise((resolve, reject) => {
-        manager.authorize('google', { scopes: 'profile+email' })
-            .then(({ response }) => {
-                getGoogleUserDetails()
-                    .then(details => {
-                        let _details = [];
-                        _details.push(details);
-                        _details.push({ token: response.credentials.access_token });
+export const signInWithGoogle = (callback) => {
+    manager.authorize('google', { scopes: 'profile+email' })
+        .then(({ response }) => {
+            getGoogleUserDetails()
+                .then(details => {
+                    let _details = [];
+                    _details.push(details);
+                    _details.push({ token: response.credentials.access_token });
 
-                        resolve(_details);
-                    })
-                    .catch(error => {
-                        reject(err);
-                    })
+                    callback(_details, null);
+                })
+                .catch(error => {
+                    callback(null, error);
+                })
             })
             .catch(err => {
-                reject(err)
+                callback(null, err);
             });
-    });
 };
 
-export const signInWithFacebook = () => {
-    return new Promise((resolve, reject) => {
-        manager.authorize('facebook', {scopes: 'email, public_profile'})
-            .then(({ response }) => {
+export const signInWithFacebook = (callback) => {
+    manager.authorize('facebook', {scopes: 'email, public_profile'})
+        .then(({ response }) => {
 
-                getFacebookUserDetails()
-                    .then(details => {
-                        let _details = [];
-                        _details.push(details);
-                        _details.push({ token: response.credentials.access_token });
+            getFacebookUserDetails()
+                .then(details => {
+                    let _details = [];
+                    _details.push(details);
+                    _details.push({ token: response.credentials.access_token });
 
-                        resolve(_details)
-                    })
-                    .catch(err =>
-                        reject(err)
-                    );
+                    callback(_details, null);
+                })
+                .catch(err =>
+                    callback(null, err)
+                );
 
             })
             .catch(err => {
-                reject(err)
+                callback(null, err)
             });
-    });
 };

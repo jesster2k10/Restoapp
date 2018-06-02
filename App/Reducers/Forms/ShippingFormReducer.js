@@ -95,6 +95,8 @@ export default (state = INITIAL_STATE, action) => {
                 return {...state, geo_code_success: false, geo_code_loading: false, geo_code_error: action.payload, geo_code_location: null};
             case Types.GEO_CODE_ADDRESS_SUCCESS:
                 return {...state, geo_code_success: true, geo_code_loading: false, geo_code_error: null, geo_code_location: action.payload};
+            case Types.CLEAR_CHECKOUT:
+                return INITIAL_STATE;
         }
         return state;
     }

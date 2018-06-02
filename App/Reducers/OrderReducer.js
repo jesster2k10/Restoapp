@@ -20,6 +20,10 @@ export default (state = INITIAL_STATE, action) => {
 
             case Types.ORDER_FAILED:
                 return { ...state, create_order_loading: false, create_order_error: action.error.message, create_order_success: false, placedOrder: null };
+
+            case Types.CLEAR_CHECKOUT:
+                return { ...state, create_order_loading: false, create_order_error: null, create_order_success: false, placedOrder: null };
+    
         }
     }
 

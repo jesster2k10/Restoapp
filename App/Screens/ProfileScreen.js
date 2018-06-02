@@ -4,6 +4,7 @@ import {
   View,
   Text,
   ScrollView,
+  KeyboardAvoidingView,
   Image,
 } from 'react-native';
 import {
@@ -30,12 +31,7 @@ class ProfileScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: strings.profile,
     headerLeft: <NavigationButton navigation={navigation} size={25}  />,
-    headerRight: <NavigationButton navigation={navigation}  action={ProfileScreen.saveChanges} size={25} icon="ios-cloud-upload" />,
   });
-
-  static saveChanges = () => {
-    window.EventBus.trigger('ProfileScreen.Save');
-  };
 
   state = {
     chosenImage: null,
@@ -60,15 +56,16 @@ class ProfileScreen extends Component {
       user,
       updateUser,
       loading,
+      nameError,
     } = this.props;
-
-    console.log(this.props);
 
     if (loggedIn && user) {
       if (loading) {
         alert('Please wait for pending upadates');
       } else {
-        updateUser();
+        if (!nameError) {
+          updateUser();
+        }
       }
     } else {
       alert('Please login to continue')
@@ -117,14 +114,17 @@ class ProfileScreen extends Component {
   render = () => {
     const { user } = this.props;
 
-    let profile, name, email, fullName = null;
+    let profile, name, email, fullName, fName = null;
 
     if (user) {
       profile = user.profileImage;
       name = user.name;
+      fName = user.fullName;
       email = user.email;
 
-      fullName = name && name.first && name.last ? `${name.first} ${name.last}` : name && name.first ? `${name.first}` : name.last
+      fullName = fName ? fName : name && name.first && name.last ? `${name.first} ${name.last}` : name && name.first ? `${name.first}` : name.last;
+
+      console.log(fullName)
     } else {
       return (
         <View style={styles.container}>
@@ -137,7 +137,7 @@ class ProfileScreen extends Component {
 
     return (
       <ScrollView style={styles.container}>
-        <View style={styles.scrollContainer}>
+        <KeyboardAvoidingView style={styles.scrollContainer}>
           <View style={styles.header}>
             { this.props.loading || this.state.loading ? <View style={styles.center}>
               <Spinner
@@ -171,7 +171,9 @@ class ProfileScreen extends Component {
                 placeholder={strings.enterFullName}
                 label={strings.fullName}
                 value={fullName}
+                error={this.props.nameError}
                 onChangeText={val => this.props.updateUserName(val)}
+                onBlur={() => this.save()}
               />
             </Section>
             <Row
@@ -183,7 +185,7 @@ class ProfileScreen extends Component {
               disclosure
             />
           </View>
-        </View>
+        </KeyboardAvoidingView>
       </ScrollView>
     )
   }

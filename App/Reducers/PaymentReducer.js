@@ -83,6 +83,8 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, make_payment_error: action.payload, make_payment_success: false, make_payment_loading: false, braintree_result: null };
         case Types.MAKE_BRAINTREE_PAYMENT_SUCCESS:
             return { ...state, make_payment_error: null, make_payment_success: true, make_payment_loading: false, braintree_result: action.payload };
+        case Types.CLEAR_CHECKOUT:
+            return INITIAL_STATE;
         default:
             return state;
     }

@@ -18,7 +18,8 @@ export default StyleSheet.create({
         flex: 1,
         backgroundColor: Colours.lighterBody,
         alignItems: 'flex-start',
-        borderColor: 'rgba(0,0,0,0.1)'
+        borderColor: 'rgba(0,0,0,0.1)',
+        height: 60
     },
     icon: {
         color: Colours.mainTextColor,

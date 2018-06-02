@@ -57,25 +57,17 @@ class InfoScreen extends Component {
         return (
             <View style={styles.container}>
                 <ParallaxView
-                    backgroundSource={{ uri: 'https://www.scandichotels.com/imagevault/publishedmedia/qn6infvg30381stkubky/scandic-sundsvall-city-restaurant-verket-10.jpg' }}
+                    backgroundSource={{ uri: Info.featureImage }}
                     windowHeight={200}>
                     <View style={styles.bodyContainer}>
                         <Section padding={15} column>
                             <Text style={styles.title}>{ strings.about }</Text>
-                            <Text style={styles.body}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dictum eu sem sit amet imperdiet. Cras euismod orci ut sem pulvinar, at posuere enim rhoncus. Quisque scelerisque faucibus ex. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris mauris mauris, ullamcorper nec condimentum in, venenatis quis quam. Curabitur porta felis vulputate ultrices imperdiet. Suspendisse convallis tortor et porta iaculis. Quisque vel nibh non nulla commodo feugiat. Cras diam sapien, semper id ullamcorper vitae, auctor eget neque. Duis porta elit quam, sed ullamcorper nunc euismod a. Suspendisse convallis lectus id enim aliquet, eget rutrum turpis mattis. Vivamus sodales id orci sed congue. Phasellus ullamcorper sapien est, et malesuada nisl aliquam eget.</Text>
+                            <Text style={styles.body}>{ Info.about }</Text>
                         </Section>
                         <Section top={15} bottom={15} column>
                             <Text style={[styles.title, { paddingLeft: 15, paddingBottom: 15 }]}>{ strings.location }</Text>
-                            <MapView style={styles.map}
-                                initialRegion={{
-                                    latitude: 37.78825,
-                                    longitude: -122.4324,
-                                    latitudeDelta: 0.0922,
-                                    longitudeDelta: 0.0421,
-                                }}
-                            >
-                                <MapView.Marker.Animated
-                                    coordinate={new MapView.AnimatedRegion({ latitude: 37.78825, longitude: -122.4324})}/>
+                            <MapView style={styles.map} initialRegion={Info.address.coordinates}>
+                                <MapView.Marker.Animated coordinate={new MapView.AnimatedRegion(Info.address.coordinates)}/>
                             </MapView>
                             <Text style={styles.addressFirst}>{ Info.address.street }</Text>
                             <Text style={styles.address}>{ Info.address.city }</Text>
@@ -86,13 +78,12 @@ class InfoScreen extends Component {
                         <Section left={15} top={15} bottom={5} column full>
                             <Text style={styles.title}>{ strings.openingTimes }</Text>
                         </Section>
-                        <Row icon="ios-clock" big first title={strings.mondayToFriday} body={Info.openingTimes} />
+                        <Row big first title={strings.mondayToFriday} body={Info.openingTimes} />
                         <Section left={15} right={15} bottom={5} top={15} column full>
                             <Text style={styles.title}>{ strings.links }</Text>
                         </Section>
                         <Row
-                            icon="ios-globe"
-                            action={() => this._openURL(Info.website)}
+                            action={() => this._openURL(`${Info.websiteProxy}://${Info.website}`)}
                             big
                             disclosure
                             first
@@ -100,39 +91,26 @@ class InfoScreen extends Component {
                             body={Info.website}
                         />
                         <Row
-                            icon="logo-facebook"
                             action={() => this._openURL(`https://facbeook.com/${Info.facebook}`)}
                             big
                             disclosure
-                            colOneSize={2}
                             title={strings.facebook}
-                            body={`@${Info.facebook}`}
+                            body={Info.facebook}
                         />
                         <Row
-                            icon="logo-twitter"
                             action={() => this._openURL(`https://twitter.com/${Info.twitter}`)}
                             big
                             disclosure
                             title={strings.twitter}
-                            body={`@${Info.twitter}`}
+                            body={Info.twitter}
                         />
                         <Row
-                            icon="logo-snapchat"
                             action={() => this._openURL(`https://snapchat.com/add/${Info.snapchat}`)}
                             big
                             disclosure
                             last
                             title={strings.snapchat}
                             body={Info.snapchat}
-                        />
-                        <Row
-                            icon="ios-mail"
-                            big
-                            disclosure
-                            last
-                            colOneSize={4}
-                            title={strings.email}
-                            body={Info.email}
                         />
                     </View>
                 </ParallaxView>

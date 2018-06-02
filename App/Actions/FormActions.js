@@ -190,3 +190,5 @@ export const changeCountry = (validate, country, key = 'SHIPPING') => {
 
 export const selectPreviousAddress = (address) => ({ type: Types.SELECT_ADDRESS, payload: address });
 export const resetSelectAddressDone = (address) => ({ type: Types.RESET_SELECT_ADDRESS_DONE });
+
+export const clearCheckout = () => ({ type: Types.CLEAR_CHECKOUT });

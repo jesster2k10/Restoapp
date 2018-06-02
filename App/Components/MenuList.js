@@ -51,11 +51,11 @@ class MenuList extends Component {
 
 const mapStateToProps = ({ meals, auth }) => {
     return {
-        meals: meals.meals,
+        meals: meals.meals.filter((meal) => !meal.isAnExtra),
         error: meals.error,
         loading: meals.loading,
         token: auth.token,
-        categoryMeals: meals.category_meals
+        categoryMeals: meals.category_meals.filter((meal) => !meal.isAnExtra)
     }
 };
 
