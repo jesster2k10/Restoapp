@@ -78,16 +78,6 @@ class CreateAddressScreen extends Component {
     return (
       <View style={styles.container}>
         <ScrollView style={styles.scroll}>
-          { this.props.loading ? 
-            <View style={styles.centered}>
-              <Spinner
-                isVisible
-                size={17}
-                type='Arc'
-                color='white'/>
-              <Text style={styles.loader}>{ strings.validatingAddress }</Text>
-            </View>
-          :
           <View>
             <InputRow
               placeholder={strings.enterFullName}
@@ -140,13 +130,14 @@ class CreateAddressScreen extends Component {
               error={this.props.errors.state}
               onChangeText={val => this.props.changeState(val, KEY)}
             />
-          </View> }
+          </View>
         </ScrollView>
-        { this.props.valid ? <SubmitButton
-          title={strings.finish}
-          style={styles.submit}
+        <SubmitButton
+          title={this.props.valid ? strings.finish : strings.checkAgainForInvalidFields}
+          style={this.props.valid ? styles.submit : styles.submitInvalid}
           onPress={this.submit}
-        /> : <Text style={styles.disclaimer}>{ strings.checkAgainForInvalidFields }</Text>}
+          loading={this.props.loading}
+        />
       </View>
     )
   }

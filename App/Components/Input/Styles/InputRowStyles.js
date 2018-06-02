@@ -71,5 +71,15 @@ export default StyleSheet.create({
     },
     iconContainer: {
         alignItems: 'flex-end'
+    },
+    required: {
+        color: 'red',
+        marginLeft: 5,
+        fontWeight: 'bold',
+    },
+    titleContainer: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'flex-end',
     }
 });

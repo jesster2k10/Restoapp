@@ -8,6 +8,13 @@ export default {
     left: 0,
     right: 0,
   },
+  submitInvalid: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: Colours.superLightGray
+  },
   scroll: {
     flex: 1,
   },

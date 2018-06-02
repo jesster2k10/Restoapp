@@ -142,7 +142,10 @@ const InputComponent = (props) => {
 
     return (
         <View>
-            <Text style={error != undefined ? styles.errorLabel : styles.label}> { error != undefined ? error : children != undefined ? children : label } </Text>
+            <View style={styles.titleContainer}>
+                <Text style={error != undefined ? styles.errorLabel : styles.label}> { error != undefined ? error : children != undefined ? children : label } </Text>
+                { this.props.required ? <Text style={styles.required}>*</Text> : null }
+            </View>
             <View>
                 { _input }
             </View>
