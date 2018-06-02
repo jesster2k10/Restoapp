@@ -13,7 +13,7 @@ export default {
     bottom: 0,
     left: 0,
     right: 0,
-    backgroundColor: Colours.superLightGray
+    backgroundColor: '#cccccc'
   },
   scroll: {
     flex: 1,

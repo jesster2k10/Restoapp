@@ -3,9 +3,11 @@ import {
   ScrollView,
   View,
   Text,
+  Platform,
 } from 'react-native';
 import { connect } from 'react-redux';
 import Spinner from 'react-native-spinkit';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import {
   Row,
   InputRow,
@@ -79,7 +81,7 @@ class CreateAddressScreen extends Component {
   render = () => {
     return (
       <View style={styles.container}>
-        <ScrollView style={styles.scroll}>
+        <KeyboardAwareScrollView style={styles.scroll} extraHeight={Platform.OS === 'ios' ? 200 : 550}>
           <View>
             <Section top={5} bottom={20}>
                 <RowHeader capital center textStyle={styles.header} spacing={4}>All Fields are required</RowHeader>
@@ -136,7 +138,7 @@ class CreateAddressScreen extends Component {
               onChangeText={val => this.props.changeState(val, KEY)}
             />
           </View>
-        </ScrollView>
+        </KeyboardAwareScrollView>
         <SubmitButton
           title={this.props.valid ? strings.finish : strings.checkAgainForInvalidFields}
           style={this.props.valid ? styles.submit : styles.submitInvalid}
