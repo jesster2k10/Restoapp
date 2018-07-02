@@ -122,7 +122,7 @@ export const getProductsForApplePay = (cart) => {
 
 export const getCurrency = ({ products }, asSymbol) => {
     if (products != undefined) {
-        return asSymbol ? getCurrencySymbol(products[products.length - 1].currency) : products[products.length - 1].currency;
+        return asSymbol ? getCurrencySymbol(products[0].currency) : products[0].currency;
     } else {
         return null
     }

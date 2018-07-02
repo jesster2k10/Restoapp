@@ -49,7 +49,8 @@ import {
 } from 'react-native-easy-grid';
 import {
     Images,
-    ApplicationStyles
+    ApplicationStyles,
+    Colours
 } from '../../Themes';
 import Constants from '../../Config/Constants';
 import {
@@ -242,6 +243,9 @@ class PaymentForm extends Component {
                         styles={cardFormStyles}
                         addCardHandler={this._addCardHandler.bind(this)}
                         activityIndicatorColor="white"
+                        cardNumberPlaceholderText="Card Number"
+                        addCardButtonText="Pay"
+                        placeholderTextColor="rgba(0,0,0,0.5)"
                         />
                 </Animatable.View>
             )

@@ -7,7 +7,7 @@ import {
     View,
     StyleSheet,
     Image,
-    TouchableOpacity
+    TouchableWithoutFeedback as TouchableOpacity
 } from 'react-native';
 import {
     Text,
